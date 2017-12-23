@@ -12,6 +12,7 @@ public class BellyExercise {
     private int imageResourceId;
     private String[] icon;
     private String[] desc;
+    private int seconds;
 
     public static final BellyExercise[] BELLY_EXERCISES = {
             new BellyExercise("Crunch",
@@ -23,7 +24,8 @@ public class BellyExercise {
                             "die Knie durch Einrollen der Wirbelsäule Richtung Kopf bringen",
                             "beim Ausatmen wieder zum Boden absenken",
                             "20 Wiederholungen"},
-                    R.drawable.crunch),
+                    R.drawable.crunch,
+                    0),
 
             new BellyExercise("schräger Crunch",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
@@ -33,7 +35,8 @@ public class BellyExercise {
                             "beim Einatmen Schultern vom Boden lösen",
                             "beim Ausatmen wieder zum Boden absenken",
                             "10 Wiederholungen pro Seite"},
-                    R.drawable.crunch_schraeg),
+                    R.drawable.crunch_schraeg,
+                    0),
 
             new BellyExercise("Sit up",
                     new String[]{"\u25CF", "\u2728", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
@@ -43,7 +46,8 @@ public class BellyExercise {
                             "beim Einatmen den Oberkörper gerundet vom Boden heben",
                             "beim Ausatmen wieder zurück (aber nicht koplett) zum Boden sinken",
                             "10 Wiederholungen"},
-                    R.drawable.sit_up),
+                    R.drawable.sit_up,
+                    0),
 
             new BellyExercise("Pseudo Sit-up",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u261D", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
@@ -54,7 +58,8 @@ public class BellyExercise {
                             "beim Einatmen den Oberkörper langsam nach \nhinten neigen (bis 45°) und dort 2-10 Sek halten",
                             "beim Ausatmen wieder aufrichten",
                             "20 - 30 Wiederholungen"},
-                    R.drawable.pseudo_sit_up),
+                    R.drawable.pseudo_sit_up,
+                    0),
 
             new BellyExercise("Fahrrad fahren",
                     new String[]{"\u25CF", "\u25CF", "\u261D", "\u27A1", "\u27A1", "\u27A1", "\u2728", "\uD83D\uDCAA"},
@@ -66,7 +71,8 @@ public class BellyExercise {
                             "beim nächsten Atemzug Beine wechseln",
                             "Alternativ: beugen und strecken direkt im Wechsel",
                             "so oft Wiederholen bis ein Brennen zu spüren ist"},
-                    R.drawable.fahrradfahren),
+                    R.drawable.fahrradfahren,
+                    0),
 
             new BellyExercise("Criss-Cross",
                     new String[]{"\u25CF", "\u27A1", "\u261D", "\uD83D\uDCAA"},
@@ -75,7 +81,8 @@ public class BellyExercise {
                             "darauf achten, dass oberer Rücken und Schultern nicht den Boden berühren und dass das Becken " +
                                     "\nfest auf dem Boden bleibt",
                             "pro Seite 10 Bewegungen"},
-                    R.drawable.kaefer),
+                    R.drawable.kaefer,
+                    0),
 
             new BellyExercise("The Hundret",
                     new String[]{"\u25CF", "\u25CF", "\u2728", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
@@ -86,7 +93,8 @@ public class BellyExercise {
                             "Arme schnell auf und abbewegen (pumpen)",
                             "jeweils über 5 Pumpbewegungen ein- und ausatmen",
                             "insgesamt 100 mal pumpen"},
-                    R.drawable.hundert),
+                    R.drawable.hundert,
+                    0),
 
             new BellyExercise("Roll up",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u27A1", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
@@ -98,7 +106,81 @@ public class BellyExercise {
                             "beim Ausatmen den Rücken runden und Nabel zur Wirbelsäule ziehen",
                             "beim Einatmen Wirbel für Wirbel abrollen bis wieder in Startposition",
                             "10 - 20 Wiederholungen"},
-                    R.drawable.roll_up_2),
+                    R.drawable.roll_up_2,
+                    0),
+
+            new BellyExercise("Unterarmstütz",
+                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{"auf den Unterarmen auf den Boden aufstützen",
+                            "Fußspitzen sind aufgestützt",
+                            "Rücken gerade halten",
+                            "einfache Variante: mit den Knien auf dem Boden abstützen",
+                            "eine Minute halten, dabei normal atmen"},
+                    R.drawable.unterarmstuetz,
+                    60),
+
+            new BellyExercise("Unterarmstütz 2",
+                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u2728", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{"auf den Unterarmen auf den Boden aufstützen",
+                            "Fußspitzen sind aufgestützt",
+                            "Rücken gerade halten",
+                            "einfache Variante: mit den Knien auf dem Boden abstützen",
+                            "ein Bein gestreckt abheben und wieder absinken",
+                            "10 Wiederholungen pro Seite"},
+                    R.drawable.unterarmstuetz_mit_heben,
+                    0),
+
+            new BellyExercise("Seitenstütz",
+                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{"seitlich auf einem Unterarm auf den Boden aufstützen",
+                            "Körper ist eine Linie",
+                            "freien Arm in die Luft strecken oder auf der Hüfte abstützen",
+                            "einfache Variante: mit den Knien auf dem Boden abstützen",
+                            "jede Seite 30 Sekunden halten, dabei normal atmen"},
+                    R.drawable.seitstuetz,
+                    30),
+
+            new BellyExercise("Boot",
+                    new String[]{"\u25CF", "\u27A1", "\u27A1", "\u261D", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{"aufrecht mit angewinkelten Knien hinsetzen",
+                            "Oberkörper leicht zurücklehnen",
+                            "ein Bein nach dem anderen anheben",
+                            "Arme und Beine sind gestreckt",
+                            "einfache Variante: die Hände umfassen die Knie",
+                            "30 Sekunden halten"},
+                    R.drawable.boot,
+                    30),
+
+            new BellyExercise("Leg Pull Up",
+                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u261D", "\u261D", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{"Hände flach auf dem Boden",
+                            "Finger zeigen zu den Füßen",
+                            "Arme gestreckt, Hände unter den Schultern",
+                            "Gesäßmuskeln anspannen",
+                            "Körper von Zehen bis Schultern auf einer schrägen Linie halten",
+                            "Blick nach vorne",
+                            "ein Bein langsam nach oben heben und wieder absenken",
+                            "die Hüften dabei hoch und parallel halten",
+                            "das Standbein darf sich nicht nach außen drehen",
+                            "einfache Variante: kein Bein heben und nur halten",
+                            "maximal 10 Wiederholungen pro Seite"},
+                    R.drawable.leg_pull_up,
+                    0),
+
+            new BellyExercise("Leg Pull Down",
+                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{"mit gestützen Arme auf die Hände stützen",
+                            "Schultern über den Handgelenken",
+                            "Fersen über den Zehen",
+                            "Blick auf den Boden",
+                            "Körper bildet eine Linie",
+                            "ein Bein heben, dabei den Fuss strecken",
+                            "dann das Bein wieder absenken",
+                            "einfache Variante: kein Bein heben und nur halten",
+                            "maximal 10 Wiederholungen pro Seite"},
+                    R.drawable.leg_pull_down,
+                    0),
+
             // ● : "\u25CF"
             // ➡ : "\u27A1"
             // finger point up  "\u261D"
@@ -106,11 +188,12 @@ public class BellyExercise {
             //muscle "\uD83D\uDCAA"
     };
 
-    private BellyExercise(String name, String[] icon, String[] desc, int imageResourceId) {
+    private BellyExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
         this.name = name;
         this.desc = desc;
         this.icon = icon;
         this.imageResourceId = imageResourceId;
+        this.seconds = seconds;
     }
 
     public String getName() {
@@ -127,5 +210,9 @@ public class BellyExercise {
 
     public String[] getIcon() {
         return icon;
+    }
+
+    public int getSeconds() {
+        return seconds;
     }
 }

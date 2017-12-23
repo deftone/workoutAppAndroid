@@ -14,12 +14,12 @@ import de.deftone.bitsandpizzas.R;
  * ➡ : "\u27A1"
  * ghost	"\uD83D\uDC7B"
  * muscle "\uD83D\uDCAA"
- *
- // ● : "\u25CF"
- // ➡ : "\u27A1"
- // finger point up  "\u261D"
- //sparkles "\u2728"
- //muscle "\uD83D\uDCAA"
+ * <p>
+ * // ● : "\u25CF"
+ * // ➡ : "\u27A1"
+ * // finger point up  "\u261D"
+ * //sparkles "\u2728"
+ * //muscle "\uD83D\uDCAA"
  */
 
 
@@ -29,6 +29,7 @@ public class LegExercise {
     private int imageResourceId;
     private String[] icon;
     private String[] desc;
+    private int seconds;
 
     public static final LegExercise[] LEG_EXERCISES = {
             new LegExercise("Kniebeuge im Ausfallschritt",
@@ -40,7 +41,8 @@ public class LegExercise {
                             "je größer der Abstand, desto mehr Gesäßmuskel ",
                             "je kleiner der Abstand, desto mehr Oberschenkelmuskel ",
                             "mehrere Wiederholungen (10-20) pro Seite "},
-                    R.drawable.ausfallschritt),
+                    R.drawable.ausfallschritt,
+                    0),
 
             new LegExercise("Kniebeugen",
                     new String[]{"\u25CF", "\u25CF", "\u261D", "\u27A1", "\u27A1", "\u2728", "\uD83D\uDCAA"},
@@ -51,7 +53,8 @@ public class LegExercise {
                             "dann wieder aufrichten in die Ausgangsposition",
                             "Varianten: Beine Schulterbreit oder weit grätscht",
                             "viele Wiederholungen (mind. 30)"},
-                    R.drawable.kniebeugen),
+                    R.drawable.kniebeugen,
+                    0),
 
             new LegExercise("Bein seitlich im 4-Füßler heben",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u2728", "\uD83D\uDCAA"},
@@ -60,7 +63,8 @@ public class LegExercise {
                             "das Bein zur Seite anheben, 1 Sek halten und dann wieder senken",
                             "wenn das Knie leicht angeboben wird (1cm) statt auf dem Boden aufzusetzen kann die Intensität erhöht werden",
                             "10 Wiederholungen pro Seite"},
-                    R.drawable.bein_seitlich_heben_4_fuessler),
+                    R.drawable.bein_seitlich_heben_4_fuessler,
+                    0),
 
             new LegExercise("Knie heben im Vierfüßler",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u261D", "\u2728", "\uD83D\uDCAA"},
@@ -69,9 +73,9 @@ public class LegExercise {
                             "langsam ein Bein in der angewinkelten Stellung nach oben heben und wieder zurück ",
                             "kein Knie berührt während der Übung den Boden",
                             "leichte Variante: nicht bewegendes Knie setzt auf",
-                            "10 Wiederholungen pro Seite"
-                    },
-                    R.drawable.vierfuessler_knie_heben),
+                            "10 Wiederholungen pro Seite"},
+                    R.drawable.vierfuessler_knie_heben,
+                    0),
 
             new LegExercise("Beckenheben vom Boden",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
@@ -80,7 +84,8 @@ public class LegExercise {
                             "Becken vom Boden heben, oben 2 Sekunden halten",
                             "Becken wieder absinken, ohne ganz abzusetzen",
                             "mehrere Wiederholungen (mind. 30)"},
-                    R.drawable.schulterbruecke),
+                    R.drawable.schulterbruecke,
+                    0),
 
             new LegExercise("Bein heben in Schulterbrücke",
                     new String[]{"\u25CF", "\u261D", "\u27A1", "\u27A1", "\u2728", "\uD83D\uDCAA"},
@@ -90,7 +95,8 @@ public class LegExercise {
                             "und wieder absenken, bis es parallel zum anderen Bein ist",
                             "einfache Variante: ohne Beinheben, nur Halten",
                             "10 Wiederholungen pro Seite"},
-                    R.drawable.schulterbruecke_bein_heben),
+                    R.drawable.schulterbruecke_bein_heben,
+                    0),
 
             new LegExercise("Oberes Bein im Liegen heben",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u261D", "\u2728", "\uD83D\uDCAA"},
@@ -101,7 +107,8 @@ public class LegExercise {
                             "den Winkel nicht zu gross werden lassen (max. 70°)",
                             " man kann das Bein im maximal Punkt einige Sekunden halten",
                             " 20 Wiederholungen pro Seite "},
-                    R.drawable.bein_seitlich_heben),
+                    R.drawable.bein_seitlich_heben,
+                    0),
 
             new LegExercise("Unteres Bein im Liegen heben",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
@@ -109,16 +116,49 @@ public class LegExercise {
                             "unteres Bein gestreckt, oberes Bein gebeugt, Fuß for dem liegenden Knie",
                             "liegendes Bein gestreckt so hoch wie möglich heben",
                             "am maximalen Punkt 2-3 Sekunden halten und wieder absenken",
-                            "20 Wiederholungen pro Seite"
-                    },
-                    R.drawable.abduktion_am_boden)
+                            "20 Wiederholungen pro Seite"},
+                    R.drawable.abduktion_am_boden,
+                    0),
+
+            new LegExercise("Standwaage",
+                    new String[]{"\u25CF", "\u27A1", "\u27A1", "\u27A1", "\u261D", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{"aufrecht stehen, Arme nach oben strecken",
+                            "Oberkörper nach vorne beugen",
+                            "gleichzeitig ein Bein so weit wie möglich heben",
+                            "Ferse nach hinten strecken, Zehen zum Körper ziehen",
+                            "Arme, Oberkörper und das gestreckte Bein bilden eine Linie",
+                            "je höher das Bein, je weicher der Boden, desto schwieriger",
+                            "jede Seite 30 Sekunden halten"},
+                    R.drawable.standwaage,
+                    30),
+
+            new LegExercise("Einbeinhalteübung",
+                    new String[]{"\u25CF", "\u27A1", "\u2728", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{"hüftbreiter, gerader Stand",
+                            "leicht in die Hocken gehen und ein Bein angewinkelt über das Standbein legen",
+                            "für mehr Intenstät stärker in die Hocke gehen",
+                            "die Arme nach vorne oder oben strecken",
+                            "jede Seite 30 Sekunden halten"},
+                    R.drawable.ein_bein_stand,
+                    30),
+
+            new LegExercise("Side Kick kniend",
+                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{"Haltung wie auf Bild einnehmen",
+                            "auf linke Hand stützen, rechte Hand an Hinterkopf",
+                            "rechtes Bein ausstrecken und auf Hüfthöhe heben",
+                            "Bein so weit wie möglich auf einer Ebene nach vorne und wieder nach hinten bewegen",
+                            " 10 Wiederholungen pro Seite"},
+                    R.drawable.side_kick_knie,
+                    0)
     };
 
-    private LegExercise(String name, String[] icon, String[] desc, int imageResourceId) {
+    private LegExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
         this.name = name;
         this.icon = icon;
         this.desc = desc;
         this.imageResourceId = imageResourceId;
+        this.seconds = seconds;
     }
 
     public String getName() {
@@ -135,5 +175,9 @@ public class LegExercise {
 
     public String[] getIcon() {
         return icon;
+    }
+
+    public int getSeconds() {
+        return seconds;
     }
 }

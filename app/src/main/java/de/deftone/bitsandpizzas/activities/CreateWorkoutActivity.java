@@ -3,13 +3,11 @@ package de.deftone.bitsandpizzas.activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 
 import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.HOLD_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
 
 public class CreateWorkoutActivity extends AppCompatActivity {

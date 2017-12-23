@@ -13,16 +13,10 @@
     <string name="order_name_hint">Please enter your name</string>
     <string name="order_detail_hint">Please enter your order</string>
 
-
     <string name="workout_motherRussia"> Bikinifigur mit Mother Russia</string>
-    <string name="home_text">Such dir ein paar Übungen aus oder lass dir ein Zufallsprogramm zusammen stellen :)</string>
-
-    <array name="stores">
-        <item>Aachen</item>
-        <item>Köln</item>
-        <item>Umeå</item>
-        <item>Den Helder</item>
-    </array>
-
+    <string name="home_text">Such dir ein paar Übungen aus oder lass dir ein Zufallsprogramm zusammen stellen :)
+          \n\nHinweise:
+          \n1) die Zahl der Wiederholungen sowie Haltezeiten sind nur Vorschläge. Mach soviel wie dir gut tut und dich fordert.
+          \n2) am besten wäre es von jeder Übung 2 Sätze zu machen.</string>
 
 </resources>

@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     public final static String LEG_EXERCISES = "leg exercieses";
     public final static String BELLY_EXERCISES = "belly exercieses";
     public final static String BACK_EXERCISES = "back exercieses";
-    public final static String HOLD_EXERCISES = "hold exercieses";
     public final static String CREATED_EXERCISES = "created exercieses";
 
     private ShareActionProvider shareActionProvider;
@@ -105,18 +104,14 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString(TYPE, BACK_EXERCISES);
                     backExercisesFragment.setArguments(bundle);
                     return backExercisesFragment;
-                case 4:
-                    ExerciseFragment holdExerciseFragment = new ExerciseFragment();
-                    bundle.putString(TYPE, HOLD_EXERCISES);
-                    holdExerciseFragment.setArguments(bundle);
-                    return holdExerciseFragment;
+                    //todo: ein paar dehnuebungen bei 4
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
 
         @Override
@@ -130,8 +125,6 @@ public class MainActivity extends AppCompatActivity {
                     return getResources().getText(R.string.bauch_tab);
                 case 3:
                     return getResources().getText(R.string.ruecken_tab);
-                case 4:
-                    return getResources().getText(R.string.halten_tab);
             }
             return null;
         }
