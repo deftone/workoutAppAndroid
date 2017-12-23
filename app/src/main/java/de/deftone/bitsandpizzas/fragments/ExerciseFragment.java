@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.BaseKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_E
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_TYPE;
 import static de.deftone.bitsandpizzas.activities.MainActivity.BACK_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.HOLD_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
@@ -37,6 +39,7 @@ public class ExerciseFragment extends Fragment {
         final Bundle bundle = this.getArguments();
         String[] exerciseNames = {""};
         int[] exerciseImages = {0};
+
         if (bundle != null) {
             switch (bundle.getString(TYPE)) {
                 case LEG_EXERCISES:
@@ -79,7 +82,25 @@ public class ExerciseFragment extends Fragment {
                         exerciseImages[i] = HoldExercise.HOLD_EXERCISES[i].getImageResourceId();
                     }
                     break;
+                case CREATED_EXERCISES:
+                    int max = 20;
+                    //todo ArrayList waere wahrscheinlich praktischer als String[].... irgendwann mal refactoren
+                    exerciseNames = new String[max];
+                    for (int i = 0; i < max; i = i + 4) {
+                        exerciseNames[i] = LegExercise.LEG_EXERCISES[i/4].getName();
+                        exerciseNames[i + 1] = BellyExercise.BELLY_EXERCISES[i/4].getName();
+                        exerciseNames[i + 2] = BackExercise.BACK_EXERCISES[i/4].getName();
+                        exerciseNames[i + 3] = HoldExercise.HOLD_EXERCISES[i/4].getName();
+                    }
+                    exerciseImages = new int[max];
+                    for (int i = 0; i < max; i = i + 4) {
+                        exerciseImages[i] = LegExercise.LEG_EXERCISES[i/4].getImageResourceId();
+                        exerciseImages[i + 1] = BellyExercise.BELLY_EXERCISES[i/4].getImageResourceId();
+                        exerciseImages[i + 2] = BackExercise.BACK_EXERCISES[i/4].getImageResourceId();
+                        exerciseImages[i + 3] = HoldExercise.HOLD_EXERCISES[i/4].getImageResourceId();
+                    }
 
+                    break;
             }
         }
 

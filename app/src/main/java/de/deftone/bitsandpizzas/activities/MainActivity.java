@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public final static String BELLY_EXERCISES = "belly exercieses";
     public final static String BACK_EXERCISES = "back exercieses";
     public final static String HOLD_EXERCISES = "hold exercieses";
+    public final static String CREATED_EXERCISES = "created exercieses";
 
     private ShareActionProvider shareActionProvider;
 

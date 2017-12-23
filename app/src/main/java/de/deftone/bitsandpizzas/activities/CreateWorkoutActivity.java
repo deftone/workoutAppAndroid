@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 
+import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.HOLD_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
 
@@ -23,13 +24,13 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 //        toolbar.setTitle("Dein Workout");
 //        setSupportActionBar(toolbar);
 
-        ExerciseFragment legExerciseFragment = new ExerciseFragment();
+        ExerciseFragment exerciseFragment = new ExerciseFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(TYPE, HOLD_EXERCISES);
-        legExerciseFragment.setArguments(bundle);
+        bundle.putString(TYPE, CREATED_EXERCISES);
+        exerciseFragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_create_workout, legExerciseFragment);
+        transaction.replace(R.id.activity_create_workout, exerciseFragment);
         transaction.commit();
     }
 }

@@ -22,6 +22,7 @@ import de.deftone.bitsandpizzas.utils.ExerciseDetailList;
 
 import static de.deftone.bitsandpizzas.activities.MainActivity.BACK_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.HOLD_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
 
@@ -77,6 +78,14 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 desc = HoldExercise.HOLD_EXERCISES[id].getDescription();
                 icon = HoldExercise.HOLD_EXERCISES[id].getIcon();
                 seconds = HoldExercise.HOLD_EXERCISES[id].getSeconds();
+                break;
+            case CREATED_EXERCISES:
+               //todo we don't know the correct exercise yet
+                //for now, use this to prevent app crash
+                title = HoldExercise.HOLD_EXERCISES[1].getName();
+                image = HoldExercise.HOLD_EXERCISES[1].getImageResourceId();
+                desc = HoldExercise.HOLD_EXERCISES[1].getDescription();
+                icon = HoldExercise.HOLD_EXERCISES[1].getIcon();
                 break;
         }
 
