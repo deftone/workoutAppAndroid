@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Workout</string>
+    <string name="create_order">Create Order</string>
+    <string name="action_share">Share</string>
+
+    <string name="title_top">Top fragment</string>
+    <string name="home_tab">HOME</string>
+    <string name="beine_tab">Beine</string>
+    <string name="bauch_tab">Bauch</string>
+    <string name="ruecken_tab">Rücken</string>
+    <string name="halten_tab">Halten</string>
+
+    <string name="order_name_hint">Please enter your name</string>
+    <string name="order_detail_hint">Please enter your order</string>
+
+
+    <string name="workout_motherRussia"> Bikinifigur mit Mother Russia</string>
+    <string name="home_text">Such dir ein paar Übungen aus oder lass dir ein Zufallsprogramm zusammen stellen :)</string>
+
+    <array name="stores">
+        <item>Aachen</item>
+        <item>Köln</item>
+        <item>Umeå</item>
+        <item>Den Helder</item>
+    </array>
+
+
+</resources>
