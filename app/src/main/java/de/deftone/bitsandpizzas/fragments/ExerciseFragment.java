@@ -6,17 +6,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.method.BaseKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.activities.ExerciseDetailActivity;
 import de.deftone.bitsandpizzas.data.BackExercise;
 import de.deftone.bitsandpizzas.data.BellyExercise;
 import de.deftone.bitsandpizzas.data.CreatedExercise;
-import de.deftone.bitsandpizzas.data.HoldExercise;
 import de.deftone.bitsandpizzas.data.LegExercise;
 import de.deftone.bitsandpizzas.utils.CaptionedImagesAdapter;
 
@@ -73,13 +73,15 @@ public class ExerciseFragment extends Fragment {
                     }
                     break;
                 case CREATED_EXERCISES:
-                    exerciseNames = new String[CreatedExercise.CREATED_EXERCISES.length];
-                    for (int i = 0; i < exerciseNames.length; i++) {
-                        exerciseNames[i] = CreatedExercise.CREATED_EXERCISES[i].getName();
+                    List<CreatedExercise> createdExercises = CreatedExercise.generateRandomExercises();
+                    int max = createdExercises.size();
+                    exerciseNames = new String[max];
+                    for (int i = 0; i < max; i++) {
+                        exerciseNames[i] = createdExercises.get(i).getName();
                     }
-                    exerciseImages = new int[CreatedExercise.CREATED_EXERCISES.length];
-                    for (int i = 0; i < exerciseImages.length; i++) {
-                        exerciseImages[i] = CreatedExercise.CREATED_EXERCISES[i].getImageResourceId();
+                    exerciseImages = new int[max];
+                    for (int i = 0; i < max; i++) {
+                        exerciseImages[i] = createdExercises.get(i).getImageResourceId();
                     }
                     break;
             }

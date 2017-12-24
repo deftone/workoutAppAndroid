@@ -11,13 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import java.util.List;
 
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.data.BackExercise;
 import de.deftone.bitsandpizzas.data.BellyExercise;
 import de.deftone.bitsandpizzas.data.CreatedExercise;
-import de.deftone.bitsandpizzas.data.HoldExercise;
 import de.deftone.bitsandpizzas.data.LegExercise;
 import de.deftone.bitsandpizzas.utils.ExerciseDetailList;
 
@@ -75,10 +75,11 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 seconds = BackExercise.BACK_EXERCISES[id].getSeconds();
                 break;
             case CREATED_EXERCISES:
-                title = CreatedExercise.CREATED_EXERCISES[id].getName();
-                image = CreatedExercise.CREATED_EXERCISES[id].getImageResourceId();
-                desc = CreatedExercise.CREATED_EXERCISES[id].getDescription();
-                icon = CreatedExercise.CREATED_EXERCISES[id].getIcon();
+                List<CreatedExercise> createdExercises = CreatedExercise.generateRandomExercises();
+                title = createdExercises.get(id).getName();
+                image = createdExercises.get(id).getImageResourceId();
+                desc = createdExercises.get(id).getDescription();
+                icon = createdExercises.get(id).getIcon();
                 break;
         }
 
@@ -110,8 +111,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                     showTimer(finalSeconds);
                 }
             });
-        }
-        else
+        } else
             fab.setVisibility(View.GONE);
     }
 

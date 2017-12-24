@@ -1,6 +1,7 @@
 package de.deftone.bitsandpizzas.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.deftone.bitsandpizzas.R;
 
@@ -27,46 +28,32 @@ public class CreatedExercise {
     private String[] desc;
     private int seconds;
 
-    private static ArrayList randomLegInts;
-    public static final CreatedExercise[] CREATED_EXERCISES = {
-            //add 6 of each - maybe more for belly?!
-            //make sure special exercises are always included
 
-            //meine idee:
-            //leg hat 11 uebungen
-            //eine funktion, die 6 zufaellige ints von 0 bis 11 ausspuckt: generateRandomArray (s.u.)
-
-            //und dann hierum eine forschleife, die statt 1 diese 6 werte nutzt
-            new CreatedExercise(LegExercise.LEG_EXERCISES[1].getName(),
-                    LegExercise.LEG_EXERCISES[1].getIcon(),
-                    LegExercise.LEG_EXERCISES[1].getDescription(),
-                    LegExercise.LEG_EXERCISES[1].getImageResourceId(),
-                    LegExercise.LEG_EXERCISES[1].getSeconds()),
-
-//            also ungefaehr sowas:
-//            randomLegInts = generateRandomArray(11, 6, TYPE_LEG);
-//            for (int i=0; i<6; i++){
-//                new CreatedExercise(LegExercise.LEG_EXERCISES[randomLegInts.get(i)].getName(),
-//                        LegExercise.LEG_EXERCISES[randomLegInts.get(i)].getIcon(),
-//                        LegExercise.LEG_EXERCISES[randomLegInts.get(i)].getDescription(),
-//                        LegExercise.LEG_EXERCISES[randomLegInts.get(i)].getImageResourceId(),
-//                        LegExercise.LEG_EXERCISES[randomLegInts.get(i)].getSeconds()),
-//             }
-
-            //add BellyExercises =14
-            new CreatedExercise(BellyExercise.BELLY_EXERCISES[1].getName(),
-                    BellyExercise.BELLY_EXERCISES[1].getIcon(),
-                    BellyExercise.BELLY_EXERCISES[1].getDescription(),
-                    BellyExercise.BELLY_EXERCISES[1].getImageResourceId(),
-                    BellyExercise.BELLY_EXERCISES[1].getSeconds()),
-
-            //add BackExercises =8
-            new CreatedExercise(BackExercise.BACK_EXERCISES[1].getName(),
-                    BackExercise.BACK_EXERCISES[1].getIcon(),
-                    BackExercise.BACK_EXERCISES[1].getDescription(),
-                    BackExercise.BACK_EXERCISES[1].getImageResourceId(),
-                    BackExercise.BACK_EXERCISES[1].getSeconds())
-    };
+//    public static final CreatedExercise[] CREATED_EXERCISES = {
+//            //add 6 of each - maybe more for belly?!
+//            //make sure special exercises are always included
+//
+//            //und dann hierum eine forschleife, die statt 1 diese 6 werte nutzt
+//            new CreatedExercise(LegExercise.LEG_EXERCISES[1].getName(),
+//                    LegExercise.LEG_EXERCISES[1].getIcon(),
+//                    LegExercise.LEG_EXERCISES[1].getDescription(),
+//                    LegExercise.LEG_EXERCISES[1].getImageResourceId(),
+//                    LegExercise.LEG_EXERCISES[1].getSeconds()),
+//
+//            //add BellyExercises =14
+//            new CreatedExercise(BellyExercise.BELLY_EXERCISES[1].getName(),
+//                    BellyExercise.BELLY_EXERCISES[1].getIcon(),
+//                    BellyExercise.BELLY_EXERCISES[1].getDescription(),
+//                    BellyExercise.BELLY_EXERCISES[1].getImageResourceId(),
+//                    BellyExercise.BELLY_EXERCISES[1].getSeconds()),
+//
+//            //add BackExercises =8
+//            new CreatedExercise(BackExercise.BACK_EXERCISES[1].getName(),
+//                    BackExercise.BACK_EXERCISES[1].getIcon(),
+//                    BackExercise.BACK_EXERCISES[1].getDescription(),
+//                    BackExercise.BACK_EXERCISES[1].getImageResourceId(),
+//                    BackExercise.BACK_EXERCISES[1].getSeconds())
+//    };
 
     private CreatedExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
         this.name = name;
@@ -76,16 +63,40 @@ public class CreatedExercise {
         this.seconds = seconds;
     }
 
-    //max = maximale Anzahl an vorhandenen Uebungen
-    //count = size of generated random array
-    private static ArrayList generateRandomArray(int max, int count, int type) {
-        ArrayList<Integer> randomInts = new ArrayList<>();
+    public static final List<CreatedExercise> generateRandomExercises() {
+        //LegExercises: random numbers
+        int max = 11;
+        int count = 6;
+        List<Integer> randomInts = generateRandomArray(max, count, TYPE_LEG);
+
+        //LegExercises: random exercises
+        List<CreatedExercise> createdExercises = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            createdExercises.add(new CreatedExercise(LegExercise.LEG_EXERCISES[randomInts.get(i)].getName(),
+                    LegExercise.LEG_EXERCISES[randomInts.get(i)].getIcon(),
+                    LegExercise.LEG_EXERCISES[randomInts.get(i)].getDescription(),
+                    LegExercise.LEG_EXERCISES[randomInts.get(i)].getImageResourceId(),
+                    LegExercise.LEG_EXERCISES[randomInts.get(i)].getSeconds()));
+        }
+        return createdExercises;
+    }
+
+    /**
+     * max = maximale Anzahl an vorhandenen Uebungen
+     * count = size of generated random array
+     **/
+    private static List<Integer> generateRandomArray(int max, int count, int type) {
+        List<Integer> randomInts = new ArrayList<>();
         int randomNumber = 0;
-        //todo: add special exercises for each type
+//        switch () todo: die anderen noch hinzufuegen mit switch
+        if (type == TYPE_LEG)
+            randomInts.add(0);
+
         while (randomInts.size() < count) {
-            randomNumber = (int) Math.floor(Math.random() * max) + 1;
-            if (!randomInts.contains(randomNumber))
+            randomNumber = (int) Math.floor(Math.random() * max);
+            if (!randomInts.contains(randomNumber)) {
                 randomInts.add(randomNumber);
+            }
         }
         return randomInts;
     }
