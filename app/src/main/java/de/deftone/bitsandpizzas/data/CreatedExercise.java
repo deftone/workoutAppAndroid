@@ -63,6 +63,8 @@ public class CreatedExercise {
         this.seconds = seconds;
     }
 
+    //todo: hier ist der kern des uebels: es wird jedesmal ein neues erzeugt, bei jedem aufruf... es sollte immer nur eine neue List erzeugt werden
+    //wenn auf das + im menu geclickt wird, aber nicht wenn man die details ansehen moechte
     public static final List<CreatedExercise> generateRandomExercises() {
         //LegExercises: random numbers
         int max = 11;

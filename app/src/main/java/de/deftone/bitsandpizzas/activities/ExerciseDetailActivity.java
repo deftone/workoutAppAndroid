@@ -75,6 +75,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 seconds = BackExercise.BACK_EXERCISES[id].getSeconds();
                 break;
             case CREATED_EXERCISES:
+                //todo und hier ist das problem, es wird wieer ein neuer erzeugt, genau wie im ExerciseFragment
                 List<CreatedExercise> createdExercises = CreatedExercise.generateRandomExercises();
                 title = createdExercises.get(id).getName();
                 image = createdExercises.get(id).getImageResourceId();

@@ -73,6 +73,7 @@ public class ExerciseFragment extends Fragment {
                     }
                     break;
                 case CREATED_EXERCISES:
+                    //todo: hier ist das problem: es wird hier ein neuer erzeugt - s.ExerciseDetailActivity todo
                     List<CreatedExercise> createdExercises = CreatedExercise.generateRandomExercises();
                     int max = createdExercises.size();
                     exerciseNames = new String[max];
