@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/info_image"
+            android:id="@+id/main_image"
             android:layout_width="match_parent"
             android:layout_height="600dp"
             android:scaleType="centerCrop"
@@ -26,6 +26,7 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/top_fragment_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/workout_motherRussia"
