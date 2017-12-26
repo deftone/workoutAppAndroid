@@ -153,7 +153,7 @@ public class LegExercise {
                     0)
     };
 
-    private LegExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
+    public LegExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
         this.name = name;
         this.icon = icon;
         this.desc = desc;

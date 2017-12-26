@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coordinator"
+    android:id="@+id/detail_activity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -34,7 +34,7 @@
 
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/image_detail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
@@ -43,7 +43,7 @@
 
 
             <ListView
-                android:id="@+id/list"
+                android:id="@+id/list_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="400dp"
                 >

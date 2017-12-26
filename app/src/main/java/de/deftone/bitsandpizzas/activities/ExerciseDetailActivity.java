@@ -96,11 +96,11 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 //        collapsingToolbarLayout.setTitle("My Title");
 
 
-        ImageView imageView = findViewById(R.id.image);
+        ImageView imageView = findViewById(R.id.image_detail);
         imageView.setImageDrawable(ContextCompat.getDrawable(this, image));
 
         ExerciseDetailList adapter = new ExerciseDetailList(ExerciseDetailActivity.this, icon, desc);
-        list = findViewById(R.id.list);
+        list = findViewById(R.id.list_detail);
         list.setAdapter(adapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
