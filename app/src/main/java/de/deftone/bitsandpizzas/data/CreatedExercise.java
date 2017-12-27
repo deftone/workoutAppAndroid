@@ -19,12 +19,15 @@ public class CreatedExercise {
     private String[] desc;
     private int seconds;
 
-    private static int maxLegs = 11;
-    private static int countLegs = 6;
-    private static int maxBelly = 14;
-    private static int countBelly = 10;
-    private static int maxBack = 8;
-    private static int countBack = 6;
+    public static int maxLegs;
+    public static int countLegs = 6;
+    public static int mandatoryLegs[] = {0, 3};
+    public static int maxBelly;
+    public static int countBelly = 10;
+    public static int mandatoryBelly[] = {8, 10};
+    public static int maxBack;
+    public static int countBack = 6;
+    public static int mandatoryBack[] = {0, 1};
 
     public static List<CreatedExercise> CREATED_EXERCISES_LIST;
 
@@ -37,6 +40,7 @@ public class CreatedExercise {
     }
 
     public static final void generateRandomExercises() {
+        maxLegs = LegExercise.LEG_EXERCISES.length;
         List<Integer> randomInts = generateRandomArray(maxLegs, countLegs, TYPE_LEG);
         CREATED_EXERCISES_LIST = new ArrayList<>();
         for (int i = 0; i < countLegs; i++) {
@@ -46,6 +50,8 @@ public class CreatedExercise {
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getImageResourceId(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getSeconds()));
         }
+
+        maxBelly = BellyExercise.BELLY_EXERCISES.length;
         randomInts = generateRandomArray(maxBelly, countBelly, TYPE_BELLY);
         for (int i = 0; i < countBelly; i++) {
             CREATED_EXERCISES_LIST.add(new CreatedExercise(BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getName(),
@@ -54,6 +60,8 @@ public class CreatedExercise {
                     BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getImageResourceId(),
                     BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getSeconds()));
         }
+
+        maxBack = BackExercise.BACK_EXERCISES.length;
         randomInts = generateRandomArray(maxBack, countBack, TYPE_BACK);
         for (int i = 0; i < countBack; i++) {
             CREATED_EXERCISES_LIST.add(new CreatedExercise(BackExercise.BACK_EXERCISES[randomInts.get(i)].getName(),
@@ -70,20 +78,27 @@ public class CreatedExercise {
      **/
     static List<Integer> generateRandomArray(int max, int count, int type) {
         List<Integer> randomInts = new ArrayList<>();
-        int randomNumber = 0;
+        int randomNumber;
         switch (type) {
             case TYPE_LEG:
-                randomInts.add(0);
-                randomInts.add(3);
+                for (int i : mandatoryLegs)
+                    randomInts.add(i);
                 break;
             case TYPE_BELLY:
-                randomInts.add(8);
-                randomInts.add(10);
+                for (int i : mandatoryBelly)
+                    randomInts.add(i);
                 break;
             case TYPE_BACK:
-                randomInts.add(0);
-                randomInts.add(1);
+                for (int i : mandatoryBack)
+                    randomInts.add(i);
                 break;
+        }
+        if (count > max) {
+            System.out.println("ERROR: generateRandomArray: Achtung! " +
+                    "count ist groesser als max!! das darf nicht sein!");
+            System.out.println("count: " + count);
+            System.out.println("max: " + max);
+            return randomInts;
         }
 
         while (randomInts.size() < count) {
