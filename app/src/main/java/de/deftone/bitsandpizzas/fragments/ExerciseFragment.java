@@ -27,6 +27,7 @@ import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
+import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
 public class ExerciseFragment extends Fragment {
 
@@ -73,16 +74,14 @@ public class ExerciseFragment extends Fragment {
                     }
                     break;
                 case CREATED_EXERCISES:
-                    //todo: hier ist das problem: es wird hier ein neuer erzeugt - s.ExerciseDetailActivity todo
-                    List<CreatedExercise> createdExercises = CreatedExercise.generateRandomExercises();
-                    int max = createdExercises.size();
+                    int max = CREATED_EXERCISES_LIST.size();
                     exerciseNames = new String[max];
                     for (int i = 0; i < max; i++) {
-                        exerciseNames[i] = createdExercises.get(i).getName();
+                        exerciseNames[i] = CREATED_EXERCISES_LIST.get(i).getName();
                     }
                     exerciseImages = new int[max];
                     for (int i = 0; i < max; i++) {
-                        exerciseImages[i] = createdExercises.get(i).getImageResourceId();
+                        exerciseImages[i] = CREATED_EXERCISES_LIST.get(i).getImageResourceId();
                     }
                     break;
             }

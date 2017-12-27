@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_create_workout:
+                //hier jedesmal die CREATED_EXERCISES_LIST neu befuellen
+                CreatedExercise.generateRandomExercises();
                 Intent intent = new Intent(this, CreateWorkoutActivity.class);
                 startActivity(intent);
                 return true;

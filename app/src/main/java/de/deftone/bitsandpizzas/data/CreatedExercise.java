@@ -28,32 +28,10 @@ public class CreatedExercise {
     private String[] desc;
     private int seconds;
 
+    private static int max = 11;
+    private static int count = 6;
 
-//    public static final CreatedExercise[] CREATED_EXERCISES = {
-//            //add 6 of each - maybe more for belly?!
-//            //make sure special exercises are always included
-//
-//            //und dann hierum eine forschleife, die statt 1 diese 6 werte nutzt
-//            new CreatedExercise(LegExercise.LEG_EXERCISES[1].getName(),
-//                    LegExercise.LEG_EXERCISES[1].getIcon(),
-//                    LegExercise.LEG_EXERCISES[1].getDescription(),
-//                    LegExercise.LEG_EXERCISES[1].getImageResourceId(),
-//                    LegExercise.LEG_EXERCISES[1].getSeconds()),
-//
-//            //add BellyExercises =14
-//            new CreatedExercise(BellyExercise.BELLY_EXERCISES[1].getName(),
-//                    BellyExercise.BELLY_EXERCISES[1].getIcon(),
-//                    BellyExercise.BELLY_EXERCISES[1].getDescription(),
-//                    BellyExercise.BELLY_EXERCISES[1].getImageResourceId(),
-//                    BellyExercise.BELLY_EXERCISES[1].getSeconds()),
-//
-//            //add BackExercises =8
-//            new CreatedExercise(BackExercise.BACK_EXERCISES[1].getName(),
-//                    BackExercise.BACK_EXERCISES[1].getIcon(),
-//                    BackExercise.BACK_EXERCISES[1].getDescription(),
-//                    BackExercise.BACK_EXERCISES[1].getImageResourceId(),
-//                    BackExercise.BACK_EXERCISES[1].getSeconds())
-//    };
+    public static List<CreatedExercise> CREATED_EXERCISES_LIST;
 
     private CreatedExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
         this.name = name;
@@ -63,24 +41,19 @@ public class CreatedExercise {
         this.seconds = seconds;
     }
 
-    //todo: hier ist der kern des uebels: es wird jedesmal ein neues erzeugt, bei jedem aufruf... es sollte immer nur eine neue List erzeugt werden
-    //wenn auf das + im menu geclickt wird, aber nicht wenn man die details ansehen moechte
-    public static final List<CreatedExercise> generateRandomExercises() {
+    public static final void generateRandomExercises() {
         //LegExercises: random numbers
-        int max = 11;
-        int count = 6;
         List<Integer> randomInts = generateRandomArray(max, count, TYPE_LEG);
 
         //LegExercises: random exercises
-        List<CreatedExercise> createdExercises = new ArrayList<>();
+        CREATED_EXERCISES_LIST = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            createdExercises.add(new CreatedExercise(LegExercise.LEG_EXERCISES[randomInts.get(i)].getName(),
+            CREATED_EXERCISES_LIST.add(new CreatedExercise(LegExercise.LEG_EXERCISES[randomInts.get(i)].getName(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getIcon(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getDescription(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getImageResourceId(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getSeconds()));
         }
-        return createdExercises;
     }
 
     /**
@@ -101,6 +74,26 @@ public class CreatedExercise {
             }
         }
         return randomInts;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImageResourceId(int imageResourceId) {
+        this.imageResourceId = imageResourceId;
+    }
+
+    public void setIcon(String[] icon) {
+        this.icon = icon;
+    }
+
+    public void setDesc(String[] desc) {
+        this.desc = desc;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
     }
 
     public String getName() {

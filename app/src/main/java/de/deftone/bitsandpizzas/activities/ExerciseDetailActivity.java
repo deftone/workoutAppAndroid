@@ -25,6 +25,7 @@ import static de.deftone.bitsandpizzas.activities.MainActivity.BACK_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
 public class ExerciseDetailActivity extends AppCompatActivity {
 
@@ -75,12 +76,10 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 seconds = BackExercise.BACK_EXERCISES[id].getSeconds();
                 break;
             case CREATED_EXERCISES:
-                //todo und hier ist das problem, es wird wieer ein neuer erzeugt, genau wie im ExerciseFragment
-                List<CreatedExercise> createdExercises = CreatedExercise.generateRandomExercises();
-                title = createdExercises.get(id).getName();
-                image = createdExercises.get(id).getImageResourceId();
-                desc = createdExercises.get(id).getDescription();
-                icon = createdExercises.get(id).getIcon();
+                title = CREATED_EXERCISES_LIST.get(id).getName();
+                image = CREATED_EXERCISES_LIST.get(id).getImageResourceId();
+                desc = CREATED_EXERCISES_LIST.get(id).getDescription();
+                icon = CREATED_EXERCISES_LIST.get(id).getIcon();
                 break;
         }
 
