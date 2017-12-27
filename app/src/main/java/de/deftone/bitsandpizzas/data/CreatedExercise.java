@@ -18,7 +18,7 @@ import de.deftone.bitsandpizzas.R;
 
 public class CreatedExercise {
 
-    private static final int TYPE_LEG = 0;
+    public static final int TYPE_LEG = 0;
     private final int TYPE_BELLY = 1;
     private final int TYPE_BACK = 2;
 
@@ -87,7 +87,7 @@ public class CreatedExercise {
      * max = maximale Anzahl an vorhandenen Uebungen
      * count = size of generated random array
      **/
-    private static List<Integer> generateRandomArray(int max, int count, int type) {
+    static List<Integer> generateRandomArray(int max, int count, int type) {
         List<Integer> randomInts = new ArrayList<>();
         int randomNumber = 0;
 //        switch () todo: die anderen noch hinzufuegen mit switch
