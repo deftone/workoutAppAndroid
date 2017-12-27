@@ -3,24 +3,15 @@ package de.deftone.bitsandpizzas.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.deftone.bitsandpizzas.R;
-
 /**
  * Created by deftone on 10.11.17.
- * <p>
- * <p>
- * // ● : "\u25CF"
- * // ➡ : "\u27A1"
- * // finger point up  "\u261D"
- * //sparkles "\u2728"
- * //muscle "\uD83D\uDCAA"
  */
 
 public class CreatedExercise {
 
     public static final int TYPE_LEG = 0;
-    private final int TYPE_BELLY = 1;
-    private final int TYPE_BACK = 2;
+    public static final int TYPE_BELLY = 1;
+    public static final int TYPE_BACK = 2;
 
     private String name;
     private int imageResourceId;
@@ -28,8 +19,12 @@ public class CreatedExercise {
     private String[] desc;
     private int seconds;
 
-    private static int max = 11;
-    private static int count = 6;
+    private static int maxLegs = 11;
+    private static int countLegs = 6;
+    private static int maxBelly = 14;
+    private static int countBelly = 10;
+    private static int maxBack = 8;
+    private static int countBack = 6;
 
     public static List<CreatedExercise> CREATED_EXERCISES_LIST;
 
@@ -42,30 +37,54 @@ public class CreatedExercise {
     }
 
     public static final void generateRandomExercises() {
-        //LegExercises: random numbers
-        List<Integer> randomInts = generateRandomArray(max, count, TYPE_LEG);
-
-        //LegExercises: random exercises
+        List<Integer> randomInts = generateRandomArray(maxLegs, countLegs, TYPE_LEG);
         CREATED_EXERCISES_LIST = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < countLegs; i++) {
             CREATED_EXERCISES_LIST.add(new CreatedExercise(LegExercise.LEG_EXERCISES[randomInts.get(i)].getName(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getIcon(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getDescription(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getImageResourceId(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getSeconds()));
         }
+        randomInts = generateRandomArray(maxBelly, countBelly, TYPE_BELLY);
+        for (int i = 0; i < countBelly; i++) {
+            CREATED_EXERCISES_LIST.add(new CreatedExercise(BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getName(),
+                    BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getIcon(),
+                    BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getDescription(),
+                    BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getImageResourceId(),
+                    BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getSeconds()));
+        }
+        randomInts = generateRandomArray(maxBack, countBack, TYPE_BACK);
+        for (int i = 0; i < countBack; i++) {
+            CREATED_EXERCISES_LIST.add(new CreatedExercise(BackExercise.BACK_EXERCISES[randomInts.get(i)].getName(),
+                    BackExercise.BACK_EXERCISES[randomInts.get(i)].getIcon(),
+                    BackExercise.BACK_EXERCISES[randomInts.get(i)].getDescription(),
+                    BackExercise.BACK_EXERCISES[randomInts.get(i)].getImageResourceId(),
+                    BackExercise.BACK_EXERCISES[randomInts.get(i)].getSeconds()));
+        }
     }
 
     /**
-     * max = maximale Anzahl an vorhandenen Uebungen
-     * count = size of generated random array
+     * maxLegs = maximale Anzahl an vorhandenen Uebungen
+     * countLegs = size of generated random array
      **/
     static List<Integer> generateRandomArray(int max, int count, int type) {
         List<Integer> randomInts = new ArrayList<>();
         int randomNumber = 0;
-//        switch () todo: die anderen noch hinzufuegen mit switch
-        if (type == TYPE_LEG)
-            randomInts.add(0);
+        switch (type) {
+            case TYPE_LEG:
+                randomInts.add(0);
+                randomInts.add(3);
+                break;
+            case TYPE_BELLY:
+                randomInts.add(8);
+                randomInts.add(10);
+                break;
+            case TYPE_BACK:
+                randomInts.add(0);
+                randomInts.add(1);
+                break;
+        }
 
         while (randomInts.size() < count) {
             randomNumber = (int) Math.floor(Math.random() * max);
@@ -74,26 +93,6 @@ public class CreatedExercise {
             }
         }
         return randomInts;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setImageResourceId(int imageResourceId) {
-        this.imageResourceId = imageResourceId;
-    }
-
-    public void setIcon(String[] icon) {
-        this.icon = icon;
-    }
-
-    public void setDesc(String[] desc) {
-        this.desc = desc;
-    }
-
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
     }
 
     public String getName() {

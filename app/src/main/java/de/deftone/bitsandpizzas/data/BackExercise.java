@@ -22,7 +22,7 @@ public class BackExercise {
     private int seconds;
 
     public static final BackExercise[] BACK_EXERCISES = {
-
+            //0
             new BackExercise("Fäuste heben",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA", "\u261D"},
                     new String[]{"Bauchlage, Füße liegen auf",
@@ -34,7 +34,7 @@ public class BackExercise {
                             "Oberkörper bleibt liegen, Bewegung aus den Schultergelenken"},
                     R.drawable.faeuste_heben,
                     30),
-
+            //1
             new BackExercise("Oberschenkel heben",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u261D", "\uD83D\uDCAA", "\u2728"},
                     new String[]{"Bauchlage",
@@ -46,7 +46,7 @@ public class BackExercise {
                             "Intensität kann durch Schließen der Oberschenkel gesteigert werden"},
                     R.drawable.oberschenkel_heben,
                     30),
-
+            //2
             new BackExercise("Wandsitz",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u261D", "\u27A1", "\uD83D\uDCAA"},
                     new String[]{"ein Schritt von Wand entfernt stehen",
@@ -59,7 +59,7 @@ public class BackExercise {
                             "eine Minute halten"},
                     R.drawable.wandsitz2,
                     60),
-
+            //3
             new BackExercise("Paddeln",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\uD83D\uDCAA", "\u261D"},
                     new String[]{"Bauchlage",
@@ -71,7 +71,7 @@ public class BackExercise {
                             "Arme und Beine dabei möglichst gerade halten"},
                     R.drawable.swimming,
                     30),
-
+            //4
             new BackExercise("Schwimmen",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA", "\u261D"},
                     new String[]{"Bauchlage",
@@ -84,7 +84,7 @@ public class BackExercise {
                             "Ellebogen die ganze Zeit so hoch wie möglich",},
                     R.drawable.swimming2,
                     0),
-
+            //5
             new BackExercise("Ellebogenmove",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA", "\u261D"},
                     new String[]{"aufrechter Stand",
@@ -107,7 +107,7 @@ public class BackExercise {
 //                            "30 Sekunden halten"},
 //                    R.drawable.schultern_strecken,
 //                    30),
-
+            //6
             new BackExercise("Schultern strecken",
                     new String[]{"\u25CF", "\u27A1", "\u27A1", "\u261D", "\u27A1", "\uD83D\uDCAA"},
                     new String[]{"aufrechter Stand",
@@ -118,7 +118,7 @@ public class BackExercise {
                             "15 langsame Wiederholungen"},
                     R.drawable.ruecken1,
                     0),
-
+            //7
             new BackExercise("Unterarmstütz 2",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u261D", "\uD83D\uDCAA"},
                     new String[]{"in Rückenlage auf dem Boden",
