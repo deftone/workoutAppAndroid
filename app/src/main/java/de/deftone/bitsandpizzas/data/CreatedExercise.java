@@ -31,7 +31,7 @@ public class CreatedExercise {
 
     public static List<CreatedExercise> CREATED_EXERCISES_LIST;
 
-    private CreatedExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
+    CreatedExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
         this.name = name;
         this.icon = icon;
         this.desc = desc;
