@@ -2,6 +2,7 @@ package de.deftone.bitsandpizzas.activities;
 
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
+import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,6 +11,7 @@ import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.data.LegExercise;
@@ -32,6 +34,7 @@ import static org.hamcrest.CoreMatchers.allOf;
 /**
  * Created by deftone on 25.12.17.
  */
+@RunWith(AndroidJUnit4.class)
 public class ExerciseDetailActivityTest {
 
     private int position = 0;
@@ -47,14 +50,14 @@ public class ExerciseDetailActivityTest {
             R.drawable.ausfallschritt,
             0);
 
-    //for intents, we need an IntentRule here... but the intent is the mainAcitivity! otherwise it crashes
+    //for intents ("intended", s.u.), we need an IntentRule here... but the intent is the mainAcitivity! otherwise it crashes
     @Rule
     public IntentsTestRule<MainActivity> intentsTestRule =
             new IntentsTestRule<>(MainActivity.class);
 
-
+    //wie in MainAcitivyTest beschrieben: in der Rule befindet sich @Before und @After (nur @Before/AfterClass wuerde ausserhalb stehen)
     @Before
-    public void beforeEachTest() {
+    public void setUp() {
         //open detail acitivity
         //click on tab "Beine"
         Matcher<View> matcher = allOf(withText("Beine"),

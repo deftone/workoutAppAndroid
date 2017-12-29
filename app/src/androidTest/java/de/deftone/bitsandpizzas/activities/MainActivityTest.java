@@ -23,20 +23,23 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.not;
 
 /**
  * Created by deftone on 26.12.17.
  */
-@LargeTest
-@RunWith(AndroidJUnit4.class)
+@LargeTest //muss das da sein?
+@RunWith(AndroidJUnit4.class) //diese zeile sollte bei allen UI tests stehen
 public class MainActivityTest {
 
-    //we need this, so that the app is launched before the tests start - otherwise all will fail
+    //ActivityTestRule -> starts Activity under test (not the app!), but the lifetime of the activity,
+    //i.e. starts activity before (each) test and terminates activity after (each) test.
+    //wenn zusaetzliche methoden nach dem starten bzw. vor beenden bei jedem test ausgefuehrt werden sollen,
+    //so stehen diese auch mit @Before und @After in der ActivityTestRule.
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    //im test kann natuerlich dann eine andere activity gelaunched werden, aber mit dieser wird gestartet
 
-
+    //es muss alles public sein, die testrule und auch alle testmethoden, sonst bumm!
     @Test
     public void toolbarIsDisplayed() {
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
