@@ -15,7 +15,7 @@ public class BellyExercise {
     private int seconds;
 
     public static final BellyExercise[] BELLY_EXERCISES = {
-            //0
+            //0 - Bild ist etwas klein und unscharf
             new BellyExercise("Crunch",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
                     new String[]{"Rücken liegt auf dem Boden",
@@ -49,14 +49,14 @@ public class BellyExercise {
                             "10 Wiederholungen"},
                     R.drawable.sit_up,
                     0),
-            //3
+            //3 - etwas unscharf
             new BellyExercise("Pseudo Sit-up",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u261D", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
                     new String[]{"mit gebeugten Knien sitzen, Füße flach aufm Boden",
                             "Oberkörper nah zu den Oberschenkeln",
                             "Hände nach vorne gestreckt",
                             "Rücken ist die ganze Zeit leicht gerundet",
-                            "beim Einatmen den Oberkörper langsam nach \nhinten neigen (bis 45°) und dort 2-10 Sek halten",
+                            "beim Einatmen den Oberkörper langsam nach hinten neigen (bis 45°) und dort 2-10 Sek halten",
                             "beim Ausatmen wieder aufrichten",
                             "20 - 30 Wiederholungen"},
                     R.drawable.pseudo_sit_up,
@@ -65,7 +65,7 @@ public class BellyExercise {
             new BellyExercise("Fahrrad fahren",
                     new String[]{"\u25CF", "\u25CF", "\u261D", "\u27A1", "\u27A1", "\u27A1", "\u2728", "\uD83D\uDCAA"},
                     new String[]{"Oberkörper leicht nach hinten kippen und mit den Unterarmen am Boden abstützen",
-                            "Beine ca 45° gestreckt vom Boden abheben und \nhalten",
+                            "Beine ca 45° gestreckt vom Boden abheben und halten",
                             "auf geraden Rücken achten",
                             "beim Ausatmen ein Bein beugen und Knie Richtung Brust ziehen",
                             "beim Einatmen Bein wieder strecken und beide Beine parallel",
@@ -79,8 +79,7 @@ public class BellyExercise {
                     new String[]{"\u25CF", "\u27A1", "\u261D", "\uD83D\uDCAA"},
                     new String[]{"Hände hinterm Kopf, Ellebogen zeigen nach außen",
                             "Beine abwechselnd ausstrecken bzw Knie zum diagonal entgegengesetzen Ellebogen ziehen",
-                            "darauf achten, dass oberer Rücken und Schultern nicht den Boden berühren und dass das Becken " +
-                                    "\nfest auf dem Boden bleibt",
+                            "darauf achten, dass oberer Rücken und Schultern nicht den Boden berühren und dass das Becken fest auf dem Boden bleibt",
                             "pro Seite 10 Bewegungen"},
                     R.drawable.kaefer,
                     0),
@@ -107,7 +106,7 @@ public class BellyExercise {
                             "beim Ausatmen den Rücken runden und Nabel zur Wirbelsäule ziehen",
                             "beim Einatmen Wirbel für Wirbel abrollen bis wieder in Startposition",
                             "10 - 20 Wiederholungen"},
-                    R.drawable.roll_up_2,
+                    R.drawable.roll_up,
                     0),
             //8
             new BellyExercise("Unterarmstütz",
@@ -180,13 +179,7 @@ public class BellyExercise {
                             "einfache Variante: kein Bein heben und nur halten",
                             "maximal 10 Wiederholungen pro Seite"},
                     R.drawable.leg_pull_down,
-                    0),
-
-            // ● : "\u25CF"
-            // ➡ : "\u27A1"
-            // finger point up  "\u261D"
-            //sparkles "\u2728"
-            //muscle "\uD83D\uDCAA"
+                    0)
     };
 
     private BellyExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {

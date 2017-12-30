@@ -14,12 +14,14 @@ import de.deftone.bitsandpizzas.R;
  * ➡ : "\u27A1"
  * ghost	"\uD83D\uDC7B"
  * muscle "\uD83D\uDCAA"
- * <p>
+ *
  * // ● : "\u25CF"
  * // ➡ : "\u27A1"
  * // finger point up  "\u261D"
  * //sparkles "\u2728"
  * //muscle "\uD83D\uDCAA"
+ *
+ * alle bilder sind auf (512 x 332) px^2 skaliert (wenige sind etwas kleiner und manchmal leider etwas unscharf)
  */
 
 
@@ -68,14 +70,15 @@ public class LegExercise {
                     0),
             //3
             new LegExercise("Knie heben im Vierfüßler",
-                    new String[]{"\u25CF", "\u25CF", "\u27A1", "\u261D", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{"\u25CF", "\u2728", "\u25CF", "\u27A1", "\u261D", "\u2728", "\uD83D\uDCAA"},
                     new String[]{"in den Vierfüßlerstand gehen",
+                            "Fussspann auf den Boden ablegen, oder auf den Zehenballen stehen",
                             "beide Knie leicht (1 cm) vom Boden heben",
                             "langsam ein Bein in der angewinkelten Stellung nach oben heben und wieder zurück ",
                             "kein Knie berührt während der Übung den Boden",
                             "leichte Variante: nicht bewegendes Knie setzt auf",
                             "10 Wiederholungen pro Seite"},
-                    R.drawable.vierfuessler_knie_heben,
+                    R.drawable.knieheben,
                     0),
             //4
             new LegExercise("Beckenheben vom Boden",
@@ -110,7 +113,7 @@ public class LegExercise {
                             " 20 Wiederholungen pro Seite "},
                     R.drawable.bein_seitlich_heben,
                     0),
-            //7
+            //7 - dieses bild ist recht klein und unscharf, koennte ausgetauscht werden
             new LegExercise("Unteres Bein im Liegen heben",
                     new String[]{"\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
                     new String[]{"seitlich auf dem Boden liegen, auf unteren Ellebogen stützen",
@@ -132,8 +135,8 @@ public class LegExercise {
                             "jede Seite 30 Sekunden halten"},
                     R.drawable.standwaage,
                     30),
-            //9
-            new LegExercise("Einbeinhalteübung",
+            //9 - Haende und Fuss sind abgeschnitten - koennte versuchen das bild nochmal im netz zu finden
+            new LegExercise("Knie im Schoss",
                     new String[]{"\u25CF", "\u27A1", "\u2728", "\u27A1", "\uD83D\uDCAA"},
                     new String[]{"hüftbreiter, gerader Stand",
                             "leicht in die Hocken gehen und ein Bein angewinkelt über das Standbein legen",
@@ -142,7 +145,7 @@ public class LegExercise {
                             "jede Seite 30 Sekunden halten"},
                     R.drawable.ein_bein_stand,
                     30),
-            //10
+            //10 - dieses bild ist recht klein und unscharf, koennte ausgetauscht werden
             new LegExercise("Side Kick kniend",
                     new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\uD83D\uDCAA"},
                     new String[]{"Haltung wie auf Bild einnehmen",
