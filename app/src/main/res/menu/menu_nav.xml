@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <item android:title="@string/random_programs">
+        <menu>
+            <item
+                android:id="@+id/nav_random_mix"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/random_legs" />
+
+            <item
+                android:id="@+id/nav_radom_legs"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/random_legs" />
+        </menu>
+    </item>
+
+</menu>

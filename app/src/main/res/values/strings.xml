@@ -13,10 +13,19 @@
     <string name="order_name_hint">Please enter your name</string>
     <string name="order_detail_hint">Please enter your order</string>
 
-    <string name="workout_motherRussia"> Bikinifigur mit Mother Russia</string>
+    <string name="workout_motherRussia">Bikinifigur mit Mother Russia</string>
     <string name="home_text">Such dir ein paar Übungen aus oder lass dir ein Zufallsprogramm zusammen stellen :)
           \n\nHinweise:
           \n1) die Zahl der Wiederholungen sowie Haltezeiten sind nur Vorschläge. Mach soviel wie dir gut tut und dich fordert.
           \n2) am besten wäre es von jeder Übung 2 Sätze zu machen.</string>
+
+    <string name="nav_open_drawer">Open navigation drawer</string>
+    <string name="nav_close_drawer">Close navigation drawer</string>
+
+    <string name="random_programs">Zufallsprogramme</string>
+    <string name="random_mix">Random Mix</string>
+    <string name="random_legs">Random Beine</string>
+
+    <string name="share_text">Want to join me working out?</string>
 
 </resources>

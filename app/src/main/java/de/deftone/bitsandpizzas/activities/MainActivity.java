@@ -1,26 +1,30 @@
 package de.deftone.bitsandpizzas.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import de.deftone.bitsandpizzas.data.CreatedExercise;
-import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.R;
+import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public final static String TYPE = "type";
     public final static String LEG_EXERCISES = "leg exercieses";
@@ -46,15 +50,33 @@ public class MainActivity extends AppCompatActivity {
         //Attach the ViewPager to the TabLayout
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        //add burger icon for drawer to toolbar
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawer,
+                toolbar,
+                R.string.nav_open_drawer,
+                R.string.nav_close_drawer);
+        //add drawer toggle to drawer layout
+        drawer.addDrawerListener(toggle);
+        //sync state of burger icon on toolbar with state of the drawer
+        toggle.syncState();
+
+        //set listener to drawer
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
+    //share intent in options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        setShareActionIntent("Want to join me for working out?");
+        setShareActionIntent(String.valueOf(R.string.share_text));
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -66,20 +88,7 @@ public class MainActivity extends AppCompatActivity {
         shareActionProvider.setShareIntent(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_create_workout:
-                //hier jedesmal die CREATED_EXERCISES_LIST neu befuellen
-                CreatedExercise.generateRandomExercises();
-                Intent intent = new Intent(this, CreateWorkoutActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
+    //viewpager
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fragmentManager) {
@@ -107,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString(TYPE, BACK_EXERCISES);
                     backExercisesFragment.setArguments(bundle);
                     return backExercisesFragment;
-                    //todo: ein paar dehnuebungen bei 4
+                //todo: ein paar dehnuebungen bei 4
             }
             return null;
         }
@@ -131,5 +140,42 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    //navigation drawer
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+//todo: warum muss ich diese methode ueberschreiben? was macht die? war bei catChat nicht noetig...
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        Intent intent = null;
+        switch (id) {
+            //todo: hier noch mehr zufallsprogramme zusammen stellen
+            case R.id.nav_random_mix:
+                //putExtra mit anzahl der uebungen und type
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                break;
+            case R.id.nav_radom_legs:
+                //putExtra mit anzahl der uebungen und type
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                break;
+        }
+        startActivity(intent);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else
+            super.onBackPressed();
     }
 }

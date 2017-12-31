@@ -22,6 +22,8 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 //        toolbar.setTitle("Dein Workout");
 //        setSupportActionBar(toolbar);
 
+        //todo: ueberlegen, wie ich am besten die versch. zufallsprogramme zusammenstelle...
+        //hier oder mehrere CreatedExercise Klassen in data?
         ExerciseFragment exerciseFragment = new ExerciseFragment();
         Bundle bundle = new Bundle();
         bundle.putString(TYPE, CREATED_EXERCISES);
