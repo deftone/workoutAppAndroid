@@ -19,15 +19,13 @@ public class CreatedExercise {
     private String[] desc;
     private int seconds;
 
-    public static int maxLegs;
-    public static int countLegs = 6;
-    public static int mandatoryLegs[] = {0, 3};
-    public static int maxBelly;
-    public static int countBelly = 10;
-    public static int mandatoryBelly[] = {8, 10};
-    public static int maxBack;
-    public static int countBack = 6;
-    public static int mandatoryBack[] = {0, 1};
+    private static int maxLegs;
+
+    static int mandatoryLegs[] = {0, 3};
+    private static int maxBelly;
+    static int mandatoryBelly[] = {8, 10};
+    private static int maxBack;
+    static int mandatoryBack[] = {0, 1};
 
     public static List<CreatedExercise> CREATED_EXERCISES_LIST;
 
@@ -39,9 +37,9 @@ public class CreatedExercise {
         this.seconds = seconds;
     }
 
-    public static final void generateRandomExercises() {
+    public static final void generateRandomExercises(int countLegs, int countBelly, int countBack, boolean mandatory) {
         maxLegs = LegExercise.LEG_EXERCISES.length;
-        List<Integer> randomInts = generateRandomArray(maxLegs, countLegs, TYPE_LEG);
+        List<Integer> randomInts = generateRandomArray(maxLegs, countLegs, TYPE_LEG, mandatory);
         CREATED_EXERCISES_LIST = new ArrayList<>();
         for (int i = 0; i < countLegs; i++) {
             CREATED_EXERCISES_LIST.add(new CreatedExercise(LegExercise.LEG_EXERCISES[randomInts.get(i)].getName(),
@@ -52,7 +50,7 @@ public class CreatedExercise {
         }
 
         maxBelly = BellyExercise.BELLY_EXERCISES.length;
-        randomInts = generateRandomArray(maxBelly, countBelly, TYPE_BELLY);
+        randomInts = generateRandomArray(maxBelly, countBelly, TYPE_BELLY, mandatory);
         for (int i = 0; i < countBelly; i++) {
             CREATED_EXERCISES_LIST.add(new CreatedExercise(BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getName(),
                     BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getIcon(),
@@ -62,7 +60,7 @@ public class CreatedExercise {
         }
 
         maxBack = BackExercise.BACK_EXERCISES.length;
-        randomInts = generateRandomArray(maxBack, countBack, TYPE_BACK);
+        randomInts = generateRandomArray(maxBack, countBack, TYPE_BACK, mandatory);
         for (int i = 0; i < countBack; i++) {
             CREATED_EXERCISES_LIST.add(new CreatedExercise(BackExercise.BACK_EXERCISES[randomInts.get(i)].getName(),
                     BackExercise.BACK_EXERCISES[randomInts.get(i)].getIcon(),
@@ -76,23 +74,24 @@ public class CreatedExercise {
      * maxLegs = maximale Anzahl an vorhandenen Uebungen
      * countLegs = size of generated random array
      **/
-    static List<Integer> generateRandomArray(int max, int count, int type) {
+    static List<Integer> generateRandomArray(int max, int count, int type, boolean mandatory) {
         List<Integer> randomInts = new ArrayList<>();
         int randomNumber;
-        switch (type) {
-            case TYPE_LEG:
-                for (int i : mandatoryLegs)
-                    randomInts.add(i);
-                break;
-            case TYPE_BELLY:
-                for (int i : mandatoryBelly)
-                    randomInts.add(i);
-                break;
-            case TYPE_BACK:
-                for (int i : mandatoryBack)
-                    randomInts.add(i);
-                break;
-        }
+        if (mandatory)
+            switch (type) {
+                case TYPE_LEG:
+                    for (int i : mandatoryLegs)
+                        randomInts.add(i);
+                    break;
+                case TYPE_BELLY:
+                    for (int i : mandatoryBelly)
+                        randomInts.add(i);
+                    break;
+                case TYPE_BACK:
+                    for (int i : mandatoryBack)
+                        randomInts.add(i);
+                    break;
+            }
         if (count > max) {
             System.out.println("ERROR: generateRandomArray: Achtung! " +
                     "count ist groesser als max!! das darf nicht sein!");

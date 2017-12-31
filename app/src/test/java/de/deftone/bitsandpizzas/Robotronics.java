@@ -24,7 +24,7 @@ public class Robotronics {
     @Test
     public void clickingButton_shouldStartOrderActivity() {
         MainActivity activity = Robolectric.setupActivity(MainActivity.class);
-        activity.findViewById(R.id.action_create_workout).performClick();
+//        activity.findViewById(R.id.action_create_workout).performClick();
 
         Intent expectedIntent = new Intent(activity, CreateWorkoutActivity.class);
         Intent actual = ShadowApplication.getInstance().getNextStartedActivity();

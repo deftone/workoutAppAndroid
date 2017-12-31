@@ -6,14 +6,36 @@
     <item android:title="@string/random_programs">
         <menu>
             <item
-                android:id="@+id/nav_random_mix"
+                android:id="@+id/nav_random_mix_long"
                 android:icon="@android:drawable/btn_star"
-                android:title="@string/random_legs" />
+                android:title="@string/random_mix_long" />
+
+            <!--farbe fuer jeden stern anders waere toll... das hier klappt aber nicht-->
+            <item
+                android:id="@+id/nav_random_mix_medium"
+                android:icon="@android:drawable/btn_star"
+                android:iconTint="@color/colorPrimaryDark"
+                android:title="@string/random_mix_medium" />
+
+            <item
+                android:id="@+id/nav_random_mix_short"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/random_mix_short" />
 
             <item
                 android:id="@+id/nav_radom_legs"
                 android:icon="@android:drawable/btn_star"
                 android:title="@string/random_legs" />
+
+            <item
+                android:id="@+id/nav_radom_belly"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/random_belly" />
+
+            <item
+                android:id="@+id/nav_radom_back"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/random_back" />
         </menu>
     </item>
 

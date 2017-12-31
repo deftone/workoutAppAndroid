@@ -20,9 +20,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import de.deftone.bitsandpizzas.R;
+import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -153,13 +153,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         Intent intent = null;
         switch (id) {
-            //todo: hier noch mehr zufallsprogramme zusammen stellen
-            case R.id.nav_random_mix:
-                //putExtra mit anzahl der uebungen und type
+            //hier jedesmal die CREATED_EXERCISES_LIST neu befuellen
+            case R.id.nav_random_mix_long:
+                CreatedExercise.generateRandomExercises(6, 10, 6, true);
                 intent = new Intent(this, CreateWorkoutActivity.class);
                 break;
+            case R.id.nav_random_mix_medium:
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                CreatedExercise.generateRandomExercises(4, 6, 4, false);
+                break;
+            case R.id.nav_random_mix_short:
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                CreatedExercise.generateRandomExercises(2, 2, 2, false);
+                break;
             case R.id.nav_radom_legs:
-                //putExtra mit anzahl der uebungen und type
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                CreatedExercise.generateRandomExercises(6, 0, 0, false);
+                break;
+            case R.id.nav_radom_belly:
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                CreatedExercise.generateRandomExercises(0, 6, 0, false);
+                break;
+            case R.id.nav_radom_back:
+                CreatedExercise.generateRandomExercises(0, 0, 6, false);
                 intent = new Intent(this, CreateWorkoutActivity.class);
                 break;
         }
