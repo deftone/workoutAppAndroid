@@ -1,5 +1,6 @@
 package de.deftone.bitsandpizzas.activities;
 
+import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -23,6 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.Matchers.not;
 
 /**
  * Created by deftone on 26.12.17.
@@ -67,11 +69,6 @@ public class MainActivityTest {
     @Test
     public void imageIsVisible() {
         onView(withId(R.id.main_image)).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void createButtonIsVisible() {
-        onView(withId(R.id.action_create_workout)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -138,5 +135,19 @@ public class MainActivityTest {
         String title = "Crunch";
         int position = 0;
         onView(allOf(withId(R.id.exercise_recycler), isDisplayed())).check(matches(MatchUtils.eigenerMatcher(position, hasDescendant(withText(title)))));
+    }
+
+    @Test
+    public void openAndCloseNavigationDrawer() {
+        //drawer content is not visible
+        onView(withId(R.id.nav_view)).check(matches(not(isDisplayed())));
+        //open nav drawer
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        //drawer content is visible
+        onView(withId(R.id.nav_view)).check(matches(isDisplayed()));
+        //close nav drawer
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
+        //drawer content is not visible
+        onView(withId(R.id.nav_view)).check(matches(not(isDisplayed())));
     }
 }
