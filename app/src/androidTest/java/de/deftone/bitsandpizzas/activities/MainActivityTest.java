@@ -29,7 +29,6 @@ import static org.hamcrest.Matchers.not;
 /**
  * Created by deftone on 26.12.17.
  */
-@LargeTest //muss das da sein?
 @RunWith(AndroidJUnit4.class) //diese zeile sollte bei allen UI tests stehen
 public class MainActivityTest {
 

@@ -38,10 +38,9 @@ public class CreateWorkoutActivityTest {
 
         //check that first card view has the correct title
         String title = "Kniebeuge im Ausfallschritt";
-        onView(withId(R.id.exercise_recycler)).check(matches(MatchUtils.eigenerMatcher(0, hasDescendant(withText(title)))));
+        onView(withId(R.id.exercise_recycler)).check(matches(MatchUtils
+                .eigenerMatcher(0, hasDescendant(withText(title)))));
     }
-
-
 
     @Test
     public void createExerciseAndGoBackAgain() {

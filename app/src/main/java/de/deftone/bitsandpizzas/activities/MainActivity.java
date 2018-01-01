@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        setShareActionIntent(String.valueOf(R.string.share_text));
+        setShareActionIntent(getString(R.string.share_text));
 
         return super.onCreateOptionsMenu(menu);
     }
