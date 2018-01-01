@@ -65,7 +65,7 @@ public class StopwatchActivity extends Activity {
     }
 
     private void runTimer() {
-        final TextView timeView = (TextView) findViewById(R.id.time_view);
+        final TextView timeView = findViewById(R.id.time_view);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
