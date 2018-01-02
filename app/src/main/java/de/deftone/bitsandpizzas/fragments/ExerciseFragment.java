@@ -16,8 +16,8 @@ import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.activities.ExerciseDetailActivity;
 import de.deftone.bitsandpizzas.data.BackExercise;
 import de.deftone.bitsandpizzas.data.BellyExercise;
-import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.data.LegExercise;
+import de.deftone.bitsandpizzas.data.StretchingExercise;
 import de.deftone.bitsandpizzas.utils.CaptionedImagesAdapter;
 
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_ID;
@@ -26,6 +26,7 @@ import static de.deftone.bitsandpizzas.activities.MainActivity.BACK_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.STRETCHING_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
@@ -71,6 +72,16 @@ public class ExerciseFragment extends Fragment {
                     exerciseImages = new int[BellyExercise.BELLY_EXERCISES.length];
                     for (int i = 0; i < exerciseImages.length; i++) {
                         exerciseImages[i] = BellyExercise.BELLY_EXERCISES[i].getImageResourceId();
+                    }
+                    break;
+                case STRETCHING_EXERCISES:
+                    exerciseNames = new String[StretchingExercise.STRETCHING_EXERCISES.length];
+                    for (int i = 0; i < exerciseNames.length; i++) {
+                        exerciseNames[i] = StretchingExercise.STRETCHING_EXERCISES[i].getName();
+                    }
+                    exerciseImages = new int[StretchingExercise.STRETCHING_EXERCISES.length];
+                    for (int i = 0; i < exerciseImages.length; i++) {
+                        exerciseImages[i] = StretchingExercise.STRETCHING_EXERCISES[i].getImageResourceId();
                     }
                     break;
                 case CREATED_EXERCISES:

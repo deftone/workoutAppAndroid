@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final static String LEG_EXERCISES = "leg exercieses";
     public final static String BELLY_EXERCISES = "belly exercieses";
     public final static String BACK_EXERCISES = "back exercieses";
+    public final static String STRETCHING_EXERCISES = "stretching exercieses";
     public final static String CREATED_EXERCISES = "created exercieses";
 
     private ShareActionProvider shareActionProvider;
@@ -116,14 +117,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bundle.putString(TYPE, BACK_EXERCISES);
                     backExercisesFragment.setArguments(bundle);
                     return backExercisesFragment;
-                //todo: ein paar dehnuebungen bei 4
+                case 4:
+                    ExerciseFragment stretchingFragment = new ExerciseFragment();
+                    bundle.putString(TYPE, STRETCHING_EXERCISES);
+                    stretchingFragment.setArguments(bundle);
+                    return stretchingFragment;
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
 
         @Override
@@ -137,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return getResources().getText(R.string.bauch_tab);
                 case 3:
                     return getResources().getText(R.string.ruecken_tab);
+                case 4:
+                    return getResources().getText(R.string.stretching_tab);
             }
             return null;
         }

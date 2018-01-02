@@ -30,6 +30,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.core.IsNot.not;
 
 /**
  * Created by deftone on 25.12.17.
@@ -38,17 +39,6 @@ import static org.hamcrest.CoreMatchers.allOf;
 public class ExerciseDetailActivityTest {
 
     private int position = 0;
-    private LegExercise legExercise = new LegExercise("Kniebeuge im Ausfallschritt",
-            new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u261D", "\u261D", "\uD83D\uDCAA"},
-            new String[]{"mit leicht gebeugten Knien stehen",
-                    "Füsse großen Schrittabstand entfernt ",
-                    "Oberkörper gerade, vorgestreckte Brust ",
-                    "dann das vordere Knie beugen, bis Oberschenkel waagerecht und wieder aufrichten ",
-                    "je größer der Abstand, desto mehr Gesäßmuskel ",
-                    "je kleiner der Abstand, desto mehr Oberschenkelmuskel ",
-                    "mehrere Wiederholungen (10-20) pro Seite "},
-            R.drawable.ausfallschritt,
-            0);
 
     //for intents ("intended", s.u.), we need an IntentRule here... but the intent is the mainAcitivity! otherwise it crashes
     @Rule
@@ -83,7 +73,7 @@ public class ExerciseDetailActivityTest {
         //gucken wer es assignet und welcher parent um eindeutig zu machen
         onView(allOf(withParent(isAssignableFrom(Toolbar.class)),
                 isAssignableFrom(AppCompatTextView.class)))
-                .check(matches(withText(legExercise.getName())));
+                .check(matches(withText(LegExercise.LEG_EXERCISES[position].getName())));
     }
 
     @Test
@@ -99,6 +89,12 @@ public class ExerciseDetailActivityTest {
     @Test
     public void noOverlapsTest() {
         onView(withId(R.id.detail_activity_layout)).check(noOverlaps());
+    }
+
+    @Test
+    public void fab_notVisible(){
+        //this tests assumes that the exercise has no seconds
+        onView(withId(R.id.fab)).check(matches(not(isDisplayed())));
     }
 
     //todo: testen, dass auch die listview mit icons und text richtig befuellt ist, aber das ist wahrscheinlich kompliziert..

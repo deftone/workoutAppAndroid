@@ -96,17 +96,6 @@ public class BackExercise {
                             "darauf achten, dass Ellebogen immer auf Schulterhöhe bleiben"},
                     R.drawable.ruecken_schulterblaetter_ziehen,
                     0),
-//
-//            //todo: in Dehnung
-////            new BackExercise("Schultern strecken",
-////                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\uD83D\uDCAA"},
-////                    new String[]{"vor die Wand stellen",
-////                            "Beine durchstrecken",
-////                            "nach vorne lehnen (90° zwischen Rumpf und Beinen)",
-////                            "Handflächen so hoch wie möglich an die Wand",
-////                            "30 Sekunden halten"},
-////                    R.drawable.schultern_strecken,
-////                    30),
             //6
             new BackExercise("Schultern strecken",
                     new String[]{"\u25CF", "\u27A1", "\u27A1", "\u261D", "\u27A1", "\uD83D\uDCAA"},

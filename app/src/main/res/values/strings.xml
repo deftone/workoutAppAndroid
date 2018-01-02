@@ -8,7 +8,7 @@
     <string name="beine_tab">Beine</string>
     <string name="bauch_tab">Bauch</string>
     <string name="ruecken_tab">Rücken</string>
-    <string name="halten_tab">Halten</string>
+    <string name="stretching_tab">Dehnen</string>
 
     <string name="order_name_hint">Please enter your name</string>
     <string name="order_detail_hint">Please enter your order</string>

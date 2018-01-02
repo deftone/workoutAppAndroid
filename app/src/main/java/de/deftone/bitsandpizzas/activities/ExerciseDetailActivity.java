@@ -12,19 +12,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.util.List;
 
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.data.BackExercise;
 import de.deftone.bitsandpizzas.data.BellyExercise;
-import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.data.LegExercise;
+import de.deftone.bitsandpizzas.data.StretchingExercise;
 import de.deftone.bitsandpizzas.utils.ExerciseDetailList;
 
 import static de.deftone.bitsandpizzas.activities.MainActivity.BACK_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.STRETCHING_EXERCISES;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
 public class ExerciseDetailActivity extends AppCompatActivity {
@@ -74,6 +74,13 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 icon = BackExercise.BACK_EXERCISES[id].getIcon();
                 desc = BackExercise.BACK_EXERCISES[id].getDescription();
                 seconds = BackExercise.BACK_EXERCISES[id].getSeconds();
+                break;
+            case STRETCHING_EXERCISES:
+                title = StretchingExercise.STRETCHING_EXERCISES[id].getName();
+                image = StretchingExercise.STRETCHING_EXERCISES[id].getImageResourceId();
+                icon = StretchingExercise.STRETCHING_EXERCISES[id].getIcon();
+                desc = StretchingExercise.STRETCHING_EXERCISES[id].getDescription();
+                seconds = StretchingExercise.STRETCHING_EXERCISES[id].getSeconds();
                 break;
             case CREATED_EXERCISES:
                 title = CREATED_EXERCISES_LIST.get(id).getName();
