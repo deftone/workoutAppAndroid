@@ -94,8 +94,8 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        //todo: das hier soll sich so verhalten wie der back button von android
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //todo: das hier soll sich so verhalten wie der back button von android, erst dann auf true setzen
+        actionBar.setDisplayHomeAsUpEnabled(false);
 
 //        Now If you want to use CollapsingToolbarLayout and Toolbar together then you have to use setTitle() of CollapsingToolbarLayout
 //        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.confirm_order_mail_layout);

@@ -93,10 +93,7 @@ public class CreatedExercise {
                     break;
             }
         if (count > max) {
-            System.out.println("ERROR: generateRandomArray: Achtung! " +
-                    "count ist groesser als max!! das darf nicht sein!");
-            System.out.println("count: " + count);
-            System.out.println("max: " + max);
+           //this should not happen
             return randomInts;
         }
 
