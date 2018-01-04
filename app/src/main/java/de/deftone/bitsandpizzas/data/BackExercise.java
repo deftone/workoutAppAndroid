@@ -6,11 +6,11 @@ import de.deftone.bitsandpizzas.R;
  * Created by deftone on 10.11.17.
  * <p>
  * <p>
- * // ● : "\u25CF"
- * // ➡ : "\u27A1"
- * // finger point up  "\u261D"
- * //sparkles "\u2728"
- * //muscle "\uD83D\uDCAA"
+ * // ● : Icons.getIcon(Icons.BULLET)
+ * // ➡ : Icons.getIcon(Icons.ARROW)
+ * // finger point up  Icons.getIcon(Icons.FINGER_POINT_UP)
+ * //sparkles Icons.getIcon(Icons.SPARKLES)
+ * //muscle Icons.getIcon(Icons.MUSCLE)
  */
 
 public class BackExercise {
@@ -24,7 +24,7 @@ public class BackExercise {
     public static final BackExercise[] BACK_EXERCISES = {
             //0
             new BackExercise("Fäuste heben",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA", "\u261D"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE), Icons.getIcon(Icons.FINGER_POINT_UP)},
                     new String[]{"Bauchlage, Füße liegen auf",
                             "Arme 90° angewinkelt, Fäuste auf Schulterhöhe auf dem Boden abstützen",
                             "Kopf in Verlängerung der Wirbelsäule flach über dem Boden schwebend halten",
@@ -36,7 +36,7 @@ public class BackExercise {
                     30),
             //1
             new BackExercise("Oberschenkel heben",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u261D", "\uD83D\uDCAA", "\u2728"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.MUSCLE), Icons.getIcon(Icons.SPARKLES)},
                     new String[]{"Bauchlage",
                             "Kopf auf Händen auf Boden ablegen",
                             "Unterschenkel in die Luft, Knie sind 90° angewinkelt",
@@ -48,7 +48,7 @@ public class BackExercise {
                     30),
             //2
             new BackExercise("Wandsitz",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u261D", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"ein Schritt von Wand entfernt stehen",
                             "mit dem Rücken gegen die Wand lehnen",
                             "Beine bilden einen 90° Winkel",
@@ -61,7 +61,7 @@ public class BackExercise {
                     60),
             //3
             new BackExercise("Paddeln",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\uD83D\uDCAA", "\u261D"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE), Icons.getIcon(Icons.FINGER_POINT_UP)},
                     new String[]{"Bauchlage",
                             "Bauchmuskeln anspannen/nach oben ziehen",
                             "Handflächen liegen flach auf dem Boden",
@@ -73,7 +73,7 @@ public class BackExercise {
                     30),
             //4
             new BackExercise("Schwimmen",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA", "\u261D"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE), Icons.getIcon(Icons.FINGER_POINT_UP)},
                     new String[]{"Bauchlage",
                             "beide Beine gestreckt vom Boden heben",
                             "Arme vor den Kopf strecken",
@@ -86,7 +86,7 @@ public class BackExercise {
                     0),
             //5
             new BackExercise("Ellebogenmove",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA", "\u261D"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE), Icons.getIcon(Icons.FINGER_POINT_UP)},
                     new String[]{"aufrechter Stand",
                             "Arme hochheben, bis Handflächen und Schultern auf einer Höhe",
                             "Handflächen zeigen nach oben",
@@ -98,7 +98,7 @@ public class BackExercise {
                     0),
             //6
             new BackExercise("Schultern strecken",
-                    new String[]{"\u25CF", "\u27A1", "\u27A1", "\u261D", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"aufrechter Stand",
                             "auf imaginären Stuhl setzen (Kniewinkel > 90°)",
                             "Arme dabei gerade nach oben strecken",
@@ -109,7 +109,7 @@ public class BackExercise {
                     0),
             //7
             new BackExercise("Unterarmstütz 2",
-                    new String[]{"\u25CF", "\u25CF", "\u27A1", "\u261D", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"in Rückenlage auf dem Boden",
                             "Ellebogen neben dem Körper aufgestützt",
                             "Oberkörper und Becken anheben",

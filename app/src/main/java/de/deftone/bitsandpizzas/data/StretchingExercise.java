@@ -6,11 +6,11 @@ import de.deftone.bitsandpizzas.R;
  * Created by deftone on 10.11.17.
  * <p>
  * <p>
- * // ● : "\u25CF"
- * // ➡ : "\u27A1"
- * // finger point up  "\u261D"
- * //sparkles "\u2728"
- * //muscle "\uD83D\uDCAA"
+ * // ● : Icons.getIcon(Icons.BULLET)
+ * // ➡ : Icons.getIcon(Icons.ARROW)
+ * // finger point up  Icons.getIcon(Icons.FINGER_POINT_UP)
+ * //sparkles Icons.getIcon(Icons.SPARKLES)
+ * //muscle Icons.getIcon(Icons.MUSCLE)
  */
 
 public class StretchingExercise {
@@ -24,7 +24,7 @@ public class StretchingExercise {
     public static final StretchingExercise[] STRETCHING_EXERCISES = {
             //01
             new StretchingExercise("Dreick",
-                    new String[]{"\u25CF", "\u25CF", "\u27A1", "\u2728", "\u27A1", "\u25CF", "\u261D", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Beine grätschen, rechten (vorderen) Fuß nach außen drehen",
                             "gestreckte Arme auf Schulterhöhe heben, Handflächen nach unten",
                             "beim Ausatmen rechten Arm nach unten, bis Hand neben Fuß aufsetzt",
@@ -37,7 +37,7 @@ public class StretchingExercise {
                     20),
             //02
             new StretchingExercise("Schultern strecken",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"vor die Wand stellen",
                             "Beine durchstrecken",
                             "nach vorne lehnen (90° zwischen Rumpf und Beinen)",
@@ -47,7 +47,7 @@ public class StretchingExercise {
                     20),
             //03
             new StretchingExercise("Held II",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u261D", "\uD83D\uDCAA", "\u2728"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.MUSCLE), Icons.getIcon(Icons.SPARKLES)},
                     new String[]{"weiter Ausfallschritt, vorderes Bein stark gebeugt, hinteres gestreckt",
                             "vorderer Fuß gerade, hinterer ca. 90° nach außen gedreht",
                             "Arme in einer Linie nach vorne bzw. hinten gestreckt",
@@ -59,7 +59,7 @@ public class StretchingExercise {
                     20),
             //04
             new StretchingExercise("Heldendreieck",
-                    new String[]{"\u25CF", "\u27A1", "\u2728", "\u27A1", "\u25CF", "\uD83D\uDCAA", "\u2728"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.MUSCLE), Icons.getIcon(Icons.SPARKLES)},
                     new String[]{"Held II Stellung einnehmen",
                             "vorderen Arm nach unten bringen: " +
                                     "Ellebogen auf Oberschenkel aufstützen (Bild)",
@@ -73,7 +73,7 @@ public class StretchingExercise {
                     20),
             //05
             new StretchingExercise("Heldentwist",
-                    new String[]{"\u25CF", "\u27A1", "\u27A1", "\u27A1", "\u25CF", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Heldendreieck einnehmen",
                             "den oberen Arm hinter dem Rücken nach unten führen",
                             "mit dem unteren Arm das gebeugte Bein von unten umarmen",
@@ -84,7 +84,7 @@ public class StretchingExercise {
                     20),
             //06
             new StretchingExercise("Ballerina",
-                    new String[]{"\u25CF", "\u27A1", "\u27A1", "\u27A1", "\u25CF", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Grätschsitz rechtes Bein gestreckt, linkes angewinkelt oder auch gestreckt",
                             "den linken Arm nach oben führen und gemeinsam mit dem Oberkörper " +
                                     "zum rechten Bein sinken",
@@ -96,7 +96,7 @@ public class StretchingExercise {
                     20),
             //07
             new StretchingExercise("Kobra",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u25CF", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"flach auf den Bauch liegen, Füße hüftbreit auseinander",
                             "Kopf und Fußspann liegen auf",
                             "Handflächen liegen neben dem Kopf auf, Unterarmee entspannt zum Boden",
@@ -109,7 +109,7 @@ public class StretchingExercise {
                     20),
             //08
             new StretchingExercise("herabschauender Hund",
-                    new String[]{"\u25CF", "\u27A1", "\u25CF", "\u25CF", "\u261D", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Vierfüsslerstand, Hände etwas nach vorne setzen",
                             "die Hüfte heben, bis die Beine und Arme gestreckt sind",
                             "Finger sind gespreizt und drücken in den Boden",
@@ -120,7 +120,7 @@ public class StretchingExercise {
                     30),
             //09
             new StretchingExercise("Kamel",
-                    new String[]{"\u25CF", "\u27A1", "\u27A1", "\u261D", "\u261D", "\u261D", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"in den Kniestand gehen",
                             "beim Ausatmen Schultern nach hinten, Becken nach vorne schieben",
                             "weiter in die Rückenbeuge und mit Händen an Fersen greifen",
@@ -132,7 +132,7 @@ public class StretchingExercise {
                     30),
             //10
             new StretchingExercise("Kind",
-                    new String[]{"\u25CF", "\u27A1", "\u25CF", "\u25CF", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Fersensitz, Hände auf den Oberschenkeln",
                             "Arme nach vorne ausstrecken und dabei den Oberkörper auf " +
                                     "den Oberschenkeln ablegen",

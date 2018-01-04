@@ -17,7 +17,7 @@ public class BellyExercise {
     public static final BellyExercise[] BELLY_EXERCISES = {
             //0 - Bild ist etwas klein und unscharf
             new BellyExercise("Crunch",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Rücken liegt auf dem Boden",
                             "Hände hinterm Kopf verschränkt",
                             "Oberschenkel senkrecht, Knie gebeugt, Füße verschränkt",
@@ -29,7 +29,7 @@ public class BellyExercise {
                     0),
             //1
             new BellyExercise("schräger Crunch",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Rücken liegt auf dem Boden",
                             "Oberschenkel senkrecht, Knie gebeugt",
                             "Arme gestreckt außen neben gebeugten Beinen",
@@ -40,7 +40,7 @@ public class BellyExercise {
                     0),
             //2
             new BellyExercise("Sit up",
-                    new String[]{"\u25CF", "\u2728", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"auf dem Boden liegen, Beine aufgestellt, Füße flach aufm Boden",
                             "Einfacher: Füße unter der Heizung (o.ä.) fixieren",
                             "Hände verschränkt hinterm Kopf (schwer), vor der Brust (mittel) oder nach vorn strecken (leicht)",
@@ -51,7 +51,7 @@ public class BellyExercise {
                     0),
             //3 - etwas unscharf
             new BellyExercise("Pseudo Sit-up",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u261D", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"mit gebeugten Knien sitzen, Füße flach aufm Boden",
                             "Oberkörper nah zu den Oberschenkeln",
                             "Hände nach vorne gestreckt",
@@ -63,7 +63,7 @@ public class BellyExercise {
                     0),
             //4
             new BellyExercise("Fahrrad fahren",
-                    new String[]{"\u25CF", "\u25CF", "\u261D", "\u27A1", "\u27A1", "\u27A1", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Oberkörper leicht nach hinten kippen und mit den Unterarmen am Boden abstützen",
                             "Beine ca 45° gestreckt vom Boden abheben und halten",
                             "auf geraden Rücken achten",
@@ -76,7 +76,7 @@ public class BellyExercise {
                     0),
             //5
             new BellyExercise("Criss-Cross",
-                    new String[]{"\u25CF", "\u27A1", "\u261D", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Hände hinterm Kopf, Ellebogen zeigen nach außen",
                             "Beine abwechselnd ausstrecken bzw Knie zum diagonal entgegengesetzen Ellebogen ziehen",
                             "darauf achten, dass oberer Rücken und Schultern nicht den Boden berühren und dass das Becken fest auf dem Boden bleibt",
@@ -85,7 +85,7 @@ public class BellyExercise {
                     0),
             //6
             new BellyExercise("The Hundret",
-                    new String[]{"\u25CF", "\u25CF", "\u2728", "\u25CF", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"auf den Rücken legen, Kopf und Schultern heben, Kinn zur Brust",
                             "Beine gestreckt auf einer Höhe von ca. 45° halten",
                             "je tiefer desto anspruchsvoller - aber darauf achten, dass der Rücken am Boden bleibt",
@@ -97,7 +97,7 @@ public class BellyExercise {
                     0),
             //7
             new BellyExercise("Roll up",
-                    new String[]{"\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u27A1", "\u27A1", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"auf dem Rücken liegen",
                             "Arme über den Kopf austrecken",
                             "die Arme vom Boden heben",
@@ -110,7 +110,7 @@ public class BellyExercise {
                     0),
             //8
             new BellyExercise("Unterarmstütz",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"auf den Unterarmen auf den Boden aufstützen",
                             "Fußspitzen sind aufgestützt",
                             "Rücken gerade halten",
@@ -120,7 +120,7 @@ public class BellyExercise {
                     60),
             //9
             new BellyExercise("Unterarmstütz 2",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u2728", "\u27A1", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"auf den Unterarmen auf den Boden aufstützen",
                             "Fußspitzen sind aufgestützt",
                             "Rücken gerade halten",
@@ -131,7 +131,7 @@ public class BellyExercise {
                     0),
             //10
             new BellyExercise("Seitenstütz",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"seitlich auf einem Unterarm auf den Boden aufstützen",
                             "Körper ist eine Linie",
                             "freien Arm in die Luft strecken oder auf der Hüfte abstützen",
@@ -141,7 +141,7 @@ public class BellyExercise {
                     30),
             //11
             new BellyExercise("Boot",
-                    new String[]{"\u25CF", "\u27A1", "\u27A1", "\u261D", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"aufrecht mit angewinkelten Knien hinsetzen",
                             "Oberkörper leicht zurücklehnen",
                             "ein Bein nach dem anderen anheben",
@@ -152,7 +152,7 @@ public class BellyExercise {
                     30),
             //12
             new BellyExercise("Leg Pull Up",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u261D", "\u261D", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.FINGER_POINT_UP), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"Hände flach auf dem Boden",
                             "Finger zeigen zu den Füßen",
                             "Arme gestreckt, Hände unter den Schultern",
@@ -168,7 +168,7 @@ public class BellyExercise {
                     0),
             //13
             new BellyExercise("Leg Pull Down",
-                    new String[]{"\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u25CF", "\u27A1", "\u27A1", "\u2728", "\uD83D\uDCAA"},
+                    new String[]{Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.BULLET), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.ARROW), Icons.getIcon(Icons.SPARKLES), Icons.getIcon(Icons.MUSCLE)},
                     new String[]{"mit gestützen Arme auf die Hände stützen",
                             "Schultern über den Handgelenken",
                             "Fersen über den Zehen",
