@@ -32,4 +32,6 @@
 
     <string name="share_text">Want to join me working out?</string>
 
+    <string name="points">Übung erfolgreich beendet</string>
+    <string name="description">Übungsanleitung</string>
 </resources>

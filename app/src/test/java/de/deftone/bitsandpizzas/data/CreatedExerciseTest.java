@@ -26,10 +26,11 @@ public class CreatedExerciseTest {
     private static String name = "titel";
     private static String[] icon = {"\u25CF", "\u25CF"};
     private static String[] desc = {"beschreibung", "und noch was"};
+    private static int[] weight = {2};
 
     @BeforeClass
     public static void startUp() {
-        testExercise = new CreatedExercise(name, icon, desc, R.drawable.faeuste_heben, 30);
+        testExercise = new CreatedExercise(name, icon, desc, R.drawable.faeuste_heben, 30, weight);
         CreatedExercise.generateRandomExercises(6, 6, 6, true);
     }
 
@@ -120,5 +121,10 @@ public class CreatedExerciseTest {
     @Test
     public void getSeconds() throws Exception {
         assertEquals(30, testExercise.getSeconds());
+    }
+
+    @Test
+    public void getWeight() throws Exception{
+        assertArrayEquals(weight, testExercise.getWeight());
     }
 }

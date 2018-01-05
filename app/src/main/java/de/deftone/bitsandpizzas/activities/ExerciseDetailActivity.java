@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -52,6 +53,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         String[] icon = {};
         String[] desc = {};
         int seconds = 0;
+        int[] weight = {};
 
         switch (type) {
             case LEG_EXERCISES:
@@ -60,6 +62,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 icon = LegExercise.LEG_EXERCISES[id].getIcon();
                 desc = LegExercise.LEG_EXERCISES[id].getDescription();
                 seconds = LegExercise.LEG_EXERCISES[id].getSeconds();
+                weight = LegExercise.LEG_EXERCISES[id].getWeight();
                 break;
             case BELLY_EXERCISES:
                 title = BellyExercise.BELLY_EXERCISES[id].getName();
@@ -67,6 +70,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 icon = BellyExercise.BELLY_EXERCISES[id].getIcon();
                 desc = BellyExercise.BELLY_EXERCISES[id].getDescription();
                 seconds = BellyExercise.BELLY_EXERCISES[id].getSeconds();
+                weight = BellyExercise.BELLY_EXERCISES[id].getWeight();
                 break;
             case BACK_EXERCISES:
                 title = BackExercise.BACK_EXERCISES[id].getName();
@@ -74,6 +78,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 icon = BackExercise.BACK_EXERCISES[id].getIcon();
                 desc = BackExercise.BACK_EXERCISES[id].getDescription();
                 seconds = BackExercise.BACK_EXERCISES[id].getSeconds();
+                weight = BackExercise.BACK_EXERCISES[id].getWeight();
                 break;
             case STRETCHING_EXERCISES:
                 title = StretchingExercise.STRETCHING_EXERCISES[id].getName();
@@ -81,12 +86,15 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 icon = StretchingExercise.STRETCHING_EXERCISES[id].getIcon();
                 desc = StretchingExercise.STRETCHING_EXERCISES[id].getDescription();
                 seconds = StretchingExercise.STRETCHING_EXERCISES[id].getSeconds();
+                weight = StretchingExercise.STRETCHING_EXERCISES[id].getWeight();
                 break;
             case CREATED_EXERCISES:
                 title = CREATED_EXERCISES_LIST.get(id).getName();
                 image = CREATED_EXERCISES_LIST.get(id).getImageResourceId();
                 desc = CREATED_EXERCISES_LIST.get(id).getDescription();
                 icon = CREATED_EXERCISES_LIST.get(id).getIcon();
+                seconds = CREATED_EXERCISES_LIST.get(id).getSeconds();
+                weight = CREATED_EXERCISES_LIST.get(id).getWeight();
                 break;
         }
 
@@ -108,6 +116,16 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         ExerciseDetailList adapter = new ExerciseDetailList(ExerciseDetailActivity.this, icon, desc);
         list = findViewById(R.id.list_detail);
         list.setAdapter(adapter);
+
+        Button weightButton = findViewById(R.id.weight_button);
+        Button weightButtonAlternative = findViewById(R.id.weight_button_alternative);
+        weightButton.setText(String.valueOf(weight[0]));
+        if (weight.length<2)
+            weightButtonAlternative.setVisibility(View.GONE);
+        else{
+            weightButtonAlternative.setVisibility(View.VISIBLE);
+            weightButtonAlternative.setText(String.valueOf(weight[1]));
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         if (seconds > 0) {

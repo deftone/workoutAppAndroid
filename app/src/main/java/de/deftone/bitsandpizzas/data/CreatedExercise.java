@@ -18,6 +18,7 @@ public class CreatedExercise {
     private String[] icon;
     private String[] desc;
     private int seconds;
+    private int[] weight;
 
     private static int maxLegs;
 
@@ -29,12 +30,13 @@ public class CreatedExercise {
 
     public static List<CreatedExercise> CREATED_EXERCISES_LIST;
 
-    CreatedExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds) {
+    CreatedExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds, int[] weight) {
         this.name = name;
         this.icon = icon;
         this.desc = desc;
         this.imageResourceId = imageResourceId;
         this.seconds = seconds;
+        this.weight = weight;
     }
 
     public static final void generateRandomExercises(int countLegs, int countBelly, int countBack, boolean mandatory) {
@@ -46,7 +48,8 @@ public class CreatedExercise {
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getIcon(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getDescription(),
                     LegExercise.LEG_EXERCISES[randomInts.get(i)].getImageResourceId(),
-                    LegExercise.LEG_EXERCISES[randomInts.get(i)].getSeconds()));
+                    LegExercise.LEG_EXERCISES[randomInts.get(i)].getSeconds(),
+                    LegExercise.LEG_EXERCISES[randomInts.get(i)].getWeight()));
         }
 
         maxBelly = BellyExercise.BELLY_EXERCISES.length;
@@ -56,7 +59,8 @@ public class CreatedExercise {
                     BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getIcon(),
                     BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getDescription(),
                     BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getImageResourceId(),
-                    BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getSeconds()));
+                    BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getSeconds(),
+                    BellyExercise.BELLY_EXERCISES[randomInts.get(i)].getWeight()));
         }
 
         maxBack = BackExercise.BACK_EXERCISES.length;
@@ -66,7 +70,8 @@ public class CreatedExercise {
                     BackExercise.BACK_EXERCISES[randomInts.get(i)].getIcon(),
                     BackExercise.BACK_EXERCISES[randomInts.get(i)].getDescription(),
                     BackExercise.BACK_EXERCISES[randomInts.get(i)].getImageResourceId(),
-                    BackExercise.BACK_EXERCISES[randomInts.get(i)].getSeconds()));
+                    BackExercise.BACK_EXERCISES[randomInts.get(i)].getSeconds(),
+                    BackExercise.BACK_EXERCISES[randomInts.get(i)].getWeight()));
         }
     }
 
@@ -93,7 +98,7 @@ public class CreatedExercise {
                     break;
             }
         if (count > max) {
-           //this should not happen
+            //this should not happen
             return randomInts;
         }
 
@@ -124,5 +129,9 @@ public class CreatedExercise {
 
     public int getSeconds() {
         return seconds;
+    }
+
+    public int[] getWeight() {
+        return weight;
     }
 }

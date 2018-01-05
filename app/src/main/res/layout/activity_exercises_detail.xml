@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar_detail"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -30,27 +30,46 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-
-
-
             <ImageView
                 android:id="@+id/image_detail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
+                android:adjustViewBounds="true"
                 android:gravity="center"
-                android:adjustViewBounds="true" />
+                android:paddingBottom="10dp" />
 
+            <TextView
+                android:id="@+id/text_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/points" />
+
+            <Button
+                android:id="@+id/weight_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/weight_button_alternative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/text_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description" />
 
             <ListView
                 android:id="@+id/list_detail"
                 android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                >
-            </ListView>
+                android:layout_height="400dp"></ListView>
 
 
         </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton

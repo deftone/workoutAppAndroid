@@ -41,51 +41,51 @@ public class ShareActivityTest {
 
 
     //dieser test funktioniert noch nicht so ganz... mit espresso aufgenommen...
-    @Test
-    public void shareIntentIsOpend() {
-        //click on share action button
-        ViewInteraction frameLayout = onView(
-                Matchers.allOf(withId(R.id.expand_activities_button),
-                        childAtPosition(
-                                Matchers.allOf(withId(R.id.activity_chooser_view_content),
-                                        childAtPosition(
-                                                withClassName(is("android.support.v7.widget.ActivityChooserView")),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        frameLayout.perform(click());
-
-        //click on "show all" (at position 3) - das ist nicht robust! besser nach titel statt position suchen!
-        DataInteraction linearLayout = onData(anything())
-                .inAdapterView(allOf(withContentDescription("Choose an app"),
-                        childAtPosition(
-                                withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                                0)))
-                .atPosition(3);
-        linearLayout.perform(click());
-
-        //click on "Gmail" (at position 3) - das ist nicht robust! besser nach titel statt position suchen!
-        DataInteraction linearLayout2 = onData(anything())
-                .inAdapterView(allOf(withContentDescription("Choose an app"),
-                        childAtPosition(
-                                withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                                0)))
-                .atPosition(3);
-        linearLayout2.perform(click());
-
-        //check shared text
-        ViewInteraction view = onView(
-                allOf(withContentDescription(R.string.action_share),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.webkit.WebView.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        view.check(matches(isDisplayed()));
-
-        //go back - besser close gmail app
-    }
+//    @Test
+//    public void shareIntentIsOpend() {
+//        //click on share action button
+//        ViewInteraction frameLayout = onView(
+//                Matchers.allOf(withId(R.id.expand_activities_button),
+//                        childAtPosition(
+//                                Matchers.allOf(withId(R.id.activity_chooser_view_content),
+//                                        childAtPosition(
+//                                                withClassName(is("android.support.v7.widget.ActivityChooserView")),
+//                                                0)),
+//                                0),
+//                        isDisplayed()));
+//        frameLayout.perform(click());
+//
+//        //click on "show all" (at position 3) - das ist nicht robust! besser nach titel statt position suchen!
+//        DataInteraction linearLayout = onData(anything())
+//                .inAdapterView(allOf(withContentDescription("Choose an app"),
+//                        childAtPosition(
+//                                withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+//                                0)))
+//                .atPosition(3);
+//        linearLayout.perform(click());
+//
+//        //click on "Gmail" (at position 3) - das ist nicht robust! besser nach titel statt position suchen!
+//        DataInteraction linearLayout2 = onData(anything())
+//                .inAdapterView(allOf(withContentDescription("Choose an app"),
+//                        childAtPosition(
+//                                withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+//                                0)))
+//                .atPosition(3);
+//        linearLayout2.perform(click());
+//
+////        //check shared text
+////        ViewInteraction view = onView(
+////                allOf(withContentDescription(R.string.action_share),
+////                        childAtPosition(
+////                                childAtPosition(
+////                                        IsInstanceOf.<View>instanceOf(android.webkit.WebView.class),
+////                                        0),
+////                                0),
+////                        isDisplayed()));
+////        view.check(matches(isDisplayed()));
+//
+//        //go back - besser close gmail app
+//    }
 
     //eigener matcher
     private static Matcher<View> childAtPosition(
