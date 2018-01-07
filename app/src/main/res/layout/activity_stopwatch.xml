@@ -22,10 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:background="@layout/style_button_rounded_corners"
+        android:background="@layout/style_shape_rounded_corners_blue"
         android:textColor="@color/white"
         android:onClick="onClickStart"
-        android:text="start"
+        android:text="@string/start"
         />
     <Button
         android:id="@+id/stop_button"
@@ -33,20 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:background="@layout/style_button_rounded_corners"
+        android:background="@layout/style_shape_rounded_corners_blue"
         android:textColor="@color/white"
         android:onClick="onClickStop"
-        android:text="pause"
-        />
-    <Button
-        android:id="@+id/reset_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:background="@layout/style_button_rounded_corners"
-        android:textColor="@color/white"
-        android:onClick="onClickReset"
-        android:text="reset"
+        android:text="@string/stop"
         />
 </LinearLayout>

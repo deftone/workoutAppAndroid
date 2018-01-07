@@ -10,7 +10,7 @@
         android:layout_gravity="center_vertical"
         android:textSize="10pt"
         android:padding="6pt"
-        android:background="@layout/style_toast_rounded_corners"
+        android:background="@layout/style_shape_rounded_corners_orange"
         android:text="Du hast es geschafft!"
         android:textColor="@android:color/white" />
 

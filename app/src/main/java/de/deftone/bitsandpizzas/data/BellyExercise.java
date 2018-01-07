@@ -176,7 +176,7 @@ public class BellyExercise {
                             "eine Minute halten, dabei normal atmen"},
                     R.drawable.unterarmstuetz,
                     60,
-                    new int[]{3}),
+                    new int[]{3, 2}),
             //9
             new BellyExercise("Unterarmstütz 2",
                     new String[]{Icons.getIcon(Icons.BULLET),
@@ -193,7 +193,7 @@ public class BellyExercise {
                             "10 Wiederholungen pro Seite"},
                     R.drawable.unterarmstuetz_mit_heben,
                     0,
-                    new int[]{3}),
+                    new int[]{3, 1}),
             //10
             new BellyExercise("Seitenstütz",
                     new String[]{Icons.getIcon(Icons.BULLET),

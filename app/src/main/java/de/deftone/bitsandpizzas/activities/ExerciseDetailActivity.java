@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 import de.deftone.bitsandpizzas.R;
@@ -117,14 +119,22 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         list = findViewById(R.id.list_detail);
         list.setAdapter(adapter);
 
+        TableRow secondRow = findViewById(R.id.second_row);
+        TextView text_points = findViewById(R.id.text_points);
         Button weightButton = findViewById(R.id.weight_button);
-        Button weightButtonAlternative = findViewById(R.id.weight_button_alternative);
-        weightButton.setText(String.valueOf(weight[0]));
-        if (weight.length<2)
-            weightButtonAlternative.setVisibility(View.GONE);
-        else{
-            weightButtonAlternative.setVisibility(View.VISIBLE);
-            weightButtonAlternative.setText(String.valueOf(weight[1]));
+        if (weight.length < 2) {
+            secondRow.setVisibility(View.GONE);
+            text_points.setText(R.string.points);
+            weightButton.setText(String.valueOf(weight[0]) + "\u263a");
+        } else {
+            //todo: hier stimmt noch etwas nicht...
+            secondRow.setVisibility(View.VISIBLE);
+            text_points.setText(R.string.points_alternative);
+            weightButton.setVisibility(View.GONE);
+            Button button_1 = findViewById(R.id.weight_button_1);
+            button_1.setText(String.valueOf(weight[0]));
+            Button button_2 = findViewById(R.id.weight_button_2);
+            button_2.setText(String.valueOf(weight[1]));
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -144,5 +154,12 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         Intent intentStopwatch = new Intent(this, StopwatchActivity.class);
         intentStopwatch.putExtra(StopwatchActivity.INTENT_SECONDS, sec);
         startActivity(intentStopwatch);
+    }
+
+    public void onClickPoints(View view) {
+        //add sharedPreferences
+        Button weightButton = findViewById(R.id.weight_button);
+        //leider muss man das style doppeln und als Drawable benuzen...
+        weightButton.setBackground(getResources().getDrawable(R.drawable.style_shape_rounded_corners_orange));
     }
 }

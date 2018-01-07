@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class StopwatchActivity extends Activity {
     private boolean running;
     private boolean wasRunning;
     private Ringtone ringtone;
+    Button play_pause_button;
 
     public static final String INTENT_SECONDS = "seconds";
 
@@ -38,6 +40,7 @@ public class StopwatchActivity extends Activity {
         }
         seconds_at_start = getIntent().getExtras().getInt(INTENT_SECONDS);
         seconds = seconds_at_start;
+        play_pause_button = findViewById(R.id.start_button);
         runTimer();
     }
 
@@ -50,18 +53,22 @@ public class StopwatchActivity extends Activity {
     }
 
     public void onClickStart(View view) {
-        running = true;
+
+        if (running) {
+            running = false;
+            play_pause_button.setText(R.string.start);
+        } else {
+            running = true;
+            play_pause_button.setText(R.string.pause);
+        }
     }
 
     public void onClickStop(View view) {
         running = false;
+        play_pause_button.setText(R.string.start);
+        seconds = seconds_at_start;
         if (ringtone != null)
             ringtone.stop();
-    }
-
-    public void onClickReset(View view) {
-        running = false;
-        seconds = seconds_at_start;
     }
 
     private void runTimer() {
