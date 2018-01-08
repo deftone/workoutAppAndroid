@@ -32,8 +32,8 @@
 
     <string name="share_text">Want to join me working out?</string>
 
-    <string name="points">Übung erfolgreich beendet?</string>
-    <string name="points_alternative">Welche Variante der Übung erfolgreich beendet?</string>
+    <string name="points">Wieviele Sätze der Übung hast du erfolgreich beendet?</string>
+    <string name="points_alternative">Wieviele Sätze der (einfachen) Übung hast du erfolgreich beendet?</string>
     <string name="description">Übungsanleitung</string>
     <string name="start">start</string>
     <string name="pause">pause</string>

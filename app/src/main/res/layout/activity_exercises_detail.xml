@@ -38,50 +38,92 @@
                 android:gravity="center"
                 android:paddingBottom="10dp" />
 
+
+            <TextView
+                android:id="@+id/text_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/points"
+                android:textSize="18sp" />
+
             <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
                 <TableRow>
-
-                    <TextView
-                        android:id="@+id/text_points"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="@string/points"
-                        android:textSize="18sp" />
-
 
                     <Button
                         android:id="@+id/weight_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@layout/style_shape_rounded_corners_blue"
-                        android:textColor="@color/white"
-                        android:onClick="onClickPoints"/>
-
-                </TableRow>
-
-                <TableRow android:id="@+id/second_row">
-
-                    <Button
-                        android:id="@+id/weight_button_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@layout/style_shape_rounded_corners_blue"
+                        android:onClick="onClickPoints"
                         android:textColor="@color/white" />
 
                     <Button
                         android:id="@+id/weight_button_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
                         android:background="@layout/style_shape_rounded_corners_blue"
-                        android:textColor="@color/white"
-                        />
+                        android:onClick="onClickPoints2"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/weight_button_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@layout/style_shape_rounded_corners_blue"
+                        android:onClick="onClickPoints3"
+                        android:textColor="@color/white" />
+                </TableRow>
+
+                <TableRow android:id="@+id/second_row">
+
+                    <Button
+                        android:id="@+id/weight_button_alternative"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@layout/style_shape_rounded_corners_blue"
+                        android:onClick="onClickPointsAltern"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/weight_button_alternative_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@layout/style_shape_rounded_corners_blue"
+                        android:onClick="onClickPointsAltern2"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/weight_button_alternative_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@layout/style_shape_rounded_corners_blue"
+                        android:onClick="onClickPointsAltern3"
+                        android:textColor="@color/white" />
                 </TableRow>
             </TableLayout>
 
