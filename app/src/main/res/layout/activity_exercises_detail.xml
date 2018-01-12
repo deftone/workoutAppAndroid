@@ -38,6 +38,18 @@
                 android:gravity="center"
                 android:paddingBottom="10dp" />
 
+            <TextView
+                android:id="@+id/text_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textSize="18sp" />
+
+            <ListView
+                android:id="@+id/list_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"></ListView>
+            <!--height of ListView is set programmatically-->
 
             <TextView
                 android:id="@+id/text_points"
@@ -126,19 +138,6 @@
                         android:textColor="@color/white" />
                 </TableRow>
             </TableLayout>
-
-            <TextView
-                android:id="@+id/text_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/description"
-                android:textSize="18sp" />
-
-            <ListView
-                android:id="@+id/list_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"></ListView>
-
 
         </LinearLayout>
 

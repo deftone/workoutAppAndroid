@@ -11,16 +11,23 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.data.BackExercise;
@@ -41,8 +48,12 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_EXERCISE_ID = "exercise_id";
     public static final String EXTRA_EXERCISE_TYPE = "exercise_type";
-    public static final String PREFS_NAME = "exercises_date_points";
-    ListView list;
+    //eine datei, die als value ein String Set der jeweiligen daten enthaelt (YYYY-MM-DD, YYYY-MM-DD, ..)
+    public static final String PREFS_DATES = "exercises_date";
+    public static final String PREFS_DATES_KEY = "exercises_date_key";
+    //eine datei, die fuer den jeweiligen tag als value die addierten punkte enthaelt, key ist der Tag ("YYYY-MM-DD")
+    public static final String PREFS_POINTS = "exercises_date_points";
+    ListView listView;
     String title = "";
     int image = 0;
     String[] icon = {};
@@ -55,14 +66,21 @@ public class ExerciseDetailActivity extends AppCompatActivity {
     Button weightAlternButton;
     Button weightAlternButton2;
     Button weightAlternButton3;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferencesDates;
+    SharedPreferences sharedPreferencesPoints;
+    SharedPreferences.Editor sharedPreferencesDatesEditor;
+    SharedPreferences.Editor sharedPreferencesPointsEditor;
     boolean buttonClicked = false;
+    static String today;
+    public static Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_detail);
+
+        context = this;
 
         //get details of the exercise
         int id = getIntent().getExtras().getInt(EXTRA_EXERCISE_ID);
@@ -77,8 +95,12 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         setWeightButtons(weight);
         buttonClicked = false;
         setFab();
-    }
 
+        //get shared prefs
+        initSharedPreferences();
+        //for now
+//        resetSharedPrefs();
+    }
 
     private void getDescriptionDetails(int id, String type) {
         switch (type) {
@@ -143,8 +165,28 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         imageView.setImageDrawable(ContextCompat.getDrawable(this, image));
 
         ExerciseDetailList adapter = new ExerciseDetailList(ExerciseDetailActivity.this, icon, desc);
-        list = findViewById(R.id.list_detail);
-        list.setAdapter(adapter);
+        listView = findViewById(R.id.list_detail);
+        listView.setAdapter(adapter);
+
+        //adjust the height of the listview
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        int height = getTotalHeightofListView();
+        int padding = 65;
+        params.height = height + padding;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
+    private int getTotalHeightofListView() {
+        ListAdapter mAdapter = listView.getAdapter();
+        int listviewElementsheight = 0;
+        for (int i = 0; i < desc.length; i++) {
+            View mView = mAdapter.getView(i, null, listView);
+            mView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+            listviewElementsheight += mView.getMeasuredHeight();
+        }
+        return listviewElementsheight;
     }
 
     private void setWeightButtons(int[] weight) {
@@ -198,46 +240,94 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
     private void addPoints(Button button, int newPoints) {
         if (!buttonClicked) {
+            //first, add date to shared prefs
+            addDate();
+
+            //change button color
             //leider muss man das style doppeln und als Drawable benuzen...
             button.setBackground(getResources().getDrawable(R.drawable.style_shape_rounded_corners_orange));
-            // Restore preferences
-            sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
-            int sumPoints = sharedPreferences.getInt("heute", 0);
+            //now add points
+            int sumPoints = sharedPreferencesPoints.getInt(today, 0);
             int newSumPoints = sumPoints + newPoints;
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("heute", sumPoints + newSumPoints);
-            editor.apply();
+            sharedPreferencesPointsEditor.putInt(today, newSumPoints).apply();
 
-            //show toast will sum todo: auslagern! ToastText muss parameter werden
-            //custom toast
-            Context context = getApplicationContext();
-            // Create layout inflator object to inflate toast.xml file
-            LayoutInflater inflater = getLayoutInflater();
-
-            // Call toast.xml file for toast layout
-            View toastview = inflater.inflate(R.layout.toast, null);
-
-            Toast toast = new Toast(context);
-
-            // Set layout to toast
-            toast.setView(toastview);
-            //das hier funktioniert im onclick nicht :( todo: text anpassen
-//            String toastText = "Du hast bisher " + newSumPoints + " Punkte erreicht!";
-//            toast.setText(toastText);
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL,
-                    0, 0);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.show();
+//            String toastText = "Du hast heute bisher " + newSumPoints + " Punkte erreicht!";
+//            Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
+//            toast.show();
+            printPoints(context);
             buttonClicked = true;
         }
     }
 
-    //for debuggin only
-    private void printPoints() {
-        sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+    private void addDate() {
+        Date date = new Date();
+        today = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        getCurrentDate();
+
+        //empty Set as default
+        Set<String> tmp = new HashSet<>();
+        //get Set of ignored calls add all checked items to this Set
+        Set<String> dates = sharedPreferencesDates.getStringSet(PREFS_DATES_KEY, tmp);
+        if (!dates.contains(today)) {
+            Log.d("test", "addDate: today: " + today);
+            dates.add(today);
+        }
+        //save new Set in editor
+        sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, dates).apply();
+    }
+
+    //for debugging
+    public static void getCurrentDate() {
+        //getting current date and time using Date class
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        Date dateobj = new Date();
+        Log.d("test", "getCurrentDate: " + df.format(dateobj));
+        System.out.println(df.format(dateobj));
+
+       /*getting current date time using calendar class
+        * An Alternative of above*/
+        Calendar calobj = Calendar.getInstance();
+        Log.d("test", "getCurrentDate: " + df.format(calobj.getTime()));
+        System.out.println(df.format(calobj.getTime()));
+
+        String toastText = "currentDate 1 " + df.format(calobj.getTime())
+                + " currentDate 2 " + df.format(calobj.getTime())
+                + "\ntoday: " + today;
+        Toast toast = Toast.makeText(context, toastText, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    //todo: was noch fehlt:
+    //einstellungen, wo man die punkte zuruecksetzen kann?
+    //anzeige, an welchem tag wieviele punkte
+    public static void printPoints(Context context) {
+
+        SharedPreferences sharedPreferencesPoints = context.getSharedPreferences(PREFS_POINTS, 0);
+
+        //alle tage
+        Set<String> tmp = new HashSet<>();
+        SharedPreferences sharedPreferencesDates = context.getSharedPreferences(PREFS_DATES, 0);
+        Set<String> dates = sharedPreferencesDates.getStringSet(PREFS_DATES, tmp);
         int defaultValue = 0;
-        int sumPoints = sharedPreferences.getInt("heute", defaultValue);
-        Log.d("test", "printPoints: sumPoints = " + sumPoints);
+        for (String date : dates) {
+
+            Log.d("test", "printPoints: date: " + date);
+
+            int sumPoints = sharedPreferencesPoints.getInt(date, defaultValue);
+            Log.d("test", "printPoints: sumPoints = " + sumPoints);
+        }
+    }
+
+    private void resetSharedPrefs() {
+        sharedPreferencesDatesEditor.clear().apply();
+        sharedPreferencesPointsEditor.clear().apply();
+    }
+
+    private void initSharedPreferences() {
+        sharedPreferencesPoints = getSharedPreferences(PREFS_POINTS, 0);
+        sharedPreferencesPointsEditor = sharedPreferencesPoints.edit();
+        sharedPreferencesDates = getSharedPreferences(PREFS_DATES, 0);
+        sharedPreferencesDatesEditor = sharedPreferencesDates.edit();
     }
 
     public void setFab() {
