@@ -27,6 +27,9 @@
         <activity
             android:name=".activities.StopwatchActivity"
             android:parentActivityName=".activities.ExerciseDetailActivity" />
+        <activity
+            android:name=".activities.StatisticActivity"
+            android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>
