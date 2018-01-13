@@ -185,6 +185,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 CreatedExercise.generateRandomExercises(0, 0, 6, false);
                 intent = new Intent(this, CreateWorkoutActivity.class);
                 break;
+            case R.id.statistic:
+                intent = new Intent(this, StatisticActivity.class);
+                break;
         }
         startActivity(intent);
 

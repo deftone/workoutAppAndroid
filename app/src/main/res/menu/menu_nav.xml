@@ -39,4 +39,14 @@
         </menu>
     </item>
 
+    <item android:title="@string/statistic">
+        <menu>
+            <item
+                android:id="@+id/statistic"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/statistic_points" />
+
+        </menu>
+    </item>
+
 </menu>

@@ -30,6 +30,9 @@
     <string name="random_belly">Bauch (6 Übungen)</string>
     <string name="random_back">Rücken (6 Übungen)</string>
 
+    <string name="statistic">Statistik</string>
+    <string name="statistic_points">Punkte</string>
+
     <string name="share_text">Want to join me working out?</string>
 
     <string name="points">Wieviele Sätze der Übung hast du erfolgreich beendet?</string>

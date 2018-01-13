@@ -10,7 +10,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,10 +20,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -71,8 +66,8 @@ public class ExerciseDetailActivity extends AppCompatActivity {
     SharedPreferences.Editor sharedPreferencesDatesEditor;
     SharedPreferences.Editor sharedPreferencesPointsEditor;
     boolean buttonClicked = false;
-    static String today;
-    public static Context context;
+    static String currentTimeInMilliesStringKey;
+    static Context context;
 
 
     @Override
@@ -247,74 +242,41 @@ public class ExerciseDetailActivity extends AppCompatActivity {
             //leider muss man das style doppeln und als Drawable benuzen...
             button.setBackground(getResources().getDrawable(R.drawable.style_shape_rounded_corners_orange));
             //now add points
-            int sumPoints = sharedPreferencesPoints.getInt(today, 0);
+            //wenn ein neuer tag ist, sollte sumPoints der defaultwert 0 sein...
+            int sumPoints = sharedPreferencesPoints.getInt(currentTimeInMilliesStringKey, 0);
             int newSumPoints = sumPoints + newPoints;
-            sharedPreferencesPointsEditor.putInt(today, newSumPoints).apply();
+            sharedPreferencesPointsEditor.putInt(currentTimeInMilliesStringKey, newSumPoints).apply();
 
-//            String toastText = "Du hast heute bisher " + newSumPoints + " Punkte erreicht!";
-//            Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
-//            toast.show();
-            printPoints(context);
+            String toastText = "Du hast heute bisher " + newSumPoints + " Punkte erreicht!";
+            Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
+            toast.show();
             buttonClicked = true;
         }
     }
 
     private void addDate() {
         Date date = new Date();
-        today = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        getCurrentDate();
+        long currentTimeInMillies = date.getTime();
+        String currentTimeInMilliesString = String.valueOf(currentTimeInMillies);
 
-        //empty Set as default
-        Set<String> tmp = new HashSet<>();
-        //get Set of ignored calls add all checked items to this Set
-        Set<String> dates = sharedPreferencesDates.getStringSet(PREFS_DATES_KEY, tmp);
-        if (!dates.contains(today)) {
-            Log.d("test", "addDate: today: " + today);
-            dates.add(today);
+        Set<String> default_set = new HashSet<>();
+        Set<String> datesFromPref = sharedPreferencesDates.getStringSet(PREFS_DATES_KEY, default_set);
+        //this is needed when the point button is clicked for the first time
+        if (datesFromPref.size() == 0) {
+            datesFromPref.add(currentTimeInMilliesString);
+            sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
+            currentTimeInMilliesStringKey = currentTimeInMilliesString;
         }
-        //save new Set in editor
-        sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, dates).apply();
-    }
-
-    //for debugging
-    public static void getCurrentDate() {
-        //getting current date and time using Date class
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-        Date dateobj = new Date();
-        Log.d("test", "getCurrentDate: " + df.format(dateobj));
-        System.out.println(df.format(dateobj));
-
-       /*getting current date time using calendar class
-        * An Alternative of above*/
-        Calendar calobj = Calendar.getInstance();
-        Log.d("test", "getCurrentDate: " + df.format(calobj.getTime()));
-        System.out.println(df.format(calobj.getTime()));
-
-        String toastText = "currentDate 1 " + df.format(calobj.getTime())
-                + " currentDate 2 " + df.format(calobj.getTime())
-                + "\ntoday: " + today;
-        Toast toast = Toast.makeText(context, toastText, Toast.LENGTH_LONG);
-        toast.show();
-    }
-
-    //todo: was noch fehlt:
-    //einstellungen, wo man die punkte zuruecksetzen kann?
-    //anzeige, an welchem tag wieviele punkte
-    public static void printPoints(Context context) {
-
-        SharedPreferences sharedPreferencesPoints = context.getSharedPreferences(PREFS_POINTS, 0);
-
-        //alle tage
-        Set<String> tmp = new HashSet<>();
-        SharedPreferences sharedPreferencesDates = context.getSharedPreferences(PREFS_DATES, 0);
-        Set<String> dates = sharedPreferencesDates.getStringSet(PREFS_DATES, tmp);
-        int defaultValue = 0;
-        for (String date : dates) {
-
-            Log.d("test", "printPoints: date: " + date);
-
-            int sumPoints = sharedPreferencesPoints.getInt(date, defaultValue);
-            Log.d("test", "printPoints: sumPoints = " + sumPoints);
+        double twentyHoursInMillies = 72000000;// 20h*60m*60s*1000
+        for (String dateString : datesFromPref) {
+            double timeInMillies = Double.parseDouble(dateString);
+            double diff = currentTimeInMillies - timeInMillies;
+            if (diff > twentyHoursInMillies) {
+                currentTimeInMilliesStringKey = currentTimeInMilliesString;
+                datesFromPref.add(currentTimeInMilliesStringKey);
+                sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
+                break;
+            }
         }
     }
 
