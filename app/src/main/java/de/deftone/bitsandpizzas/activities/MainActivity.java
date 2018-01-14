@@ -1,6 +1,7 @@
 package de.deftone.bitsandpizzas.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -23,6 +24,9 @@ import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
+
+import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_DATES;
+import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_POINTS;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -188,8 +192,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.statistic:
                 intent = new Intent(this, StatisticActivity.class);
                 break;
+            case R.id.delete_all_points:
+                resetSharedPrefs();
+                break;
         }
-        startActivity(intent);
+        if (intent != null)
+            startActivity(intent);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -203,5 +211,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
         } else
             super.onBackPressed();
+    }
+
+    private void resetSharedPrefs() {
+        SharedPreferences sharedPreferencesDates = getSharedPreferences(PREFS_DATES, 0);
+        SharedPreferences.Editor sharedPreferencesDatesEditor = sharedPreferencesDates.edit();
+        sharedPreferencesDatesEditor.clear().apply();
+
+        SharedPreferences sharedPreferencesPoints = getSharedPreferences(PREFS_POINTS, 0);
+        SharedPreferences.Editor sharedPreferencesPointsEditor = sharedPreferencesPoints.edit();
+        sharedPreferencesPointsEditor.clear().apply();
     }
 }

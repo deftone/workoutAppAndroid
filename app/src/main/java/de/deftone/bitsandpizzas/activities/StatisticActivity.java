@@ -14,10 +14,11 @@ import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import de.deftone.bitsandpizzas.R;
 
@@ -34,11 +35,9 @@ import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_P
 public class StatisticActivity extends AppCompatActivity {
     private GraphView statisticGraph;
     private Calendar calendar;
-    private Set<String> datesSet;
-    private TreeSet<Integer> datesTreeSet = new TreeSet<>();
-    private ArrayList<Integer> points = new ArrayList<>();
-    //    private TreeMap<Double, Integer> date_point_map = new TreeMap<>();
-    private TreeMap<Integer, Integer> date_point_map = new TreeMap<>();
+    private Set<String> stringDatesFromPrefs;
+    private ArrayList<Long> dates_list = new ArrayList<>();
+    private Map<Long, Integer> date_point_map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class StatisticActivity extends AppCompatActivity {
         statisticGraph = findViewById(R.id.graph);
         calendar = Calendar.getInstance();
         getDataFromSharedPrefs();
-//        createLineGraph();
         createBarChartGraph();
     }
 
@@ -55,69 +53,83 @@ public class StatisticActivity extends AppCompatActivity {
     private void getDataFromSharedPrefs() {
         SharedPreferences presDates = getSharedPreferences(PREFS_DATES, 0);
         Set<String> default_set = new HashSet<>();
-        datesSet = presDates.getStringSet(PREFS_DATES_KEY, default_set);
+        stringDatesFromPrefs = presDates.getStringSet(PREFS_DATES_KEY, default_set);
 
-        SharedPreferences prefsPoints = getSharedPreferences(PREFS_POINTS, 0);
-        for (String date : datesSet) {
-            int sumPoints = prefsPoints.getInt(date, 0);
-            double timeInMilies = Double.parseDouble(date);
-            double timeInSec = timeInMilies / 1000;
-            int timeInSecInt = (int) timeInSec;
-            date_point_map.put(timeInSecInt, sumPoints);
-            datesTreeSet.add(timeInSecInt);
+        SharedPreferences pointsFromPrefs = getSharedPreferences(PREFS_POINTS, 0);
+        for (String date : stringDatesFromPrefs) {
+            Long timeInMillies = Long.parseLong(date);
+            dates_list.add(timeInMillies);
         }
-        Log.d("", "getDataFromSharedPrefs: ");
 
-
+        Collections.sort(dates_list);
+        for (Long date : dates_list) {
+            int sumPoints = pointsFromPrefs.getInt(String.valueOf(date), 0);
+            date_point_map.put(date, sumPoints);
+        }
     }
-
-    //das hier ist richtig sortiert, allerdings kommt die falsche zeit raus.. 1969 statt 2018... /1000 und *1000 klappt nicht
-    //also mit TreeSet und TreeMap und Integer wird alles richtig sortiert, allerdings gehen die daten verloren..
 
     private void createBarChartGraph() {
-        int count = date_point_map.size();
-        DataPoint[] dataPoints = new DataPoint[count];
-        String dateString = "";
-        int i = 0;
-        for (int dateInSec : datesTreeSet) {
-//        for (int i = 0; i < count; i++) {
-//            Integer sumPoints = date_point_map.get(Double.parseDouble(date));
-            Integer sumPoints = date_point_map.get(dateInSec);
-            dataPoints[i] = new DataPoint(i, sumPoints);
-
-            calendar.setTimeInMillis(dateInSec*1000);
-
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH) + 1; //Januar is 0, ...
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            int hour = calendar.get(Calendar.HOUR);
-            int min = calendar.get(Calendar.MINUTE);
-            int sec = calendar.get(Calendar.SECOND);
-            dateString = dateString + i + " : " + year + "." + month + "." + day
-                    + ", " + hour + ":" + min + ":" + sec + "\n";
-
-            i++;
-        }
-        // for LineGraph use this:
-        //        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
-        statisticGraph.addSeries(series);
-        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-            @Override
-            public int get(DataPoint data) {
-                return Color.rgb((int) data.getX() * 255 / 4, (int) Math.abs(data.getY() * 255 / 6), 100);
-            }
-        });
-        series.setSpacing(50);
-
-        statisticGraph.getGridLabelRenderer().setNumHorizontalLabels(count + 1);
-        statisticGraph.getViewport().setMinY(0.0);
-        statisticGraph.getViewport().setMinX(-0.5);
-        statisticGraph.getViewport().setMaxX(count - 0.5);
-        statisticGraph.getViewport().setXAxisBoundsManual(true);
-        statisticGraph.getViewport().setYAxisBoundsManual(true);
         TextView dateText = findViewById(R.id.i_dates);
-        dateText.setText(dateString);
+        int count = date_point_map.size();
+        if (count > 0) {
+            DataPoint[] dataPoints = new DataPoint[count];
+            String dateString = "";
+            int i = 0;
+            for (long date : dates_list) {
+                Integer sumPoints = date_point_map.get(date);
+                dataPoints[i] = new DataPoint(i, sumPoints);
+                dateString = getDateString(i, dateString, date);
+                i++;
+            }
+            // for LineGraph use this:
+            //        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+            BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
+            statisticGraph.addSeries(series);
+            series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                @Override
+                public int get(DataPoint data) {
+//                    Log.d("test", "get: green: " + (int) data.getY() * 10);
+                    int green = (int) data.getY() * 10;
+                    if (green > 255)
+                        green = 255;
+                    return Color.rgb(0, green, 0);
+                }
+            });
+            series.setSpacing(50);
+
+            statisticGraph.getGridLabelRenderer().setNumHorizontalLabels(count + 1);
+            statisticGraph.getViewport().setMinY(0.0);
+            statisticGraph.getViewport().setMinX(-0.5);
+            statisticGraph.getViewport().setMaxX(count - 0.5);
+            statisticGraph.getViewport().setXAxisBoundsManual(true);
+            statisticGraph.getViewport().setYAxisBoundsManual(true);
+            dateText.setText(dateString);
+        } else {
+            dateText.setText(R.string.nothing_to_show);
+        }
     }
 
+    private String getDateString(int i, String dateString, long date) {
+        calendar.setTimeInMillis(date);
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1; //Januar is 0, ...
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+        int sec = calendar.get(Calendar.SECOND);
+        dateString = dateString + i + " : " + formatTimeDigit(day) + "." + formatTimeDigit(month)
+                + "." + formatTimeDigit(year)
+                + ", " + formatTimeDigit(hour) + ":" + formatTimeDigit(min)
+                + ":" + formatTimeDigit(sec) + "\n";
+
+        return dateString;
+    }
+
+    private String formatTimeDigit(int number) {
+        if (number < 10)
+            return "0" + number;
+        else
+            return "" + number;
+    }
 }

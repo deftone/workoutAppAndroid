@@ -49,4 +49,14 @@
         </menu>
     </item>
 
+    <item android:title="@string/settings">
+        <menu>
+            <item
+                android:id="@+id/delete_all_points"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/delete_all_points" />
+
+        </menu>
+    </item>
+
 </menu>

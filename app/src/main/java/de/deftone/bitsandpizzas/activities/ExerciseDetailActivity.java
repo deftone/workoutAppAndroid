@@ -10,6 +10,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +21,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -93,8 +97,6 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
         //get shared prefs
         initSharedPreferences();
-        //for now
-//        resetSharedPrefs();
     }
 
     private void getDescriptionDetails(int id, String type) {
@@ -263,26 +265,47 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         Set<String> datesFromPref = sharedPreferencesDates.getStringSet(PREFS_DATES_KEY, default_set);
         //this is needed when the point button is clicked for the first time
         if (datesFromPref.size() == 0) {
-            datesFromPref.add(currentTimeInMilliesString);
-            sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
             currentTimeInMilliesStringKey = currentTimeInMilliesString;
+            datesFromPref.add(currentTimeInMilliesStringKey);
+            sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
+            return;
         }
-        double twentyHoursInMillies = 72000000;// 20h*60m*60s*1000
+        int twentyHoursInMillies = 30000;//72000000;// 20h*60m*60s*1000
+        //check if latest/newest dateitem is > 24h ago
+        ArrayList<Long> datesFromPrefLong = new ArrayList<>();
         for (String dateString : datesFromPref) {
-            double timeInMillies = Double.parseDouble(dateString);
-            double diff = currentTimeInMillies - timeInMillies;
-            if (diff > twentyHoursInMillies) {
-                currentTimeInMilliesStringKey = currentTimeInMilliesString;
-                datesFromPref.add(currentTimeInMilliesStringKey);
-                sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
-                break;
-            }
+            datesFromPrefLong.add(Long.valueOf(dateString));
+        }
+        //does this work? for long
+        long latestDate = Collections.max(datesFromPrefLong);
+        Log.d("test", "addDate: latest date: "+ getDateString(0, "", latestDate));
+        long diff = currentTimeInMillies - latestDate;
+        //modifiedTimeFromPrefs is older than the new/current timeSinceJan18
+        if (diff > twentyHoursInMillies) {
+            currentTimeInMilliesStringKey = currentTimeInMilliesString;
+            datesFromPref.add(currentTimeInMilliesStringKey);
+            sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
         }
     }
 
-    private void resetSharedPrefs() {
-        sharedPreferencesDatesEditor.clear().apply();
-        sharedPreferencesPointsEditor.clear().apply();
+    //only for debugging
+    private String getDateString(int i, String dateString, long date) {
+        Calendar calendar = Calendar.getInstance();
+//        Calendar.getInstance();
+        calendar.setTimeInMillis(date);
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1; //Januar is 0, ...
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+        int sec = calendar.get(Calendar.SECOND);
+        dateString = dateString + i + " : " + (day) + "." + (month)
+                + "." + (year)
+                + ", " + (hour) + ":" + (min)
+                + ":" + (sec) + "\n";
+
+        return dateString;
     }
 
     private void initSharedPreferences() {

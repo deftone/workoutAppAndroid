@@ -84,25 +84,27 @@ public class StopwatchActivityTest {
 
     @Test
     public void check_buttons(){
+        onView(withId(R.id.start_button)).check(matches(withText(R.string.start)));
         onView(withId(R.id.start_button)).perform(click());
+        onView(withId(R.id.start_button)).check(matches(withText(R.string.pause)));
         try {
             int runTime = seconds-1;
             //man muss etwas laenger warten als nur die runtime... sonst steht noch die seconds in der texview
             Thread.sleep((runTime)*1000+300);
 
             //click pause and check time
-            onView(withId(R.id.stop_button)).perform(click());
+            onView(withId(R.id.start_button)).perform(click());
             String time = String.format(Locale.getDefault(), "%02d:%02d", 0, runTime);
             onView(withId(R.id.time_view)).check(matches(withText(time)));
             //wait some more and check time didn't change
             Thread.sleep(1300);
             onView(withId(R.id.time_view)).check(matches(withText(time)));
 
-            //click reset
-            onView(withId(R.id.reset_button)).perform(click());
+            onView(withId(R.id.stop_button)).perform(click());
             time = String.format(Locale.getDefault(), "%02d:%02d", 0, seconds);
             Thread.sleep(500); //give the test enough time to update the view
             onView(withId(R.id.time_view)).check(matches(withText(time)));
+            onView(withId(R.id.start_button)).check(matches(withText(R.string.start)));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
