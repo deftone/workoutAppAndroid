@@ -27,6 +27,10 @@ import de.deftone.bitsandpizzas.fragments.TopFragment;
 
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_DATES;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.activities.StatisticActivity.EXTRA;
+import static de.deftone.bitsandpizzas.activities.StatisticActivity.FOUR_WEEKS;
+import static de.deftone.bitsandpizzas.activities.StatisticActivity.LAST_TEN;
+import static de.deftone.bitsandpizzas.activities.StatisticActivity.TWELVE_WEEKS;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -189,11 +193,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 CreatedExercise.generateRandomExercises(0, 0, 6, false);
                 intent = new Intent(this, CreateWorkoutActivity.class);
                 break;
-            case R.id.statistic:
+            case R.id.statistic_last10:
                 intent = new Intent(this, StatisticActivity.class);
+                intent.putExtra(EXTRA, LAST_TEN);
+                break;
+            case R.id.statistic_4weeks:
+                intent = new Intent(this, StatisticActivity.class);
+                intent.putExtra(EXTRA, FOUR_WEEKS);
+                break;
+            case R.id.statistic_12weeks:
+                intent = new Intent(this, StatisticActivity.class);
+                intent.putExtra(EXTRA, TWELVE_WEEKS);
+                break;
+            case R.id.statistic_all:
+                intent = new Intent(this, StatisticActivity.class);
+                intent.putExtra(EXTRA, TWELVE_WEEKS);
                 break;
             case R.id.delete_all_points:
-                resetSharedPrefs();
+//                resetSharedPrefs();
                 break;
         }
         if (intent != null)

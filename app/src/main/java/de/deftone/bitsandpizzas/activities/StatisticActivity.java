@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -15,8 +14,10 @@ import com.jjoe64.graphview.series.DataPoint;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,10 +30,15 @@ import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_P
 /**
  * Created by deftone on 12.01.18.
  * <p>
- * todo: statistik ansicht fuer monat, jahr, die letzten 10? auch menue items in drawer anpassen
  */
 
 public class StatisticActivity extends AppCompatActivity {
+    public static final String EXTRA = "extra";
+    public static final int LAST_TEN = 10;
+    public static final int FOUR_WEEKS = 4;
+    public static final int TWELVE_WEEKS = 12;
+    public static final int ALL = 100;
+
     private GraphView statisticGraph;
     private Calendar calendar;
     private Set<String> stringDatesFromPrefs;
@@ -45,8 +51,29 @@ public class StatisticActivity extends AppCompatActivity {
         setContentView(R.layout.statistic);
         statisticGraph = findViewById(R.id.graph);
         calendar = Calendar.getInstance();
+        int statistic_type = getIntent().getExtras().getInt(EXTRA);
+
+        List<Long> dateList = initData(statistic_type);
+        createBarChartGraph(dateList);
+    }
+
+    private List<Long> initData(int statistic_type) {
         getDataFromSharedPrefs();
-        createBarChartGraph();
+
+        switch (statistic_type) {
+            case FOUR_WEEKS:
+                long fourWeeksInMillies = 2419200000l;//4w*7t*24h*60m*60s*1000
+                return getDatesFromTimeDuration(fourWeeksInMillies);
+            case TWELVE_WEEKS:
+                long twelveWeeksInMillies = 7257600000l;//12w*7t*24h*60m*60s*1000
+                return getDatesFromTimeDuration(twelveWeeksInMillies);
+            case LAST_TEN:
+                return getLastTen();
+            case ALL:
+                return dates_list;
+            default:
+                return Collections.emptyList();
+        }
     }
 
     //we need this so that we have a chronological ordered TreeMap with date and points
@@ -60,22 +87,50 @@ public class StatisticActivity extends AppCompatActivity {
             Long timeInMillies = Long.parseLong(date);
             dates_list.add(timeInMillies);
         }
-
         Collections.sort(dates_list);
+        //evtl brauche ich diese map gar nicht, wenn man die nach keys sortieren kann
         for (Long date : dates_list) {
             int sumPoints = pointsFromPrefs.getInt(String.valueOf(date), 0);
             date_point_map.put(date, sumPoints);
         }
     }
 
-    private void createBarChartGraph() {
+    private List<Long> getDatesFromTimeDuration(long timeDuration) {
+        Date currentDate = new Date();
+        long currentTimeInMillies = 1520031600000l;// 3.3.18 currentDate.getTime();
+
+        long startTime = currentTimeInMillies - timeDuration;
+
+        List<Long> datesList = new ArrayList<>();
+        for (long date : dates_list) {
+            if (date > startTime) {
+                datesList.add(date);
+            }
+        }
+        Collections.sort(datesList);
+        return datesList;
+    }
+
+    //todo:  hier ist noch ein fehler... kommt scheinbar leeres array raus...
+    private List<Long> getLastTen() {
+        List<Long> lastTen = new ArrayList<>();
+        int count = dates_list.size();
+        int min = count >= 10 ? 10 : 10 - count;
+        for (int i = count; i < min; i--) {
+            lastTen.add(dates_list.get(i));
+        }
+        return lastTen;
+    }
+
+
+    private void createBarChartGraph(List<Long> datesList) {
         TextView dateText = findViewById(R.id.i_dates);
-        int count = date_point_map.size();
+        int count = datesList.size();
         if (count > 0) {
             DataPoint[] dataPoints = new DataPoint[count];
             String dateString = "";
             int i = 0;
-            for (long date : dates_list) {
+            for (long date : datesList) {
                 Integer sumPoints = date_point_map.get(date);
                 dataPoints[i] = new DataPoint(i, sumPoints);
                 dateString = getDateString(i, dateString, date);

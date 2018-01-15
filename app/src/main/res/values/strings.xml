@@ -31,7 +31,10 @@
     <string name="random_back">Rücken (6 Übungen)</string>
 
     <string name="statistic">Statistik</string>
-    <string name="statistic_points">Punkte</string>
+    <string name="statistic_points_4">Punkte (4 Wochen)</string>
+    <string name="statistic_points_12">Punkte (12 Wochen)</string>
+    <string name="statistic_points_10">Punkte (letze 10)</string>
+    <string name="statistic_points_all">Punkte (alle)</string>
 
     <string name="settings">Einstellungen</string>
     <string name="delete_all_points">alle Punkte löschen</string>

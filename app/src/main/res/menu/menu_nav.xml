@@ -42,9 +42,25 @@
     <item android:title="@string/statistic">
         <menu>
             <item
-                android:id="@+id/statistic"
+                android:id="@+id/statistic_last10"
                 android:icon="@android:drawable/btn_star"
-                android:title="@string/statistic_points" />
+                android:title="@string/statistic_points_10" />
+
+            <item
+                android:id="@+id/statistic_4weeks"
+                android:icon="@android:drawable/btn_star"
+                android:title= "@string/statistic_points_4" />
+
+            <item
+                android:id="@+id/statistic_12weeks"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/statistic_points_12" />
+
+            <item
+                android:id="@+id/statistic_all"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/statistic_points_all" />
+
 
         </menu>
     </item>
