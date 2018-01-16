@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,6 +47,8 @@ public class StatisticActivity extends AppCompatActivity {
     private Set<String> stringDatesFromPrefs;
     private ArrayList<Long> dates_list = new ArrayList<>();
     private Map<Long, Integer> date_point_map = new HashMap<>();
+    int statistic_type;
+    private String title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +56,10 @@ public class StatisticActivity extends AppCompatActivity {
         setContentView(R.layout.statistic);
         statisticGraph = findViewById(R.id.graph);
         calendar = Calendar.getInstance();
-        int statistic_type = getIntent().getExtras().getInt(EXTRA);
+        statistic_type = getIntent().getExtras().getInt(EXTRA);
 
-        List<Long> dateList = initData(statistic_type);
-        createBarChartGraph(dateList);
+        List<Long> modifiedDateList = initData(statistic_type);
+        createBarChartGraph(modifiedDateList);
     }
 
     private List<Long> initData(int statistic_type) {
@@ -63,13 +68,17 @@ public class StatisticActivity extends AppCompatActivity {
         switch (statistic_type) {
             case FOUR_WEEKS:
                 long fourWeeksInMillies = 2419200000l;//4w*7t*24h*60m*60s*1000
+                title = getString(R.string.graph_points_4);
                 return getDatesFromTimeDuration(fourWeeksInMillies);
             case TWELVE_WEEKS:
                 long twelveWeeksInMillies = 7257600000l;//12w*7t*24h*60m*60s*1000
+                title = getString(R.string.graph_points_12);
                 return getDatesFromTimeDuration(twelveWeeksInMillies);
             case LAST_TEN:
+                title = getString(R.string.graph_points_10);
                 return getLastTen();
             case ALL:
+                title = getString(R.string.graph_points_all);
                 return dates_list;
             default:
                 return Collections.emptyList();
@@ -88,7 +97,7 @@ public class StatisticActivity extends AppCompatActivity {
             dates_list.add(timeInMillies);
         }
         Collections.sort(dates_list);
-        //evtl brauche ich diese map gar nicht, wenn man die nach keys sortieren kann
+
         for (Long date : dates_list) {
             int sumPoints = pointsFromPrefs.getInt(String.valueOf(date), 0);
             date_point_map.put(date, sumPoints);
@@ -111,60 +120,74 @@ public class StatisticActivity extends AppCompatActivity {
         return datesList;
     }
 
-    //todo:  hier ist noch ein fehler... kommt scheinbar leeres array raus...
     private List<Long> getLastTen() {
         List<Long> lastTen = new ArrayList<>();
         int count = dates_list.size();
-        int min = count >= 10 ? 10 : 10 - count;
-        for (int i = count; i < min; i--) {
+        int min = count >= 10 ? (count - 10) : 0;
+        for (int i = min; i <= count - 1; i++) {
             lastTen.add(dates_list.get(i));
         }
         return lastTen;
     }
 
-
-    private void createBarChartGraph(List<Long> datesList) {
+    private void createBarChartGraph(List<Long> modifiedDatesList) {
+        TextView titleText = findViewById(R.id.graph_title);
+        titleText.setText(title);
         TextView dateText = findViewById(R.id.i_dates);
-        int count = datesList.size();
+        int count = modifiedDatesList.size();
         if (count > 0) {
             DataPoint[] dataPoints = new DataPoint[count];
             String dateString = "";
             int i = 0;
-            for (long date : datesList) {
+            for (long date : modifiedDatesList) {
                 Integer sumPoints = date_point_map.get(date);
-                dataPoints[i] = new DataPoint(i, sumPoints);
-                dateString = getDateString(i, dateString, date);
+                dataPoints[i] = new DataPoint(date, sumPoints);
+                dateString = getDateString(i + 1, dateString, date, sumPoints);
                 i++;
             }
-            // for LineGraph use this:
-            //        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
-            BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
-            statisticGraph.addSeries(series);
-            series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-                @Override
-                public int get(DataPoint data) {
-//                    Log.d("test", "get: green: " + (int) data.getY() * 10);
-                    int green = (int) data.getY() * 10;
-                    if (green > 255)
-                        green = 255;
-                    return Color.rgb(0, green, 0);
-                }
-            });
-            series.setSpacing(50);
+            if (statistic_type == FOUR_WEEKS) {
+                BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
+                statisticGraph.addSeries(series);
+                series.setSpacing(50);
+                series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                    @Override
+                    public int get(DataPoint data) {
+                        int green = (int) data.getY() * 10;
+                        if (green > 255)
+                            green = 255;
+                        return Color.rgb(0, green, 0);
+                    }
+                });
+            } else {
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+                statisticGraph.addSeries(series);
+                series.setDrawDataPoints(true);
+                series.setDataPointsRadius(10);
+            }
 
-            statisticGraph.getGridLabelRenderer().setNumHorizontalLabels(count + 1);
+            // set date label formatter
+            statisticGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+            statisticGraph.getGridLabelRenderer().setNumHorizontalLabels(4); //nur wenige, da sich labels sonst ueberlagern
+
+            // as we use dates as labels, the human rounding to nice readable numbers is not necessary
+            statisticGraph.getGridLabelRenderer().setHumanRounding(false);
+
             statisticGraph.getViewport().setMinY(0.0);
-            statisticGraph.getViewport().setMinX(-0.5);
-            statisticGraph.getViewport().setMaxX(count - 0.5);
-            statisticGraph.getViewport().setXAxisBoundsManual(true);
             statisticGraph.getViewport().setYAxisBoundsManual(true);
+            long fourDays = 255600000l;
+            statisticGraph.getViewport().setMinX(modifiedDatesList.get(0) - fourDays);
+            statisticGraph.getViewport().setMaxX(modifiedDatesList.get(count - 1) + fourDays);
+            statisticGraph.getViewport().setXAxisBoundsManual(true);
+            GridLabelRenderer gridLabel = statisticGraph.getGridLabelRenderer();
+//            gridLabel.setHorizontalAxisTitle(getString(R.string.x_axis));
+            gridLabel.setVerticalAxisTitle(getString(R.string.y_axis));
             dateText.setText(dateString);
         } else {
             dateText.setText(R.string.nothing_to_show);
         }
     }
 
-    private String getDateString(int i, String dateString, long date) {
+    private String getDateString(int i, String dateString, long date, int points) {
         calendar.setTimeInMillis(date);
 
         int year = calendar.get(Calendar.YEAR);
@@ -173,10 +196,12 @@ public class StatisticActivity extends AppCompatActivity {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
         int sec = calendar.get(Calendar.SECOND);
-        dateString = dateString + i + " : " + formatTimeDigit(day) + "." + formatTimeDigit(month)
+        dateString = dateString //+ formatDigit(i) + " : "
+                + formatTimeDigit(day) + "." + formatTimeDigit(month)
                 + "." + formatTimeDigit(year)
-                + ", " + formatTimeDigit(hour) + ":" + formatTimeDigit(min)
-                + ":" + formatTimeDigit(sec) + "\n";
+//                + ", " + formatTimeDigit(hour) + ":" + formatTimeDigit(min)
+//                + ":" + formatTimeDigit(sec)
+                + ", Punkte: " + formatDigit(points) + "\n";
 
         return dateString;
     }
@@ -184,6 +209,13 @@ public class StatisticActivity extends AppCompatActivity {
     private String formatTimeDigit(int number) {
         if (number < 10)
             return "0" + number;
+        else
+            return "" + number;
+    }
+
+    private String formatDigit(int number) {
+        if (number < 10)
+            return "  " + number;
         else
             return "" + number;
     }

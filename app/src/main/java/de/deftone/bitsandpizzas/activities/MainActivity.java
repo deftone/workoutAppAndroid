@@ -27,6 +27,7 @@ import de.deftone.bitsandpizzas.fragments.TopFragment;
 
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_DATES;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.activities.StatisticActivity.ALL;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.EXTRA;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.FOUR_WEEKS;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.LAST_TEN;
@@ -207,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.statistic_all:
                 intent = new Intent(this, StatisticActivity.class);
-                intent.putExtra(EXTRA, TWELVE_WEEKS);
+                intent.putExtra(EXTRA, ALL);
                 break;
             case R.id.delete_all_points:
 //                resetSharedPrefs();

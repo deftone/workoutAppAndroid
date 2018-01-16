@@ -35,6 +35,11 @@
     <string name="statistic_points_12">Punkte (12 Wochen)</string>
     <string name="statistic_points_10">Punkte (letze 10)</string>
     <string name="statistic_points_all">Punkte (alle)</string>
+    <string name="graph_points_10">Gesamtpunkte der letzten 10 Workouts</string>
+    <string name="graph_points_all">Gesamtpunkte aller bisherigen Workouts</string>
+    <string name="graph_points_4">Gesamtpunkte der Workouts der letzen 4 Wochen</string>
+    <string name="graph_points_12">Gesamtpunkte pro Workouts der letzen 12 Wochen</string>
+    <string name="nothing_to_show">Bisher keine Punkte gesammelt… los gehts!</string>
 
     <string name="settings">Einstellungen</string>
     <string name="delete_all_points">alle Punkte löschen</string>
@@ -47,5 +52,7 @@
     <string name="pause">pause</string>
     <string name="stop">stop</string>
     <string name="reset">reset</string>
-    <string name="nothing_to_show">Bisher keine Punkte gesammelt... los gehts!</string>
+    <string name="x_axis">Datum</string>
+    <string name="y_axis">Punkte</string>
+    <string name="details">Details:</string>
 </resources>
