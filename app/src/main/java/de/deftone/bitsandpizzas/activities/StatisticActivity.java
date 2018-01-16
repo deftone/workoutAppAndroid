@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -106,7 +107,7 @@ public class StatisticActivity extends AppCompatActivity {
 
     private List<Long> getDatesFromTimeDuration(long timeDuration) {
         Date currentDate = new Date();
-        long currentTimeInMillies = 1520031600000l;// 3.3.18 currentDate.getTime();
+        long currentTimeInMillies = currentDate.getTime();
 
         long startTime = currentTimeInMillies - timeDuration;
 
@@ -152,6 +153,7 @@ public class StatisticActivity extends AppCompatActivity {
                 series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
                     @Override
                     public int get(DataPoint data) {
+                        //todo: das hier evtl noch besser anpassen... statt *10 irgendwie anteilig am y-wert?
                         int green = (int) data.getY() * 10;
                         if (green > 255)
                             green = 255;
@@ -179,10 +181,11 @@ public class StatisticActivity extends AppCompatActivity {
             statisticGraph.getViewport().setMaxX(modifiedDatesList.get(count - 1) + fourDays);
             statisticGraph.getViewport().setXAxisBoundsManual(true);
             GridLabelRenderer gridLabel = statisticGraph.getGridLabelRenderer();
-//            gridLabel.setHorizontalAxisTitle(getString(R.string.x_axis));
             gridLabel.setVerticalAxisTitle(getString(R.string.y_axis));
             dateText.setText(dateString);
         } else {
+            TextView detailText = findViewById(R.id.text_detail);
+            detailText.setVisibility(View.GONE);
             dateText.setText(R.string.nothing_to_show);
         }
     }

@@ -270,42 +270,20 @@ public class ExerciseDetailActivity extends AppCompatActivity {
             sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
             return;
         }
-        int twentyHoursInMillies = 30000;//72000000;// 20h*60m*60s*1000
-        //check if latest/newest dateitem is > 24h ago
+        int fourteenHoursInMillies = 50400000;// 14h*60m*60s*1000
+        //check if latest/newest dateitem is > 14h ago
         ArrayList<Long> datesFromPrefLong = new ArrayList<>();
         for (String dateString : datesFromPref) {
             datesFromPrefLong.add(Long.valueOf(dateString));
         }
-        //does this work? for long
         long latestDate = Collections.max(datesFromPrefLong);
-        Log.d("test", "addDate: latest date: "+ getDateString(0, "", latestDate));
         long diff = currentTimeInMillies - latestDate;
-        //modifiedTimeFromPrefs is older than the new/current timeSinceJan18
-        if (diff > twentyHoursInMillies) {
+        //modifiedTimeFromPrefs is older than the new/current time
+        if (diff > fourteenHoursInMillies) {
             currentTimeInMilliesStringKey = currentTimeInMilliesString;
             datesFromPref.add(currentTimeInMilliesStringKey);
             sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
         }
-    }
-
-    //only for debugging
-    private String getDateString(int i, String dateString, long date) {
-        Calendar calendar = Calendar.getInstance();
-//        Calendar.getInstance();
-        calendar.setTimeInMillis(date);
-
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1; //Januar is 0, ...
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int min = calendar.get(Calendar.MINUTE);
-        int sec = calendar.get(Calendar.SECOND);
-        dateString = dateString + i + " : " + (day) + "." + (month)
-                + "." + (year)
-                + ", " + (hour) + ":" + (min)
-                + ":" + (sec) + "\n";
-
-        return dateString;
     }
 
     private void initSharedPreferences() {
