@@ -82,9 +82,9 @@ public class BellyExercise {
                             "Oberkörper nah zu den Oberschenkeln",
                             "Hände nach vorne gestreckt",
                             "Rücken ist die ganze Zeit leicht gerundet",
-                            "beim Einatmen den Oberkörper langsam nach hinten neigen (bis 45°) und dort 2-10 Sek halten",
+                            "beim Einatmen den Oberkörper langsam nach hinten neigen (bis 45°) und dort 3 Sek halten",
                             "beim Ausatmen wieder aufrichten",
-                            "20 - 30 Wiederholungen"},
+                            "10 Wiederholungen"},
                     R.drawable.pseudo_sit_up,
                     0,
                     new int[]{2}),
@@ -105,10 +105,10 @@ public class BellyExercise {
                             "beim Einatmen Bein wieder strecken und beide Beine parallel",
                             "beim nächsten Atemzug Beine wechseln",
                             "Alternativ: beugen und strecken direkt im Wechsel",
-                            "so oft Wiederholen bis ein Brennen zu spüren ist"},
+                            "jedes Bein 10 mal beugen und strecken"},
                     R.drawable.fahrradfahren,
                     0,
-                    new int[]{2}),
+                    new int[]{3}),
             //5
             new BellyExercise("Criss-Cross",
                     new String[]{Icons.getIcon(Icons.BULLET),
@@ -158,11 +158,11 @@ public class BellyExercise {
                             "soweit aufrollen bis die Fingerspitzen bei den Zehen angekommen sind",
                             "beim Ausatmen den Rücken runden und Nabel zur Wirbelsäule ziehen",
                             "beim Einatmen Wirbel für Wirbel abrollen bis wieder in Startposition",
-                            "10 - 20 Wiederholungen"},
+                            "10 Wiederholungen"},
                     R.drawable.roll_up,
                     0,
                     new int[]{2}),
-            //8
+            //8 ganzkoerper/rumpf
             new BellyExercise("Unterarmstütz",
                     new String[]{Icons.getIcon(Icons.BULLET),
                             Icons.getIcon(Icons.BULLET),
@@ -177,7 +177,7 @@ public class BellyExercise {
                     R.drawable.unterarmstuetz,
                     60,
                     new int[]{3, 2}),
-            //9
+            //9 ganzkoerper
             new BellyExercise("Unterarmstütz 2",
                     new String[]{Icons.getIcon(Icons.BULLET),
                             Icons.getIcon(Icons.BULLET),
@@ -194,7 +194,7 @@ public class BellyExercise {
                     R.drawable.unterarmstuetz_mit_heben,
                     0,
                     new int[]{3, 1}),
-            //10
+            //10 gamzkoerper
             new BellyExercise("Seitenstütz",
                     new String[]{Icons.getIcon(Icons.BULLET),
                             Icons.getIcon(Icons.BULLET),
@@ -225,8 +225,8 @@ public class BellyExercise {
                             "30 Sekunden halten"},
                     R.drawable.boot,
                     30,
-                    new int[]{2}),
-            //12
+                    new int[]{3,1}),
+            //12 gamzkoerper
             new BellyExercise("Leg Pull Up",
                     new String[]{Icons.getIcon(Icons.BULLET),
                             Icons.getIcon(Icons.BULLET),
@@ -253,7 +253,7 @@ public class BellyExercise {
                     R.drawable.leg_pull_up,
                     0,
                     new int[]{3, 2}),
-            //13
+            //13 gamzkoerper
             new BellyExercise("Leg Pull Down",
                     new String[]{Icons.getIcon(Icons.BULLET),
                             Icons.getIcon(Icons.BULLET),
