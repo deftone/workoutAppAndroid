@@ -33,6 +33,9 @@ import static org.hamcrest.Matchers.not;
 /**
  * Created by deftone on 26.12.17.
  */
+
+//todo: im drawer die statistiken antippen, punkte loeschen (alert dialog)
+
 @RunWith(AndroidJUnit4.class) //diese zeile sollte bei allen UI tests stehen
 public class MainActivityTest {
 
@@ -48,13 +51,13 @@ public class MainActivityTest {
     @Test //dieser Test ist auch gruen, wenn der entsprechende code auskommentiert ist und man weder toolbar, noch viewpager sehen kann...
     public void checkToolbarAndViewpager() {
         //toolbarIsDisplayed
-        onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
+        onView(withId(R.id.toolbar)).check(MatchUtils.isVisible()); //egal ob isVisible oder matches.isDisplayed()... verhaelt sich gleich
         //wenn die toolbar ein bild hat, dann kann man auch folgendes testen
         //onView(withId(R.id.toolbar_image)).check(matches(withContentDescription(R.string.toolbar_image_title)));
         //viewPagerIsVisible
-        onView(withId(R.id.viewpager)).check(matches(isDisplayed()));
+        onView(withId(R.id.viewpager)).check(MatchUtils.isVisible());
         //tabsAreVisible
-        onView(withId(R.id.tabs)).check(matches(isDisplayed()));
+        onView(withId(R.id.tabs)).check(MatchUtils.isVisible());
     }
 
     @Test //auch gruen, wenn burger icon weg ist, aber auch ohne burger icon, kann man swipen zum oeffnen, daher ok
