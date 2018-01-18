@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 
-import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
 
 public class CreateWorkoutActivity extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         //hier oder mehrere CreatedExercise Klassen in data?
         ExerciseFragment exerciseFragment = new ExerciseFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(TYPE, CREATED_EXERCISES);
+        bundle.putString(TYPE, TYPE_CREATED_EXERCISES);
         exerciseFragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

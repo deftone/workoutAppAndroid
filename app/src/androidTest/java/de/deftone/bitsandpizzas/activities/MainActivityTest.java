@@ -43,36 +43,42 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
     //im test kann natuerlich dann eine andere activity gelaunched werden, aber mit dieser wird gestartet
-
     //es muss alles public sein, die testrule und auch alle testmethoden, sonst bumm!
-    @Test
-    public void toolbarIsDisplayed() {
+
+    @Test //dieser Test ist auch gruen, wenn der entsprechende code auskommentiert ist und man weder toolbar, noch viewpager sehen kann...
+    public void checkToolbarAndViewpager() {
+        //toolbarIsDisplayed
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
-
         //wenn die toolbar ein bild hat, dann kann man auch folgendes testen
-//        onView(withId(R.id.toolbar_image)).check(matches(withContentDescription(R.string.toolbar_image_title)));
-    }
-
-    @Test
-    public void viewPagerIsVisible() {
+        //onView(withId(R.id.toolbar_image)).check(matches(withContentDescription(R.string.toolbar_image_title)));
+        //viewPagerIsVisible
         onView(withId(R.id.viewpager)).check(matches(isDisplayed()));
-    }
-
-    //dieser test ist auch gruen, wenn die tab zeilen in mainactivity auskommentiert sind und man die tabs nicht sieht :(
-    @Test
-    public void tabsAreVisible() {
+        //tabsAreVisible
         onView(withId(R.id.tabs)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void titleInBanner() {
-        onView(withId(R.id.top_fragment_title)).check(matches(withText(R.string.workout_motherRussia)));
+    @Test //auch gruen, wenn burger icon weg ist, aber auch ohne burger icon, kann man swipen zum oeffnen, daher ok
+    public void openAndCloseNavigationDrawer() {
+        //drawer content is not visible
+        onView(withId(R.id.nav_view)).check(matches(not(isDisplayed())));
+        //open nav drawer
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        //drawer content is visible
+        onView(withId(R.id.nav_view)).check(matches(isDisplayed()));
+        //close nav drawer
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
+        //drawer content is not visible
+        onView(withId(R.id.nav_view)).check(matches(not(isDisplayed())));
     }
 
     @Test
-    public void imageIsVisible() {
+    public void checkTopFragment() {
+        //title
+        onView(withId(R.id.top_fragment_title)).check(matches(withText(R.string.workout_motherRussia)));
+        //image
         onView(withId(R.id.main_image)).check(matches(isDisplayed()));
     }
+
 
     @Test
     public void check_visible_CardViewItems_leg() {
@@ -148,42 +154,5 @@ public class MainActivityTest {
             onView(allOf(withId(R.id.exercise_recycler), isDisplayed()))
                     .check(matches(MatchUtils.eigenerMatcher(position, hasDescendant(withText(title)))));
         }
-    }
-
-
-    @Test
-    public void openAndCloseNavigationDrawer() {
-        //drawer content is not visible
-        onView(withId(R.id.nav_view)).check(matches(not(isDisplayed())));
-        //open nav drawer
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        //drawer content is visible
-        onView(withId(R.id.nav_view)).check(matches(isDisplayed()));
-        //close nav drawer
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
-        //drawer content is not visible
-        onView(withId(R.id.nav_view)).check(matches(not(isDisplayed())));
-    }
-
-    @Test
-    public void startTimer() {
-        //click on tabs stretching
-        Matcher<View> matcher = allOf(withText(R.string.stretching_tab),
-                isDescendantOfA(withId(R.id.tabs)));
-        onView(matcher).perform(click());
-
-        //click on first card view
-        int position = 0;
-        onView(allOf(withId(R.id.exercise_recycler), isDisplayed()))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(position, click()));
-
-        //click fab
-        onView(withId(R.id.fab)).perform(click());
-
-        //check
-        int seconds = StretchingExercise.STRETCHING_EXERCISES[position].getSeconds();
-        String time = String.format(Locale.getDefault(), "%02d:%02d", 0, seconds);
-        onView(withId(R.id.time_view)).check(matches(withText(time)));
-
     }
 }

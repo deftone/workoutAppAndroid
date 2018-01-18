@@ -10,7 +10,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -36,11 +34,11 @@ import de.deftone.bitsandpizzas.data.LegExercise;
 import de.deftone.bitsandpizzas.data.StretchingExercise;
 import de.deftone.bitsandpizzas.utils.ExerciseDetailList;
 
-import static de.deftone.bitsandpizzas.activities.MainActivity.BACK_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.STRETCHING_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BACK_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BELLY_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_CREATED_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_STRETCHING_EXERCISES;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
 public class ExerciseDetailActivity extends AppCompatActivity {
@@ -101,7 +99,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
     private void getDescriptionDetails(int id, String type) {
         switch (type) {
-            case LEG_EXERCISES:
+            case TYPE_LEG_EXERCISES:
                 title = LegExercise.LEG_EXERCISES[id].getName();
                 image = LegExercise.LEG_EXERCISES[id].getImageResourceId();
                 icon = LegExercise.LEG_EXERCISES[id].getIcon();
@@ -109,7 +107,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 seconds = LegExercise.LEG_EXERCISES[id].getSeconds();
                 weight = LegExercise.LEG_EXERCISES[id].getWeight();
                 break;
-            case BELLY_EXERCISES:
+            case TYPE_BELLY_EXERCISES:
                 title = BellyExercise.BELLY_EXERCISES[id].getName();
                 image = BellyExercise.BELLY_EXERCISES[id].getImageResourceId();
                 icon = BellyExercise.BELLY_EXERCISES[id].getIcon();
@@ -117,7 +115,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 seconds = BellyExercise.BELLY_EXERCISES[id].getSeconds();
                 weight = BellyExercise.BELLY_EXERCISES[id].getWeight();
                 break;
-            case BACK_EXERCISES:
+            case TYPE_BACK_EXERCISES:
                 title = BackExercise.BACK_EXERCISES[id].getName();
                 image = BackExercise.BACK_EXERCISES[id].getImageResourceId();
                 icon = BackExercise.BACK_EXERCISES[id].getIcon();
@@ -125,7 +123,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 seconds = BackExercise.BACK_EXERCISES[id].getSeconds();
                 weight = BackExercise.BACK_EXERCISES[id].getWeight();
                 break;
-            case STRETCHING_EXERCISES:
+            case TYPE_STRETCHING_EXERCISES:
                 title = StretchingExercise.STRETCHING_EXERCISES[id].getName();
                 image = StretchingExercise.STRETCHING_EXERCISES[id].getImageResourceId();
                 icon = StretchingExercise.STRETCHING_EXERCISES[id].getIcon();
@@ -133,7 +131,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
                 seconds = StretchingExercise.STRETCHING_EXERCISES[id].getSeconds();
                 weight = StretchingExercise.STRETCHING_EXERCISES[id].getWeight();
                 break;
-            case CREATED_EXERCISES:
+            case TYPE_CREATED_EXERCISES:
                 title = CREATED_EXERCISES_LIST.get(id).getName();
                 image = CREATED_EXERCISES_LIST.get(id).getImageResourceId();
                 desc = CREATED_EXERCISES_LIST.get(id).getDescription();

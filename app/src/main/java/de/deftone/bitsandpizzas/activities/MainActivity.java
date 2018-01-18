@@ -39,11 +39,11 @@ import static de.deftone.bitsandpizzas.activities.StatisticActivity.TWELVE_WEEKS
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public final static String TYPE = "type";
-    public final static String LEG_EXERCISES = "leg exercieses";
-    public final static String BELLY_EXERCISES = "belly exercieses";
-    public final static String BACK_EXERCISES = "back exercieses";
-    public final static String STRETCHING_EXERCISES = "stretching exercieses";
-    public final static String CREATED_EXERCISES = "created exercieses";
+    public final static String TYPE_LEG_EXERCISES = "leg exercieses";
+    public final static String TYPE_BELLY_EXERCISES = "belly exercieses";
+    public final static String TYPE_BACK_EXERCISES = "back exercieses";
+    public final static String TYPE_STRETCHING_EXERCISES = "stretching exercieses";
+    public final static String TYPE_CREATED_EXERCISES = "created exercieses";
 
     private ShareActionProvider shareActionProvider;
 
@@ -116,22 +116,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return new TopFragment();
                 case 1:
                     ExerciseFragment legExerciseFragment = new ExerciseFragment();
-                    bundle.putString(TYPE, LEG_EXERCISES);
+                    bundle.putString(TYPE, TYPE_LEG_EXERCISES);
                     legExerciseFragment.setArguments(bundle);
                     return legExerciseFragment;
                 case 2:
                     ExerciseFragment bellyExerciseFragment = new ExerciseFragment();
-                    bundle.putString(TYPE, BELLY_EXERCISES);
+                    bundle.putString(TYPE, TYPE_BELLY_EXERCISES);
                     bellyExerciseFragment.setArguments(bundle);
                     return bellyExerciseFragment;
                 case 3:
                     ExerciseFragment backExercisesFragment = new ExerciseFragment();
-                    bundle.putString(TYPE, BACK_EXERCISES);
+                    bundle.putString(TYPE, TYPE_BACK_EXERCISES);
                     backExercisesFragment.setArguments(bundle);
                     return backExercisesFragment;
                 case 4:
                     ExerciseFragment stretchingFragment = new ExerciseFragment();
-                    bundle.putString(TYPE, STRETCHING_EXERCISES);
+                    bundle.putString(TYPE, TYPE_STRETCHING_EXERCISES);
                     stretchingFragment.setArguments(bundle);
                     return stretchingFragment;
             }

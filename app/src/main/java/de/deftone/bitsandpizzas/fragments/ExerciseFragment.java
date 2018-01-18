@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.activities.ExerciseDetailActivity;
 import de.deftone.bitsandpizzas.data.BackExercise;
@@ -22,11 +20,11 @@ import de.deftone.bitsandpizzas.utils.CaptionedImagesAdapter;
 
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_ID;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_TYPE;
-import static de.deftone.bitsandpizzas.activities.MainActivity.BACK_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.BELLY_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.CREATED_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.LEG_EXERCISES;
-import static de.deftone.bitsandpizzas.activities.MainActivity.STRETCHING_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BACK_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BELLY_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_CREATED_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_STRETCHING_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
@@ -44,7 +42,7 @@ public class ExerciseFragment extends Fragment {
 
         if (bundle != null) {
             switch (bundle.getString(TYPE)) {
-                case LEG_EXERCISES:
+                case TYPE_LEG_EXERCISES:
                     exerciseNames = new String[LegExercise.LEG_EXERCISES.length];
                     for (int i = 0; i < exerciseNames.length; i++) {
                         exerciseNames[i] = LegExercise.LEG_EXERCISES[i].getName();
@@ -54,7 +52,7 @@ public class ExerciseFragment extends Fragment {
                         exerciseImages[i] = LegExercise.LEG_EXERCISES[i].getImageResourceId();
                     }
                     break;
-                case BACK_EXERCISES:
+                case TYPE_BACK_EXERCISES:
                     exerciseNames = new String[BackExercise.BACK_EXERCISES.length];
                     for (int i = 0; i < exerciseNames.length; i++) {
                         exerciseNames[i] = BackExercise.BACK_EXERCISES[i].getName();
@@ -64,7 +62,7 @@ public class ExerciseFragment extends Fragment {
                         exerciseImages[i] = BackExercise.BACK_EXERCISES[i].getImageResourceId();
                     }
                     break;
-                case BELLY_EXERCISES:
+                case TYPE_BELLY_EXERCISES:
                     exerciseNames = new String[BellyExercise.BELLY_EXERCISES.length];
                     for (int i = 0; i < exerciseNames.length; i++) {
                         exerciseNames[i] = BellyExercise.BELLY_EXERCISES[i].getName();
@@ -74,7 +72,7 @@ public class ExerciseFragment extends Fragment {
                         exerciseImages[i] = BellyExercise.BELLY_EXERCISES[i].getImageResourceId();
                     }
                     break;
-                case STRETCHING_EXERCISES:
+                case TYPE_STRETCHING_EXERCISES:
                     exerciseNames = new String[StretchingExercise.STRETCHING_EXERCISES.length];
                     for (int i = 0; i < exerciseNames.length; i++) {
                         exerciseNames[i] = StretchingExercise.STRETCHING_EXERCISES[i].getName();
@@ -84,7 +82,7 @@ public class ExerciseFragment extends Fragment {
                         exerciseImages[i] = StretchingExercise.STRETCHING_EXERCISES[i].getImageResourceId();
                     }
                     break;
-                case CREATED_EXERCISES:
+                case TYPE_CREATED_EXERCISES:
                     int max = CREATED_EXERCISES_LIST.size();
                     exerciseNames = new String[max];
                     for (int i = 0; i < max; i++) {
