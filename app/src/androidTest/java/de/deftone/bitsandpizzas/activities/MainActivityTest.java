@@ -1,6 +1,7 @@
 package de.deftone.bitsandpizzas.activities;
 
 import android.support.test.espresso.contrib.DrawerActions;
+import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -11,12 +12,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Locale;
-
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.data.BellyExercise;
 import de.deftone.bitsandpizzas.data.LegExercise;
-import de.deftone.bitsandpizzas.data.StretchingExercise;
 import de.deftone.bitsandpizzas.testUtils.MatchUtils;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -33,8 +31,6 @@ import static org.hamcrest.Matchers.not;
 /**
  * Created by deftone on 26.12.17.
  */
-
-//todo: im drawer die statistiken antippen, punkte loeschen (alert dialog)
 
 @RunWith(AndroidJUnit4.class) //diese zeile sollte bei allen UI tests stehen
 public class MainActivityTest {
@@ -157,5 +153,36 @@ public class MainActivityTest {
             onView(allOf(withId(R.id.exercise_recycler), isDisplayed()))
                     .check(matches(MatchUtils.eigenerMatcher(position, hasDescendant(withText(title)))));
         }
+    }
+
+    @Test
+    public void openStatistic(){
+        //open nav drawer
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+
+        //click on drawer item
+        onView(withId(R.id.nav_view))
+                .perform(NavigationViewActions.navigateTo(R.id.statistic_4weeks));
+
+        // Check that statistic Activity was opened by checking the graph title is correct
+        onView(withId(R.id.graph_title)).check(matches(withText(R.string.graph_points_4)));
+    }
+
+    @Test
+    public void deletePoints(){
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+
+        //delete all points
+        onView(withId(R.id.nav_view))
+                .perform(NavigationViewActions.navigateTo(R.id.delete_all_points));
+
+        //check if alert dialog pops up
+        onView(withText(R.string.delete_points_title)).check(matches(isDisplayed()));
+
+        //click on "nein"
+        onView(withText(android.R.string.no)).perform(click());
+
+        //close drawer
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
     }
 }
