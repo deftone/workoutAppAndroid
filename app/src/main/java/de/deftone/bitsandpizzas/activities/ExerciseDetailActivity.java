@@ -247,7 +247,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
             int newSumPoints = sumPoints + newPoints;
             sharedPreferencesPointsEditor.putInt(currentTimeInMilliesStringKey, newSumPoints).apply();
 
-            String toastText = "Du hast heute bisher " + newSumPoints + " Punkte erreicht!";
+            String toastText = getString(R.string.points_today_1) + newSumPoints + getString(R.string.points_today_2);
             Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
             toast.show();
             buttonClicked = true;
