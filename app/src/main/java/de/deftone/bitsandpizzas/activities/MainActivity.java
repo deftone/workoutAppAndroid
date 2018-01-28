@@ -28,8 +28,8 @@ import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
 
-import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_DATES;
-import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.ALL;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.EXTRA;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.FOUR_WEEKS;

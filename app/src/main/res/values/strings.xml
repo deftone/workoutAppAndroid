@@ -58,6 +58,6 @@
     <string name="reset">reset</string>
     <string name="x_axis">Datum</string>
     <string name="y_axis">Punkte</string>
-    <string name="points_today_1">Du hast heute bisher</string>
-    <string name="points_today_2">Punkte erreicht!</string>
+    <string name="points_today_1">Du hast heute bisher\ </string>
+    <string name="points_today_2">\ Punkte erreicht!</string>
 </resources>

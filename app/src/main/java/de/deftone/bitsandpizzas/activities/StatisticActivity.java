@@ -27,13 +27,12 @@ import java.util.Set;
 
 import de.deftone.bitsandpizzas.R;
 
-import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_DATES;
-import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_DATES_KEY;
-import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES_KEY;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
 
 /**
  * Created by deftone on 12.01.18.
- * <p>
  */
 
 public class StatisticActivity extends AppCompatActivity {

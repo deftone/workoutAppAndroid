@@ -2,7 +2,6 @@ package de.deftone.bitsandpizzas.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -20,13 +19,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 import de.deftone.bitsandpizzas.R;
+import de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints;
 import de.deftone.bitsandpizzas.data.BackExercise;
 import de.deftone.bitsandpizzas.data.BellyExercise;
 import de.deftone.bitsandpizzas.data.Icons;
@@ -41,15 +35,16 @@ import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_LEG_EXERCISE
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_STRETCHING_EXERCISES;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
+/**
+ * Created by deftone on 28.01.18.
+ * this class contains the android/visual part of ExerciseDetails
+ * the different methods are tested by espresso tests
+ */
+
 public class ExerciseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_EXERCISE_ID = "exercise_id";
     public static final String EXTRA_EXERCISE_TYPE = "exercise_type";
-    //eine datei, die als value ein String Set der jeweiligen daten enthaelt (YYYY-MM-DD, YYYY-MM-DD, ..)
-    public static final String PREFS_DATES = "exercises_date";
-    public static final String PREFS_DATES_KEY = "exercises_date_key";
-    //eine datei, die fuer den jeweiligen tag als value die addierten punkte enthaelt, key ist der Tag ("YYYY-MM-DD")
-    public static final String PREFS_POINTS = "exercises_date_points";
     ListView listView;
     String title = "";
     int image = 0;
@@ -63,14 +58,8 @@ public class ExerciseDetailActivity extends AppCompatActivity {
     Button weightAlternButton;
     Button weightAlternButton2;
     Button weightAlternButton3;
-    SharedPreferences sharedPreferencesDates;
-    SharedPreferences sharedPreferencesPoints;
-    SharedPreferences.Editor sharedPreferencesDatesEditor;
-    SharedPreferences.Editor sharedPreferencesPointsEditor;
     boolean buttonClicked = false;
-    static String currentTimeInMilliesStringKey;
     static Context context;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +81,9 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         setWeightButtons(weight);
         buttonClicked = false;
         setFab();
-
-        //get shared prefs
-        initSharedPreferences();
     }
 
+    //todo: refactoren mit Exercise object, wenn fertig
     private void getDescriptionDetails(int id, String type) {
         switch (type) {
             case TYPE_LEG_EXERCISES:
@@ -209,89 +196,48 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         }
     }
 
+    //these methods must be public otherwise onClick won't work
     public void onClickPoints(View view) {
-        addPoints(weightButton, weight[0]);
+        handleOnClick(weight[0], weightButton);
     }
 
     public void onClickPoints2(View view) {
-        addPoints(weightButton2, 2 * weight[0]);
+        handleOnClick(2* weight[0], weightButton2);
     }
 
     public void onClickPoints3(View view) {
-        addPoints(weightButton3, 3 * weight[0]);
+        handleOnClick(3* weight[0], weightButton3);
     }
 
     public void onClickPointsAltern(View view) {
-        addPoints(weightAlternButton, weight[1]);
+        handleOnClick( weight[1], weightAlternButton);
     }
 
     public void onClickPointsAltern2(View view) {
-        addPoints(weightAlternButton2, 2 * weight[1]);
+        handleOnClick( 2* weight[1], weightAlternButton2);
     }
 
     public void onClickPointsAltern3(View view) {
-        addPoints(weightAlternButton3, 3 * weight[1]);
+        handleOnClick(3 * weight[1], weightAlternButton3);
     }
 
-    private void addPoints(Button button, int newPoints) {
+    private void handleOnClick(int buttonPoints, Button button){
         if (!buttonClicked) {
-            //first, add date to shared prefs
-            addDate();
-
-            //change button color
-            //leider muss man das style doppeln und als Drawable benuzen...
-            button.setBackground(getResources().getDrawable(R.drawable.style_shape_rounded_corners_orange));
-            //now add points
-            //wenn ein neuer tag ist, sollte sumPoints der defaultwert 0 sein...
-            int sumPoints = sharedPreferencesPoints.getInt(currentTimeInMilliesStringKey, 0);
-            int newSumPoints = sumPoints + newPoints;
-            sharedPreferencesPointsEditor.putInt(currentTimeInMilliesStringKey, newSumPoints).apply();
-
-            String toastText = getString(R.string.points_today_1) + newSumPoints + getString(R.string.points_today_2);
-            Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
-            toast.show();
+            int points = ExerciseDetailAddPoints.addExercisePointsToDailySum(context, buttonPoints);
+            changeButtonAndShowToast(button, points);
             buttonClicked = true;
         }
     }
 
-    private void addDate() {
-        Date date = new Date();
-        long currentTimeInMillies = date.getTime();
-        String currentTimeInMilliesString = String.valueOf(currentTimeInMillies);
-
-        Set<String> default_set = new HashSet<>();
-        Set<String> datesFromPref = sharedPreferencesDates.getStringSet(PREFS_DATES_KEY, default_set);
-        //this is needed when the point button is clicked for the first time
-        if (datesFromPref.size() == 0) {
-            currentTimeInMilliesStringKey = currentTimeInMilliesString;
-            datesFromPref.add(currentTimeInMilliesStringKey);
-            sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
-            return;
-        }
-        int fourteenHoursInMillies = 50400000;// 14h*60m*60s*1000
-        //check if latest/newest dateitem is > 14h ago
-        ArrayList<Long> datesFromPrefLong = new ArrayList<>();
-        for (String dateString : datesFromPref) {
-            datesFromPrefLong.add(Long.valueOf(dateString));
-        }
-        long latestDate = Collections.max(datesFromPrefLong);
-        long diff = currentTimeInMillies - latestDate;
-        //modifiedTimeFromPrefs is older than the new/current time
-        if (diff > fourteenHoursInMillies) {
-            currentTimeInMilliesStringKey = currentTimeInMilliesString;
-            datesFromPref.add(currentTimeInMilliesStringKey);
-            sharedPreferencesDatesEditor.clear().putStringSet(PREFS_DATES_KEY, datesFromPref).apply();
-        }
+    private void changeButtonAndShowToast(Button button, int points) {
+        button.setBackground(getResources().getDrawable(R.drawable.style_shape_rounded_corners_orange));
+        String toastText = getString(R.string.points_today_1)
+                + points + getString(R.string.points_today_2);
+        Toast toast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
-    private void initSharedPreferences() {
-        sharedPreferencesPoints = getSharedPreferences(PREFS_POINTS, 0);
-        sharedPreferencesPointsEditor = sharedPreferencesPoints.edit();
-        sharedPreferencesDates = getSharedPreferences(PREFS_DATES, 0);
-        sharedPreferencesDatesEditor = sharedPreferencesDates.edit();
-    }
-
-    public void setFab() {
+    private void setFab() {
         FloatingActionButton fab = findViewById(R.id.fab);
         if (seconds > 0) {
             fab.setVisibility(View.VISIBLE);
