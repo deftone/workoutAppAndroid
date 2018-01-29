@@ -53,6 +53,7 @@ public class ExerciseDetailAddPoints {
         String currentTimeInMilliesString = String.valueOf(currentTimeInMillies);
 
         Set<String> default_set = new HashSet<>();
+        //todo: die folgende zeile sollte weggemocked werden und die testdaten sollten ausgegeben werden?
         Set<String> datesFromPref = sharedPreferencesDates.getStringSet(PREFS_DATES_KEY, default_set);
         //this is needed when the point button is clicked for the first time
         if (datesFromPref.size() == 0) {
