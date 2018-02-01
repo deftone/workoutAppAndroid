@@ -1,6 +1,5 @@
 package de.deftone.bitsandpizzas.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -59,14 +58,16 @@ public class ExerciseDetailActivity extends AppCompatActivity {
     Button weightAlternButton2;
     Button weightAlternButton3;
     boolean buttonClicked = false;
-    static Context context;
+    ExerciseDetailAddPoints exerciseDetailAddPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_detail);
 
-        context = this;
+        if (exerciseDetailAddPoints == null){
+            exerciseDetailAddPoints = new ExerciseDetailAddPoints(this);
+        }
 
         //get details of the exercise
         int id = getIntent().getExtras().getInt(EXTRA_EXERCISE_ID);
@@ -223,7 +224,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
     private void handleOnClick(int buttonPoints, Button button){
         if (!buttonClicked) {
-            int points = ExerciseDetailAddPoints.addExercisePointsToDailySum(context, buttonPoints);
+            int points = exerciseDetailAddPoints.addExercisePointsToDailySum(buttonPoints);
             changeButtonAndShowToast(button, points);
             buttonClicked = true;
         }
@@ -233,7 +234,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         button.setBackground(getResources().getDrawable(R.drawable.style_shape_rounded_corners_orange));
         String toastText = getString(R.string.points_today_1)
                 + points + getString(R.string.points_today_2);
-        Toast toast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
         toast.show();
     }
 
