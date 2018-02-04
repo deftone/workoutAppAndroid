@@ -10,7 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES_KEY;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anySet;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -84,7 +87,7 @@ public class ExerciseDetailAddPointsTest {
         assertEquals("1515106800000", key);
     }
 
-    /* mocked unit tests for updateKeyDate (not much logic, not that necessarry, just for fun)*/
+    /** mocked unit tests for updateKeyDate (not much logic, not that necessarry, just for fun) **/
     @Test
     public void noDatesInSharedPrefsMock(){
         //shared prefs dates has no content yet
@@ -118,15 +121,26 @@ public class ExerciseDetailAddPointsTest {
 
         sut.updateKeyDate();
 
-        verify(sharedPreferencesDatesEditor, times(0)).putStringSet(eq(PREFS_DATES_KEY), anySet());
+        verify(sharedPreferencesDatesEditor, times(0))
+                .putStringSet(eq(PREFS_DATES_KEY), anySet());
     }
 
     @Test
-    public void xxx(){
+    public void addPoints(){
         Set<String> sharedPrefsTestData = new HashSet<>();
         sharedPrefsTestData.add("1514761200000"); //1.1.2018
         sharedPrefsTestData.add("1515106800000"); //5.1.2018
-        when(this.sharedPreferencesDates.getStringSet(eq(PREFS_DATES_KEY), anySet())).thenReturn(sharedPrefsTestData);
-//todo: hier weiter fuer die "hauptmethode"
+        when(sharedPreferencesDates.getStringSet(eq(PREFS_DATES_KEY), anySet())).thenReturn(sharedPrefsTestData);
+
+        int oldSum = 10;
+        when(sharedPreferencesPoints.getInt(anyString(), anyInt())).thenReturn(oldSum);
+
+        int sharedPrefsTestPoints = oldSum;
+        when(sharedPreferencesPointsEditor.putInt(anyString(), anyInt())).thenReturn(sharedPreferencesPointsEditor);
+
+        int newPoints = 5;
+        int newSum = sut.addExercisePointsToDailySum(newPoints);
+
+        assertEquals(oldSum+newPoints, newSum);
     }
 }

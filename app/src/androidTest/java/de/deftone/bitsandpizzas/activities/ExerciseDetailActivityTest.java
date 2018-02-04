@@ -50,13 +50,44 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class ExerciseDetailActivityTest {
 
-    private ExerciseDetailActivity exerciseDetailActivity;
-
     //damit wir in jedem test einen anderen intent aufrufen koennen, kommt dieser NICHT in die testrule
     @Rule
     public ActivityTestRule<ExerciseDetailActivity> mActivityRule =
             new ActivityTestRule<>(ExerciseDetailActivity.class, true, false);
 
+    @Test
+    public void clickButtonCheckPoints() throws InterruptedException {
+//        //so koennte man auf die shared preferences zugreifen, wenn man sie vorm (!) intent starten aufruft
+//        //aber nur die default, nicht die speziellen mit namen...
+//        Context context = getInstrumentation().getTargetContext();
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        int position = 0;
+        startIntent(position, TYPE_LEG_EXERCISES);
+
+        //reset shared preferences -das hier so erst, nachdem der intent gestartet wurde
+        SharedPreferences sharedPreferencesDates = mActivityRule.getActivity().getSharedPreferences(PREFS_DATES, 0);
+        SharedPreferences.Editor sharedPreferencesDatesEditor = sharedPreferencesDates.edit();
+        sharedPreferencesDatesEditor.clear().apply();
+
+        SharedPreferences sharedPreferencesPoints = mActivityRule.getActivity().getSharedPreferences(PREFS_POINTS, 0);
+        SharedPreferences.Editor sharedPreferencesPointsEditor = sharedPreferencesPoints.edit();
+        sharedPreferencesPointsEditor.clear().apply();
+
+
+        //klicken funktioniert nicht wenn der button nicht zu sehen ist
+        //auf scrollview funktioniert onView(withText("xx")).perform(ViewActions.scrollTo())
+        //-aber nicht wenn xx in einer nested scrollview im coordin. layout ist, hier swipen (das funktioniert auch bei recyclerview)
+        onView(withId(R.id.detail_scrollview)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.weight_button)).perform(click());
+        //check toast is visible
+        int[] points = LEG_EXERCISES[position].getWeight();
+        String toastText = mActivityRule.getActivity().getString(R.string.points_today_1) + points[0]
+                + mActivityRule.getActivity().getString(R.string.points_today_2);
+        onView(withText(toastText))
+                .inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView()))))
+                .check(matches(isDisplayed()));
+    }
 
     @Test
     public void checkLayout() {
@@ -132,41 +163,6 @@ public class ExerciseDetailActivityTest {
         int seconds = STRETCHING_EXERCISES[position].getSeconds();
         String time = String.format(Locale.getDefault(), "%02d:%02d", 0, seconds);
         onView(withId(R.id.time_view)).check(matches(withText(time)));
-    }
-
-
-    @Test
-    public void clickButtonCheckPoints() throws InterruptedException {
-//        //so koennte man auf die shared preferences zugreifen, wenn man sie vorm (!) intent starten aufruft
-//        //aber nur die default, nicht die speziellen mit namen...
-//        Context context = getInstrumentation().getTargetContext();
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        int position = 0;
-        startIntent(position, TYPE_LEG_EXERCISES);
-
-        //reset shared preferences -das hier so erst, nachdem der intent gestartet wurde
-        SharedPreferences sharedPreferencesDates = mActivityRule.getActivity().getSharedPreferences(PREFS_DATES, 0);
-        SharedPreferences.Editor sharedPreferencesDatesEditor = sharedPreferencesDates.edit();
-        sharedPreferencesDatesEditor.clear().apply();
-
-        SharedPreferences sharedPreferencesPoints = mActivityRule.getActivity().getSharedPreferences(PREFS_POINTS, 0);
-        SharedPreferences.Editor sharedPreferencesPointsEditor = sharedPreferencesPoints.edit();
-        sharedPreferencesPointsEditor.clear().apply();
-
-
-        //klicken funktioniert nicht wenn der button nicht zu sehen ist
-        //auf scrollview funktioniert onView(withText("xx")).perform(ViewActions.scrollTo())
-        //-aber nicht wenn xx in einer nested scrollview im coordin. layout ist, hier swipen (das funktioniert auch bei recyclerview)
-        onView(withId(R.id.detail_scrollview)).perform(ViewActions.swipeUp());
-        onView(withId(R.id.weight_button)).perform(click());
-        //check toast is visible
-        int[] points = LEG_EXERCISES[position].getWeight();
-        String toastText = mActivityRule.getActivity().getString(R.string.points_today_1) + points[0]
-                + mActivityRule.getActivity().getString(R.string.points_today_2);
-        onView(withText(toastText))
-                .inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
     }
 
     private void startIntent(int position, String Type) {

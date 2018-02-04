@@ -47,7 +47,6 @@ public class ExerciseDetailAddPoints {
         //now add points
         //wenn ein neuer tag ist, sollte sumPoints der defaultwert 0 sein...
         int sumPoints = sharedPreferencesPoints.getInt(currentTimeInMilliesStringKey, 0);
-        //pointsFromPrefs.getInt(String.valueOf(date), 0);
         int newSumPoints = sumPoints + newPoints;
         sharedPreferencesPoints.edit().putInt(currentTimeInMilliesStringKey, newSumPoints).apply();
         return newSumPoints;
