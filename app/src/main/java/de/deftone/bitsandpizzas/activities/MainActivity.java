@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -18,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -28,16 +30,18 @@ import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
 
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES;
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_VIEWPAGER;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.ALL;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.EXTRA;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.FOUR_WEEKS;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.LAST_TEN;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.TWELVE_WEEKS;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES;
+import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String SAVED_LAYOUT_MANAGER = "classname.recycler.layout";//????
     public final static String TYPE = "type";
     public final static String TYPE_LEG_EXERCISES = "leg exercieses";
     public final static String TYPE_BELLY_EXERCISES = "belly exercieses";
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final static String TYPE_CREATED_EXERCISES = "created exercieses";
 
     private ShareActionProvider shareActionProvider;
+    private Parcelable layoutManagerSavedState;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        recyclerView = findViewById(R.id.exercise_recycler);
 
         //Attach the SectionsPagerAdapter to the Viewpager
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -64,8 +72,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        //set correct tab
+        if (getIntent().getExtras() != null) {
+            String viewPagerTitle = getIntent().getExtras().getString(EXTRA_VIEWPAGER);
+            int viewPagerItem;
+            switch (viewPagerTitle) {
+                case TYPE_BACK_EXERCISES:
+                    viewPagerItem = 3;
+                    break;
+                case TYPE_BELLY_EXERCISES:
+                    viewPagerItem = 2;
+                    break;
+                case TYPE_LEG_EXERCISES:
+                    viewPagerItem = 1;
+                    break;
+                case TYPE_STRETCHING_EXERCISES:
+                    viewPagerItem = 4;
+                    break;
+                default:
+                    viewPagerItem = 0;
+
+            }
+            viewPager.setCurrentItem(viewPagerItem);
+        }
         //add burger icon for drawer to toolbar
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this,
                 drawer,
@@ -268,5 +299,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sharedPreferencesPointsEditor.clear().apply();
     }
 
+//    @Override
+//    protected Parcelable onSaveInstanceState() {
+//        Bundle bundle = new Bundle();
+//
+//        bundle.putParcelable(SAVED_LAYOUT_MANAGER, recyclerView.getLayoutManager().onSaveInstanceState());
+//        return bundle;
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Parcelable state) {
+//        if (state instanceof Bundle) {
+//            layoutManagerSavedState = ((Bundle) state).getParcelable(SAVED_LAYOUT_MANAGER);
+//        }
+//        super.onRestoreInstanceState(state);
+//    }
+//
+//    private void restoreLayoutManagerPosition() {
+//        if (layoutManagerSavedState != null) {
+//            recyclerView.getLayoutManager().onRestoreInstanceState(layoutManagerSavedState);
+//        }
+//    }
 
 }

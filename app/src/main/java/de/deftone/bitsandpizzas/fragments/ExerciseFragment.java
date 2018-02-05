@@ -3,6 +3,7 @@ package de.deftone.bitsandpizzas.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,10 @@ import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
 public class ExerciseFragment extends Fragment {
+
+    private static final String SAVED_LAYOUT_MANAGER = "classname.recycler.layout";//????
+    private RecyclerView recyclerView;
+    private Parcelable layoutManagerSavedState;
 
     public ExerciseFragment() {
     }
@@ -96,7 +101,7 @@ public class ExerciseFragment extends Fragment {
             }
         }
 
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view_exercises, container, false);
+        recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view_exercises, container, false);
 
         CaptionedImagesAdapter adapter = new CaptionedImagesAdapter(exerciseNames, exerciseImages);
         recyclerView.setAdapter(adapter);
@@ -114,4 +119,31 @@ public class ExerciseFragment extends Fragment {
         });
         return recyclerView;
     }
+
+//    //todo: it would be great if the correct position would be shown too, i.e. scrolled where it was before
+//    //http://panavtec.me/retain-restore-recycler-view-scroll-position
+//    //oder das hier:
+//    //https://stackoverflow.com/questions/27816217/how-to-save-recyclerviews-scroll-position-using-recyclerview-state
+//    //ich glaube das muss alles in das fragment rein.... oder doch in die activity? keine ahnung, funktioniert in beiden nicht
+//    @Override
+//    protected Parcelable onSaveInstanceState() {
+//        Bundle bundle = new Bundle();
+//
+//        bundle.putParcelable(SAVED_LAYOUT_MANAGER, recyclerView.getLayoutManager().onSaveInstanceState());
+//        return bundle;
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Parcelable state) {
+//        if (state instanceof Bundle) {
+//            layoutManagerSavedState = ((Bundle) state).getParcelable(SAVED_LAYOUT_MANAGER);
+//        }
+//        super.onRestoreInstanceState(state);
+//    }
+//
+//    private void restoreLayoutManagerPosition() {
+//        if (layoutManagerSavedState != null) {
+//            recyclerView.getLayoutManager().onRestoreInstanceState(layoutManagerSavedState);
+//        }
+//    }
 }

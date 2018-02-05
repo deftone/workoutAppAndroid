@@ -1,11 +1,14 @@
 package de.deftone.bitsandpizzas.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -44,6 +47,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_EXERCISE_ID = "exercise_id";
     public static final String EXTRA_EXERCISE_TYPE = "exercise_type";
+    public static final String EXTRA_VIEWPAGER = "viewpager";
     ListView listView;
     String title = "";
     int image = 0;
@@ -59,20 +63,22 @@ public class ExerciseDetailActivity extends AppCompatActivity {
     Button weightAlternButton3;
     boolean buttonClicked = false;
     ExerciseDetailAddPoints exerciseDetailAddPoints;
+    Context context = this;
+    private String exerciseType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_detail);
 
-        if (exerciseDetailAddPoints == null){
+        if (exerciseDetailAddPoints == null) {
             exerciseDetailAddPoints = new ExerciseDetailAddPoints(this);
         }
 
         //get details of the exercise
         int id = getIntent().getExtras().getInt(EXTRA_EXERCISE_ID);
-        String type = getIntent().getExtras().getString(EXTRA_EXERCISE_TYPE);
-        getDescriptionDetails(id, type);
+        exerciseType = getIntent().getExtras().getString(EXTRA_EXERCISE_TYPE);
+        getDescriptionDetails(id, exerciseType);
 
         //scroll to top and adjust/set elements on activity layout
         NestedScrollView scrollView = findViewById(R.id.detail_scrollview);
@@ -133,14 +139,33 @@ public class ExerciseDetailActivity extends AppCompatActivity {
     private void setToobar() {
         Toolbar toolbar = findViewById(R.id.toolbar_detail);
         toolbar.setTitle(title);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        //todo: das hier soll sich so verhalten wie der back button von android, erst dann auf true setzen
-        actionBar.setDisplayHomeAsUpEnabled(false);
-//in case i will ever need this:
+        //in case i will ever need this:
 //        Now If you want to use CollapsingToolbarLayout and Toolbar together then you have to use setTitle() of CollapsingToolbarLayout
 //        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.confirm_order_mail_layout);
 //        collapsingToolbarLayout.setTitle("My Title");
+
+        //show up arrow
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, toolbar,
+                R.string.nav_open_drawer,
+                R.string.nav_close_drawer);
+        //show up arrow (setting it first false and then true is "best practise"...)
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        toggle.setDrawerIndicatorEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //and implement up arrow functionality: set correct tab of viewpager
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra(EXTRA_VIEWPAGER, exerciseType);
+                startActivity(intent);
+            }
+        });
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void setImageAndDescription() {
@@ -203,26 +228,26 @@ public class ExerciseDetailActivity extends AppCompatActivity {
     }
 
     public void onClickPoints2(View view) {
-        handleOnClick(2* weight[0], weightButton2);
+        handleOnClick(2 * weight[0], weightButton2);
     }
 
     public void onClickPoints3(View view) {
-        handleOnClick(3* weight[0], weightButton3);
+        handleOnClick(3 * weight[0], weightButton3);
     }
 
     public void onClickPointsAltern(View view) {
-        handleOnClick( weight[1], weightAlternButton);
+        handleOnClick(weight[1], weightAlternButton);
     }
 
     public void onClickPointsAltern2(View view) {
-        handleOnClick( 2* weight[1], weightAlternButton2);
+        handleOnClick(2 * weight[1], weightAlternButton2);
     }
 
     public void onClickPointsAltern3(View view) {
         handleOnClick(3 * weight[1], weightAlternButton3);
     }
 
-    private void handleOnClick(int buttonPoints, Button button){
+    private void handleOnClick(int buttonPoints, Button button) {
         if (!buttonClicked) {
             int points = exerciseDetailAddPoints.addExercisePointsToDailySum(buttonPoints);
             changeButtonAndShowToast(button, points);
