@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final static String TYPE_LEG_EXERCISES = "leg exercieses";
     public final static String TYPE_BELLY_EXERCISES = "belly exercieses";
     public final static String TYPE_BACK_EXERCISES = "back exercieses";
+    public final static String TYPE_COMBI_EXERCISES = "combi_exercises";
     public final static String TYPE_STRETCHING_EXERCISES = "stretching exercieses";
     public final static String TYPE_CREATED_EXERCISES = "created exercieses";
 
@@ -71,23 +72,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Attach the ViewPager to the TabLayout
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(R.drawable.arm_muscle);
+        }
 
         //set correct tab
         if (getIntent().getExtras() != null) {
             String viewPagerTitle = getIntent().getExtras().getString(EXTRA_VIEWPAGER);
             int viewPagerItem;
             switch (viewPagerTitle) {
-                case TYPE_BACK_EXERCISES:
-                    viewPagerItem = 3;
+                case TYPE_LEG_EXERCISES:
+                    viewPagerItem = 1;
                     break;
                 case TYPE_BELLY_EXERCISES:
                     viewPagerItem = 2;
                     break;
-                case TYPE_LEG_EXERCISES:
-                    viewPagerItem = 1;
+                case TYPE_BACK_EXERCISES:
+                    viewPagerItem = 3;
+                    break;
+                case TYPE_COMBI_EXERCISES:
+                    viewPagerItem = 4;
                     break;
                 case TYPE_STRETCHING_EXERCISES:
-                    viewPagerItem = 4;
+                    viewPagerItem = 5;
                     break;
                 default:
                     viewPagerItem = 0;
@@ -161,6 +168,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     backExercisesFragment.setArguments(bundle);
                     return backExercisesFragment;
                 case 4:
+                    ExerciseFragment combiExerciseFragment = new ExerciseFragment();
+                    bundle.putString(TYPE, TYPE_COMBI_EXERCISES);
+                    combiExerciseFragment.setArguments(bundle);
+                    return combiExerciseFragment;
+                case 5:
                     ExerciseFragment stretchingFragment = new ExerciseFragment();
                     bundle.putString(TYPE, TYPE_STRETCHING_EXERCISES);
                     stretchingFragment.setArguments(bundle);
@@ -171,25 +183,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getResources().getText(R.string.home_tab);
-                case 1:
-                    return getResources().getText(R.string.beine_tab);
-                case 2:
-                    return getResources().getText(R.string.bauch_tab);
-                case 3:
-                    return getResources().getText(R.string.ruecken_tab);
-                case 4:
-                    return getResources().getText(R.string.stretching_tab);
-            }
-            return null;
-        }
+
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            Drawable myDrawable;
+//            switch (position) {
+//                case 0:
+//                    return getResources().getText(R.string.home_tab);
+//                case 1:
+////                    myDrawable = getResources().getDrawable(R.mipmap.ic_launcher);
+//                    return getResources().getText(R.string.beine_tab);
+//                case 2:
+//                    return getResources().getText(R.string.bauch_tab);
+//                case 3:
+//                    return getResources().getText(R.string.ruecken_tab);
+//                case 4:
+//                    return getString(R.string.combi_tab);
+//                case 5:
+//                    return getResources().getText(R.string.stretching_tab);
+//            }
+//            return null;
+//        }
     }
 
     //navigation drawer

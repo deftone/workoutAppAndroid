@@ -11,18 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.activities.ExerciseDetailActivity;
-import de.deftone.bitsandpizzas.data.BackExercise;
-import de.deftone.bitsandpizzas.data.BellyExercise;
-import de.deftone.bitsandpizzas.data.LegExercise;
-import de.deftone.bitsandpizzas.data.StretchingExercise;
+import de.deftone.bitsandpizzas.data.CreatedExercise;
+import de.deftone.bitsandpizzas.data.Exercise;
+import de.deftone.bitsandpizzas.data.ExerciseTypes;
 import de.deftone.bitsandpizzas.utils.CaptionedImagesAdapter;
 
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_ID;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_TYPE;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BACK_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BELLY_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_COMBI_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_LEG_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_STRETCHING_EXERCISES;
@@ -42,60 +45,55 @@ public class ExerciseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final Bundle bundle = this.getArguments();
-        String[] exerciseNames = {""};
-        int[] exerciseImages = {0};
+        List<String> exerciseNames = new ArrayList<>();
+        List<Integer> exerciseImages = new ArrayList<>();
 
         if (bundle != null) {
             switch (bundle.getString(TYPE)) {
                 case TYPE_LEG_EXERCISES:
-                    exerciseNames = new String[LegExercise.LEG_EXERCISES.length];
-                    for (int i = 0; i < exerciseNames.length; i++) {
-                        exerciseNames[i] = LegExercise.LEG_EXERCISES[i].getName();
-                    }
-                    exerciseImages = new int[LegExercise.LEG_EXERCISES.length];
-                    for (int i = 0; i < exerciseImages.length; i++) {
-                        exerciseImages[i] = LegExercise.LEG_EXERCISES[i].getImageResourceId();
+                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
+                        if (exercise.getType().equals(ExerciseTypes.LEG)) {
+                            exerciseNames.add(exercise.getName());
+                            exerciseImages.add(exercise.getImageResourceId());
+                        }
                     }
                     break;
                 case TYPE_BACK_EXERCISES:
-                    exerciseNames = new String[BackExercise.BACK_EXERCISES.length];
-                    for (int i = 0; i < exerciseNames.length; i++) {
-                        exerciseNames[i] = BackExercise.BACK_EXERCISES[i].getName();
-                    }
-                    exerciseImages = new int[BackExercise.BACK_EXERCISES.length];
-                    for (int i = 0; i < exerciseImages.length; i++) {
-                        exerciseImages[i] = BackExercise.BACK_EXERCISES[i].getImageResourceId();
+                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
+                        if (exercise.getType().equals(ExerciseTypes.BACK)) {
+                            exerciseNames.add(exercise.getName());
+                            exerciseImages.add(exercise.getImageResourceId());
+                        }
                     }
                     break;
                 case TYPE_BELLY_EXERCISES:
-                    exerciseNames = new String[BellyExercise.BELLY_EXERCISES.length];
-                    for (int i = 0; i < exerciseNames.length; i++) {
-                        exerciseNames[i] = BellyExercise.BELLY_EXERCISES[i].getName();
+                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
+                        if (exercise.getType().equals(ExerciseTypes.BELLY)) {
+                            exerciseNames.add(exercise.getName());
+                            exerciseImages.add(exercise.getImageResourceId());
+                        }
                     }
-                    exerciseImages = new int[BellyExercise.BELLY_EXERCISES.length];
-                    for (int i = 0; i < exerciseImages.length; i++) {
-                        exerciseImages[i] = BellyExercise.BELLY_EXERCISES[i].getImageResourceId();
+                    break;
+                case TYPE_COMBI_EXERCISES:
+                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
+                        if (exercise.getType().equals(ExerciseTypes.COMBI)) {
+                            exerciseNames.add(exercise.getName());
+                            exerciseImages.add(exercise.getImageResourceId());
+                        }
                     }
                     break;
                 case TYPE_STRETCHING_EXERCISES:
-                    exerciseNames = new String[StretchingExercise.STRETCHING_EXERCISES.length];
-                    for (int i = 0; i < exerciseNames.length; i++) {
-                        exerciseNames[i] = StretchingExercise.STRETCHING_EXERCISES[i].getName();
-                    }
-                    exerciseImages = new int[StretchingExercise.STRETCHING_EXERCISES.length];
-                    for (int i = 0; i < exerciseImages.length; i++) {
-                        exerciseImages[i] = StretchingExercise.STRETCHING_EXERCISES[i].getImageResourceId();
+                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
+                        if (exercise.getType().equals(ExerciseTypes.STRETCHING)) {
+                            exerciseNames.add(exercise.getName());
+                            exerciseImages.add(exercise.getImageResourceId());
+                        }
                     }
                     break;
                 case TYPE_CREATED_EXERCISES:
-                    int max = CREATED_EXERCISES_LIST.size();
-                    exerciseNames = new String[max];
-                    for (int i = 0; i < max; i++) {
-                        exerciseNames[i] = CREATED_EXERCISES_LIST.get(i).getName();
-                    }
-                    exerciseImages = new int[max];
-                    for (int i = 0; i < max; i++) {
-                        exerciseImages[i] = CREATED_EXERCISES_LIST.get(i).getImageResourceId();
+                    for (CreatedExercise exercise : CREATED_EXERCISES_LIST) {
+                        exerciseNames.add(exercise.getName());
+                        exerciseImages.add(exercise.getImageResourceId());
                     }
                     break;
             }

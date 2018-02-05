@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import de.deftone.bitsandpizzas.R;
 
 /**
@@ -18,15 +20,15 @@ import de.deftone.bitsandpizzas.R;
 
 public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImagesAdapter.ViewHolder> {
 
-    private String[] captions;
-    private int[] imageIds;
+    private List<String> captions;
+    private List<Integer> imageIds;
     private Listener listener;
 
     public interface Listener{
         void  onClick(int position);
     }
 
-    public CaptionedImagesAdapter(String[] captions, int[] imageIds){
+    public CaptionedImagesAdapter(List<String> captions, List<Integer> imageIds){
         this.captions = captions;
         this.imageIds = imageIds;
     }
@@ -46,11 +48,11 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
     public void onBindViewHolder(ViewHolder holder, final int position) {
         CardView cardView = holder.cardView;
         ImageView imageView = cardView.findViewById(R.id.card_view_image);
-        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(), imageIds[position]);
+        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(), imageIds.get(position));
         imageView.setImageDrawable(drawable);
-        imageView.setContentDescription(captions[position]);
+        imageView.setContentDescription(captions.get(position));
         TextView textView = cardView.findViewById(R.id.card_view_desc);
-        textView.setText(captions[position]);
+        textView.setText(captions.get(position));
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +65,7 @@ public class CaptionedImagesAdapter extends RecyclerView.Adapter<CaptionedImages
 
     @Override
     public int getItemCount() {
-        return captions.length;
+        return captions.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
