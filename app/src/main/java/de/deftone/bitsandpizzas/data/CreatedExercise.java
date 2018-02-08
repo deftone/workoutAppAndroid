@@ -7,18 +7,12 @@ import java.util.List;
  * Created by deftone on 10.11.17.
  */
 
-public class CreatedExercise {
+public class CreatedExercise extends Exercise {
 
     public static final int TYPE_LEG = 0;
     public static final int TYPE_BELLY = 1;
     public static final int TYPE_BACK = 2;
 
-    private String name;
-    private int imageResourceId;
-    private String[] icon;
-    private String[] desc;
-    private int seconds;
-    private int[] weight;
 
     private static int maxLegs;
 
@@ -30,14 +24,10 @@ public class CreatedExercise {
 
     public static List<CreatedExercise> CREATED_EXERCISES_LIST;
 
-    CreatedExercise(String name, String[] icon, String[] desc, int imageResourceId, int seconds, int[] weight) {
-        this.name = name;
-        this.icon = icon;
-        this.desc = desc;
-        this.imageResourceId = imageResourceId;
-        this.seconds = seconds;
-        this.weight = weight;
+    protected CreatedExercise(int id, ExerciseTypes type, String name, String[] icon, String[] desc, int imageResourceId, int seconds, int[] weight) {
+        super(id, type, name, icon, desc, imageResourceId, seconds, weight);
     }
+
 
     public static final void generateRandomExercises(int countLegs, int countBelly, int countBack, boolean mandatory) {
         maxLegs = LegExercise.LEG_EXERCISES.length;
@@ -109,29 +99,5 @@ public class CreatedExercise {
             }
         }
         return randomInts;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getImageResourceId() {
-        return imageResourceId;
-    }
-
-    public String[] getDescription() {
-        return desc;
-    }
-
-    public String[] getIcon() {
-        return icon;
-    }
-
-    public int getSeconds() {
-        return seconds;
-    }
-
-    public int[] getWeight() {
-        return weight;
     }
 }
