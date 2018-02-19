@@ -1,7 +1,5 @@
 package de.deftone.bitsandpizzas.data;
 
-import android.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.List;
 

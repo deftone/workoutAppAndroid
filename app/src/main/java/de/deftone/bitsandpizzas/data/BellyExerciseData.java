@@ -2,11 +2,14 @@ package de.deftone.bitsandpizzas.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 import de.deftone.bitsandpizzas.R;
 
-import static de.deftone.bitsandpizzas.data.Exercise.*;
+import static de.deftone.bitsandpizzas.data.Exercise.ARROW;
+import static de.deftone.bitsandpizzas.data.Exercise.BULLET;
+import static de.deftone.bitsandpizzas.data.Exercise.FINGER_POINT_UP;
+import static de.deftone.bitsandpizzas.data.Exercise.MUSCLE;
+import static de.deftone.bitsandpizzas.data.Exercise.SPARKLES;
 import static de.deftone.bitsandpizzas.data.ExerciseTypes.BELLY;
 
 /**
