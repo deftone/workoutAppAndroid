@@ -25,21 +25,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 import de.deftone.bitsandpizzas.R;
+import de.deftone.bitsandpizzas.data.BackExerciseData;
+import de.deftone.bitsandpizzas.data.BellyExerciseData;
+import de.deftone.bitsandpizzas.data.CombiExerciseData;
 import de.deftone.bitsandpizzas.data.CreatedExercise;
+import de.deftone.bitsandpizzas.data.Exercise;
+import de.deftone.bitsandpizzas.data.LegExerciseData;
+import de.deftone.bitsandpizzas.data.StretchingExerciseData;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
 
-import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_VIEWPAGER;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.ALL;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.EXTRA;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.FOUR_WEEKS;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.LAST_TEN;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.TWELVE_WEEKS;
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES;
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.helper.ExerciseDetailAddPoints.PREFS_DATES;
+import static de.deftone.bitsandpizzas.helper.ExerciseDetailAddPoints.PREFS_POINTS;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final List<Exercise> ALL_LEG_EXERCISES = LegExerciseData.getAllLegExercises();
+    public static final List<Exercise> bellyExercises = BellyExerciseData.getAllBellyExercises();
+    public static final List<Exercise> backExercises = BackExerciseData.getAllBackExercises();
+    public static final List<Exercise> combiExercises = CombiExerciseData.getAllCombiExercises();
+    public static final List<Exercise> stretchingExercises = StretchingExerciseData.getAllStretchinExercises();
 
     private static final String SAVED_LAYOUT_MANAGER = "classname.recycler.layout";//????
     public final static String TYPE = "type";
@@ -59,49 +72,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setUpViewPager();
 
         recyclerView = findViewById(R.id.exercise_recycler);
 
-        //Attach the SectionsPagerAdapter to the Viewpager
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.viewpager);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        //Attach the ViewPager to the TabLayout
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            tabLayout.getTabAt(i).setIcon(R.drawable.arm_muscle);
-        }
-
-        //set correct tab
-        if (getIntent().getExtras() != null) {
-            String viewPagerTitle = getIntent().getExtras().getString(EXTRA_VIEWPAGER);
-            int viewPagerItem;
-            switch (viewPagerTitle) {
-                case TYPE_LEG_EXERCISES:
-                    viewPagerItem = 1;
-                    break;
-                case TYPE_BELLY_EXERCISES:
-                    viewPagerItem = 2;
-                    break;
-                case TYPE_BACK_EXERCISES:
-                    viewPagerItem = 3;
-                    break;
-                case TYPE_COMBI_EXERCISES:
-                    viewPagerItem = 4;
-                    break;
-                case TYPE_STRETCHING_EXERCISES:
-                    viewPagerItem = 5;
-                    break;
-                default:
-                    viewPagerItem = 0;
-
-            }
-            viewPager.setCurrentItem(viewPagerItem);
-        }
         //add burger icon for drawer to toolbar
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -137,6 +114,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, text);
         shareActionProvider.setShareIntent(intent);
+    }
+
+    private void setUpViewPager(){
+        //Attach the SectionsPagerAdapter to the Viewpager
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+
+        //Attach the ViewPager to the TabLayout
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+        //put icons to tabs
+        tabLayout.getTabAt(0).setIcon(R.drawable.home);
+        tabLayout.getTabAt(1).setIcon(R.drawable.legs_running);
+        tabLayout.getTabAt(2).setIcon(R.drawable.belly);
+        tabLayout.getTabAt(3).setIcon(R.drawable.back_lying);
+        tabLayout.getTabAt(4).setIcon(R.drawable.combi);
+        tabLayout.getTabAt(5).setIcon(R.drawable.stretching);
+
+        //todo das hier macht einen nullpointer wenn die app ohne AS gestartet wird... :(
+//        //set correct tab - wozu brauche ich das ueberhaupt?!
+//        if (getIntent().getExtras() != null) {
+//            String viewPagerTitle = getIntent().getExtras().getString(EXTRA_VIEWPAGER);
+//            int viewPagerItem;
+//            switch (viewPagerTitle) {
+//                case TYPE_LEG_EXERCISES:
+//                    viewPagerItem = 1;
+//                    break;
+//                case TYPE_BELLY_EXERCISES:
+//                    viewPagerItem = 2;
+//                    break;
+//                case TYPE_BACK_EXERCISES:
+//                    viewPagerItem = 3;
+//                    break;
+//                case TYPE_COMBI_EXERCISES:
+//                    viewPagerItem = 4;
+//                    break;
+//                case TYPE_STRETCHING_EXERCISES:
+//                    viewPagerItem = 5;
+//                    break;
+//                default:
+//                    viewPagerItem = 0;
+//
+//            }
+//            viewPager.setCurrentItem(viewPagerItem);
+//        }
+
     }
 
     //viewpager
@@ -187,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
+
 //        @Override
 //        public CharSequence getPageTitle(int position) {
 //            Drawable myDrawable;
@@ -212,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //navigation drawer
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
-//todo: warum muss ich diese methode ueberschreiben? was macht die? war bei catChat nicht noetig...
+        //warum muss ich diese methode ueberschreiben? was macht die? war bei catChat nicht noetig...
     }
 
     @Override
@@ -222,27 +248,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             //hier jedesmal die CREATED_EXERCISES_LIST neu befuellen
             case R.id.nav_random_mix_long:
-                CreatedExercise.generateRandomExercises(6, 10, 6, true);
+                CreatedExercise.generateRandomExercises(4, 5,
+                        5, 7, 5);
                 intent = new Intent(this, CreateWorkoutActivity.class);
                 break;
             case R.id.nav_random_mix_medium:
                 intent = new Intent(this, CreateWorkoutActivity.class);
-                CreatedExercise.generateRandomExercises(4, 6, 4, false);
+                CreatedExercise.generateRandomExercises(3, 4,
+                        3, 5, 3);
                 break;
             case R.id.nav_random_mix_short:
                 intent = new Intent(this, CreateWorkoutActivity.class);
-                CreatedExercise.generateRandomExercises(2, 2, 2, false);
+                CreatedExercise.generateRandomExercises(2, 2,
+                        2, 2, 2);
                 break;
             case R.id.nav_radom_legs:
                 intent = new Intent(this, CreateWorkoutActivity.class);
-                CreatedExercise.generateRandomExercises(6, 0, 0, false);
+                CreatedExercise.generateRandomExercises(6, 0,
+                        0, 0, 0);
                 break;
             case R.id.nav_radom_belly:
                 intent = new Intent(this, CreateWorkoutActivity.class);
-                CreatedExercise.generateRandomExercises(0, 6, 0, false);
+                CreatedExercise.generateRandomExercises(0, 6,
+                        0, 0, 0);
                 break;
             case R.id.nav_radom_back:
-                CreatedExercise.generateRandomExercises(0, 0, 6, false);
+                CreatedExercise.generateRandomExercises(0, 0,
+                        6, 0, 0);
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                break;
+            case R.id.nav_radom_combi:
+                CreatedExercise.generateRandomExercises(0, 0,
+                        0, 6, 0);
                 intent = new Intent(this, CreateWorkoutActivity.class);
                 break;
             case R.id.statistic_last10:
@@ -316,6 +353,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sharedPreferencesPointsEditor.clear().apply();
     }
 
+    //todo: merken wo die liste war und nicht immer wieder von oben!
 //    @Override
 //    protected Parcelable onSaveInstanceState() {
 //        Bundle bundle = new Bundle();

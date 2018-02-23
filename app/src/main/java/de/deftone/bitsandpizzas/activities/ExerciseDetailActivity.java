@@ -22,20 +22,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.deftone.bitsandpizzas.R;
-import de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints;
-import de.deftone.bitsandpizzas.data.BackExercise;
-import de.deftone.bitsandpizzas.data.BellyExercise;
-import de.deftone.bitsandpizzas.data.Icons;
-import de.deftone.bitsandpizzas.data.LegExercise;
-import de.deftone.bitsandpizzas.data.StretchingExercise;
-import de.deftone.bitsandpizzas.utils.ExerciseDetailList;
+import de.deftone.bitsandpizzas.helper.ExerciseDetailAddPoints;
+import de.deftone.bitsandpizzas.data.Exercise;
+import de.deftone.bitsandpizzas.helper.ExerciseDetailList;
 
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BACK_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_BELLY_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_COMBI_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_CREATED_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_LEG_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_STRETCHING_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.backExercises;
+import static de.deftone.bitsandpizzas.activities.MainActivity.bellyExercises;
+import static de.deftone.bitsandpizzas.activities.MainActivity.ALL_LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.combiExercises;
+import static de.deftone.bitsandpizzas.activities.MainActivity.stretchingExercises;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
+import static de.deftone.bitsandpizzas.data.Exercise.MUSCLE;
+import static de.deftone.bitsandpizzas.data.Exercise.SPARKLES;
 
 /**
  * Created by deftone on 28.01.18.
@@ -90,50 +94,36 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         setFab();
     }
 
-    //todo: refactoren mit Exercise object, wenn fertig
     private void getDescriptionDetails(int id, String type) {
         switch (type) {
             case TYPE_LEG_EXERCISES:
-                title = LegExercise.LEG_EXERCISES[id].getName();
-                image = LegExercise.LEG_EXERCISES[id].getImageResourceId();
-                icon = LegExercise.LEG_EXERCISES[id].getIcon();
-                desc = LegExercise.LEG_EXERCISES[id].getDescription();
-                seconds = LegExercise.LEG_EXERCISES[id].getSeconds();
-                weight = LegExercise.LEG_EXERCISES[id].getWeight();
+                setExerciseData(ALL_LEG_EXERCISES.get(id));
                 break;
             case TYPE_BELLY_EXERCISES:
-                title = BellyExercise.BELLY_EXERCISES[id].getName();
-                image = BellyExercise.BELLY_EXERCISES[id].getImageResourceId();
-                icon = BellyExercise.BELLY_EXERCISES[id].getIcon();
-                desc = BellyExercise.BELLY_EXERCISES[id].getDescription();
-                seconds = BellyExercise.BELLY_EXERCISES[id].getSeconds();
-                weight = BellyExercise.BELLY_EXERCISES[id].getWeight();
+                setExerciseData(bellyExercises.get(id));
                 break;
             case TYPE_BACK_EXERCISES:
-                title = BackExercise.BACK_EXERCISES[id].getName();
-                image = BackExercise.BACK_EXERCISES[id].getImageResourceId();
-                icon = BackExercise.BACK_EXERCISES[id].getIcon();
-                desc = BackExercise.BACK_EXERCISES[id].getDescription();
-                seconds = BackExercise.BACK_EXERCISES[id].getSeconds();
-                weight = BackExercise.BACK_EXERCISES[id].getWeight();
+                setExerciseData(backExercises.get(id));
+                break;
+            case TYPE_COMBI_EXERCISES:
+                setExerciseData(combiExercises.get(id));
                 break;
             case TYPE_STRETCHING_EXERCISES:
-                title = StretchingExercise.STRETCHING_EXERCISES[id].getName();
-                image = StretchingExercise.STRETCHING_EXERCISES[id].getImageResourceId();
-                icon = StretchingExercise.STRETCHING_EXERCISES[id].getIcon();
-                desc = StretchingExercise.STRETCHING_EXERCISES[id].getDescription();
-                seconds = StretchingExercise.STRETCHING_EXERCISES[id].getSeconds();
-                weight = StretchingExercise.STRETCHING_EXERCISES[id].getWeight();
+                setExerciseData(stretchingExercises.get(id));
                 break;
             case TYPE_CREATED_EXERCISES:
-                title = CREATED_EXERCISES_LIST.get(id).getName();
-                image = CREATED_EXERCISES_LIST.get(id).getImageResourceId();
-                desc = CREATED_EXERCISES_LIST.get(id).getDescription();
-                icon = CREATED_EXERCISES_LIST.get(id).getIcon();
-                seconds = CREATED_EXERCISES_LIST.get(id).getSeconds();
-                weight = CREATED_EXERCISES_LIST.get(id).getWeight();
+                setExerciseData(CREATED_EXERCISES_LIST.get(id));
                 break;
         }
+    }
+
+    private void setExerciseData(Exercise exercise) {
+        title = exercise.getName();
+        image = exercise.getImageResourceId();
+        desc = exercise.getDescription();
+        icon = exercise.getIcon();
+        seconds = exercise.getSeconds();
+        weight = exercise.getWeight();
     }
 
     private void setToobar() {
@@ -204,9 +194,9 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         weightButton = findViewById(R.id.weight_button);
         weightButton2 = findViewById(R.id.weight_button_2);
         weightButton3 = findViewById(R.id.weight_button_3);
-        weightButton.setText("1x" + String.valueOf(weight[0]) + Icons.getIcon(Icons.MUSCLE));
-        weightButton2.setText("2x" + String.valueOf(weight[0]) + Icons.getIcon(Icons.MUSCLE));
-        weightButton3.setText("3x" + String.valueOf(weight[0]) + Icons.getIcon(Icons.MUSCLE));
+        weightButton.setText("1x" + String.valueOf(weight[0]) + MUSCLE);
+        weightButton2.setText("2x" + String.valueOf(weight[0]) + MUSCLE);
+        weightButton3.setText("3x" + String.valueOf(weight[0]) + MUSCLE);
         if (weight.length < 2) {
             secondRow.setVisibility(View.GONE);
             textView.setText(R.string.points);
@@ -216,9 +206,9 @@ public class ExerciseDetailActivity extends AppCompatActivity {
             weightAlternButton = findViewById(R.id.weight_button_alternative);
             weightAlternButton2 = findViewById(R.id.weight_button_alternative_2);
             weightAlternButton3 = findViewById(R.id.weight_button_alternative_3);
-            weightAlternButton.setText("1x" + String.valueOf(weight[1]) + Icons.getIcon(Icons.SPARKLES));
-            weightAlternButton2.setText("2x" + String.valueOf(weight[1]) + Icons.getIcon(Icons.SPARKLES));
-            weightAlternButton3.setText("3x" + String.valueOf(weight[1]) + Icons.getIcon(Icons.SPARKLES));
+            weightAlternButton.setText("1x" + String.valueOf(weight[1]) + SPARKLES);
+            weightAlternButton2.setText("2x" + String.valueOf(weight[1]) + SPARKLES);
+            weightAlternButton3.setText("3x" + String.valueOf(weight[1]) + SPARKLES);
         }
     }
 

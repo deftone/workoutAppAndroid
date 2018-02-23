@@ -27,13 +27,16 @@ public class LegExerciseData {
         exercises.add(new Exercise(1, LEG, "Kniebeugen", getIconsKnieb2(),
                 getDescKnieb2(), R.drawable.kniebeugen, 0, new int[]{2}));
 
-        exercises.add(new Exercise(2, LEG, "Oberes Bein im Liegen heben", getIconsHeben(),
+        exercises.add(new Exercise(2, LEG, "Fersenheben", getIconsKnieb3(),
+                getDescKnieb3(), R.drawable.squad_heels_raised, 0, new int[]{2}));
+
+        exercises.add(new Exercise(3, LEG, "Oberes Bein im Liegen heben", getIconsHeben(),
                 getDescHeben(), R.drawable.bein_seitlich_heben, 0, new int[]{2}));
 
-        exercises.add(new Exercise(3, LEG, "Unteres Bein im Liegen heben", getIconsHeben2(),
+        exercises.add(new Exercise(4, LEG, "Unteres Bein im Liegen heben", getIconsHeben2(),
                 getDescHeben2(), R.drawable.abduktion_am_boden, 0, new int[]{1}));
 
-        exercises.add(new Exercise(4, LEG, "Side Kick kniend", getIconsSideKick(),
+        exercises.add(new Exercise(5, LEG, "Side Kick kniend", getIconsSideKick(),
                 getDescSideKick(), R.drawable.side_kick_knie, 0, new int[]{3}));
 
         return exercises;
@@ -65,6 +68,19 @@ public class LegExerciseData {
                 "dann wieder aufrichten in die Ausgangsposition",
                 "Varianten: Beine Schulterbreit oder weit grätscht",
                 "30 Wiederholungen"};
+    }
+
+    private static String[] getIconsKnieb3() {
+        return new String[]{BULLET, BULLET, ARROW, FINGER_POINT_UP, MUSCLE, SPARKLES};
+    }
+
+    private static String[] getDescKnieb3() {
+        return new String[]{"in einen tiefen Jujum Sogi gehen",
+                "Arme vorm Körper wie auf dem Bild oder Hände in die Hüfte stemmen",
+                "eine Ferse langsam vom Boden abheben und wieder absenken",
+                "nicht mit Schwung, nicht fallen lassen, sondern kontrollierte Bewegung",
+                "jede Seite 10 mal, abschließend 10 mal mit beiden Fersen gleichzeitig",
+                "anspruchsvoller: den Körper absenken, wenn die Fersen hochgehen"};
     }
 
     private static String[] getIconsHeben() {

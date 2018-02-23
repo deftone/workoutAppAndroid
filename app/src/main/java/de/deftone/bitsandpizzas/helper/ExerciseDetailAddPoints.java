@@ -1,4 +1,4 @@
-package de.deftone.bitsandpizzas.activityUtils;
+package de.deftone.bitsandpizzas.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,13 +10,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.deftone.bitsandpizzas.activities.ExerciseDetailActivity;
-
 /**
  * Created by deftone on 28.01.18.
  * this class contains the logic part of ExerciseDetails
  */
-
 public class ExerciseDetailAddPoints {
 
     //eine datei, die als value ein String Set der jeweiligen daten enthaelt (YYYY-MM-DD, YYYY-MM-DD, ..)

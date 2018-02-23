@@ -13,8 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import de.deftone.bitsandpizzas.R;
-import de.deftone.bitsandpizzas.data.BellyExercise;
-import de.deftone.bitsandpizzas.data.LegExercise;
 import de.deftone.bitsandpizzas.testUtils.MatchUtils;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -25,6 +23,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static de.deftone.bitsandpizzas.activities.MainActivity.ALL_LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.bellyExercises;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.not;
 
@@ -89,7 +89,7 @@ public class MainActivityTest {
         //only 8 are visible without scrolling - this test will fail for position == 8
         String title;
         for (int position = 0; position < 8; position++) {
-            title = LegExercise.LEG_EXERCISES[position].getName();
+            title = ALL_LEG_EXERCISES.get(position).getName();
             //denn es werden immer 1-3 recyclerviews geladen, der aktuelle und der rechts bzw links davon, deshalb mit allOf und isDisplayed die richtige beutzen
             //achtung: wichtig! ich benutze eine viewgroup, daher muss withText mit hasDescendant gewrappt werden!!
             onView(allOf(withId(R.id.exercise_recycler), isDisplayed()))
@@ -105,8 +105,8 @@ public class MainActivityTest {
         onView(matcher).perform(click());
 
         String title;
-        for (int position = 8; position < LegExercise.LEG_EXERCISES.length; position++) {
-            title = LegExercise.LEG_EXERCISES[position].getName();
+        for (int position = 8; position < ALL_LEG_EXERCISES.size(); position++) {
+            title = ALL_LEG_EXERCISES.get(position).getName();
             //common pitfall... mind. 90% muss zu sehen sein...
             //deshalb scrollen
             onView(allOf(withId(R.id.exercise_recycler), isDisplayed()))
@@ -127,7 +127,7 @@ public class MainActivityTest {
         //only 8 are visible without scrolling - this test will fail for position == 8
         String title;
         for (int position = 0; position < 8; position++) {
-            title = BellyExercise.BELLY_EXERCISES[position].getName();
+            title = bellyExercises.get(position).getName();
             //denn es werden immer 1-3 recyclerviews geladen, der aktuelle und der rechts bzw links davon, deshalb mit allOf und isDisplayed die richtige beutzen
             //achtung: wichtig! ich benutze eine viewgroup, daher muss withText mit hasDescendant gewrappt werden!!
             onView(allOf(withId(R.id.exercise_recycler), isDisplayed()))
@@ -143,8 +143,8 @@ public class MainActivityTest {
         onView(matcher).perform(click());
 
         String title;
-        for (int position = 8; position < BellyExercise.BELLY_EXERCISES.length; position++) {
-            title = BellyExercise.BELLY_EXERCISES[position].getName();
+        for (int position = 8; position < bellyExercises.size(); position++) {
+            title = bellyExercises.get(position).getName();
             //common pitfall... mind. 90% muss zu sehen sein...
             //deshalb scrollen
             onView(allOf(withId(R.id.exercise_recycler), isDisplayed()))

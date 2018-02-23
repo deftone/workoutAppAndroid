@@ -1,4 +1,4 @@
-package de.deftone.bitsandpizzas.utils;
+package de.deftone.bitsandpizzas.helper;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;

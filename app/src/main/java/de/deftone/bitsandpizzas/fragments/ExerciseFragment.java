@@ -18,8 +18,7 @@ import de.deftone.bitsandpizzas.R;
 import de.deftone.bitsandpizzas.activities.ExerciseDetailActivity;
 import de.deftone.bitsandpizzas.data.CreatedExercise;
 import de.deftone.bitsandpizzas.data.Exercise;
-import de.deftone.bitsandpizzas.data.ExerciseTypes;
-import de.deftone.bitsandpizzas.utils.CaptionedImagesAdapter;
+import de.deftone.bitsandpizzas.helper.CaptionedImagesAdapter;
 
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_ID;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_TYPE;
@@ -30,6 +29,11 @@ import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_CREATED_EXER
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_LEG_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_STRETCHING_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE;
+import static de.deftone.bitsandpizzas.activities.MainActivity.backExercises;
+import static de.deftone.bitsandpizzas.activities.MainActivity.bellyExercises;
+import static de.deftone.bitsandpizzas.activities.MainActivity.combiExercises;
+import static de.deftone.bitsandpizzas.activities.MainActivity.ALL_LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.stretchingExercises;
 import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LIST;
 
 public class ExerciseFragment extends Fragment {
@@ -51,43 +55,33 @@ public class ExerciseFragment extends Fragment {
         if (bundle != null) {
             switch (bundle.getString(TYPE)) {
                 case TYPE_LEG_EXERCISES:
-                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
-                        if (exercise.getType().equals(ExerciseTypes.LEG)) {
-                            exerciseNames.add(exercise.getName());
-                            exerciseImages.add(exercise.getImageResourceId());
-                        }
+                    for (Exercise exercise : ALL_LEG_EXERCISES) {
+                        exerciseNames.add(exercise.getName());
+                        exerciseImages.add(exercise.getImageResourceId());
                     }
                     break;
                 case TYPE_BACK_EXERCISES:
-                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
-                        if (exercise.getType().equals(ExerciseTypes.BACK)) {
-                            exerciseNames.add(exercise.getName());
-                            exerciseImages.add(exercise.getImageResourceId());
-                        }
+                    for (Exercise exercise : backExercises) {
+                        exerciseNames.add(exercise.getName());
+                        exerciseImages.add(exercise.getImageResourceId());
                     }
                     break;
                 case TYPE_BELLY_EXERCISES:
-                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
-                        if (exercise.getType().equals(ExerciseTypes.BELLY)) {
-                            exerciseNames.add(exercise.getName());
-                            exerciseImages.add(exercise.getImageResourceId());
-                        }
+                    for (Exercise exercise : bellyExercises) {
+                        exerciseNames.add(exercise.getName());
+                        exerciseImages.add(exercise.getImageResourceId());
                     }
                     break;
                 case TYPE_COMBI_EXERCISES:
-                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
-                        if (exercise.getType().equals(ExerciseTypes.COMBI)) {
-                            exerciseNames.add(exercise.getName());
-                            exerciseImages.add(exercise.getImageResourceId());
-                        }
+                    for (Exercise exercise : combiExercises) {
+                        exerciseNames.add(exercise.getName());
+                        exerciseImages.add(exercise.getImageResourceId());
                     }
                     break;
                 case TYPE_STRETCHING_EXERCISES:
-                    for (Exercise exercise : Exercise.ALL_EXERCISES) {
-                        if (exercise.getType().equals(ExerciseTypes.STRETCHING)) {
-                            exerciseNames.add(exercise.getName());
-                            exerciseImages.add(exercise.getImageResourceId());
-                        }
+                    for (Exercise exercise : stretchingExercises) {
+                        exerciseNames.add(exercise.getName());
+                        exerciseImages.add(exercise.getImageResourceId());
                     }
                     break;
                 case TYPE_CREATED_EXERCISES:

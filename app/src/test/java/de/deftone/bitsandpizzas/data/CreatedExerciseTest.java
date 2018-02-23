@@ -8,12 +8,8 @@ import java.util.List;
 
 import de.deftone.bitsandpizzas.R;
 
-import static de.deftone.bitsandpizzas.data.CreatedExercise.TYPE_BACK;
-import static de.deftone.bitsandpizzas.data.CreatedExercise.TYPE_BELLY;
-import static de.deftone.bitsandpizzas.data.CreatedExercise.TYPE_LEG;
-import static de.deftone.bitsandpizzas.data.CreatedExercise.mandatoryBack;
-import static de.deftone.bitsandpizzas.data.CreatedExercise.mandatoryBelly;
-import static de.deftone.bitsandpizzas.data.CreatedExercise.mandatoryLegs;
+import static de.deftone.bitsandpizzas.activities.MainActivity.ALL_LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.data.ExerciseTypes.LEG;
 import static org.junit.Assert.*;
 
 /**
@@ -23,6 +19,8 @@ import static org.junit.Assert.*;
  */
 public class CreatedExerciseTest {
     private static CreatedExercise testExercise;
+    private static int id = 33;
+    private static ExerciseTypes type = LEG;
     private static String name = "titel";
     private static String[] icon = {"\u25CF", "\u25CF"};
     private static String[] desc = {"beschreibung", "und noch was"};
@@ -30,8 +28,12 @@ public class CreatedExerciseTest {
 
     @BeforeClass
     public static void startUp() {
-        testExercise = new CreatedExercise(name, icon, desc, R.drawable.faeuste_heben, 30, weight);
-        CreatedExercise.generateRandomExercises(6, 6, 6, true);
+        testExercise = new CreatedExercise(id, type, name, icon, desc, R.drawable.faeuste_heben, 30, weight);
+        CreatedExercise.generateRandomExercises(3,
+                3,
+                3,
+                3,
+                3);
     }
 
     @AfterClass
@@ -42,41 +44,15 @@ public class CreatedExerciseTest {
 
     @Test
     public void generateRandomExercises() throws Exception {
-        int size_expected = 18; //see above in startUp, 6+6+6 exercises
+        int size_expected = 15; //see above in startUp, 5x3 exercises
         assertEquals(size_expected, CreatedExercise.CREATED_EXERCISES_LIST.size());
     }
 
     @Test
     public void generateRandomArrayLeg() throws Exception {
-        final int max = 7;
         final int count = 5;
-        final int type = TYPE_LEG;
-        List<Integer> testArray = CreatedExercise.generateRandomArray(max, count, type, true);
+        List<Integer> testArray = CreatedExercise.generateRandomArray(count, ALL_LEG_EXERCISES.size());
         assertEquals(count, testArray.size());
-        for (int i : mandatoryLegs)
-            assertTrue(testArray.contains(i));
-    }
-
-    @Test
-    public void generateRandomArrayBelly() throws Exception {
-        final int max = 8;
-        final int count = 8;
-        final int type = TYPE_BELLY;
-        List<Integer> testArray = CreatedExercise.generateRandomArray(max, count, type, true);
-        assertEquals(count, testArray.size());
-        for (int i : mandatoryBelly)
-            assertTrue(testArray.contains(i));
-    }
-
-    @Test
-    public void generateRandomArrayBack() throws Exception {
-        final int max = 8;
-        final int count = 8;
-        final int type = TYPE_BACK;
-        List<Integer> testArray = CreatedExercise.generateRandomArray(max, count, type, true);
-        assertEquals(count, testArray.size());
-        for (int i : mandatoryBack)
-            assertTrue(testArray.contains(i));
     }
 
     //thourough unittests also checks failures, i.e. wrong input
@@ -84,18 +60,8 @@ public class CreatedExerciseTest {
     public void generateRandomArray_wrongInput_1() {
         final int max = 5;
         final int count = 7;
-        final int type = TYPE_BACK;
-        List<Integer> testArray = CreatedExercise.generateRandomArray(max, count, type, false);
+        List<Integer> testArray = CreatedExercise.generateRandomArray(max, count);
         assertEquals(0, testArray.size());
-    }
-
-    @Test
-    public void generateRandomArray_wrongInput_2() {
-        final int max = 5;
-        final int count = 7;
-        final int type = TYPE_BACK;
-        List<Integer> testArray = CreatedExercise.generateRandomArray(max, count, type, true);
-        assertEquals(2, testArray.size());
     }
 
     @Test

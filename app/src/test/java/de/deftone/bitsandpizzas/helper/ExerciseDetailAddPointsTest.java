@@ -1,4 +1,4 @@
-package de.deftone.bitsandpizzas.activityUtils;
+package de.deftone.bitsandpizzas.helper;
 
 import android.content.SharedPreferences;
 
@@ -9,8 +9,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES_KEY;
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.helper.ExerciseDetailAddPoints.PREFS_DATES_KEY;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anySet;
 import static org.mockito.Matchers.anyString;

@@ -1,9 +1,8 @@
-package de.deftone.bitsandpizzas.utils;
+package de.deftone.bitsandpizzas.helper;
 
 /**
  * Created by deftone on 12.12.17.
  */
-
 
 import android.app.Activity;
 import android.view.LayoutInflater;

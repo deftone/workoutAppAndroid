@@ -36,6 +36,11 @@
                 android:id="@+id/nav_radom_back"
                 android:icon="@android:drawable/btn_star"
                 android:title="@string/random_back" />
+
+            <item
+                android:id="@+id/nav_radom_combi"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/random_combi" />
         </menu>
     </item>
 
@@ -49,7 +54,7 @@
             <item
                 android:id="@+id/statistic_4weeks"
                 android:icon="@android:drawable/btn_star"
-                android:title= "@string/statistic_points_4" />
+                android:title="@string/statistic_points_4" />
 
             <item
                 android:id="@+id/statistic_12weeks"

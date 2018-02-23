@@ -23,12 +23,13 @@
     <string name="nav_close_drawer">Close navigation drawer</string>
 
     <string name="random_programs">Zufallsprogramme</string>
-    <string name="random_mix_long">Mix lang (22 Übungen)</string>
-    <string name="random_mix_medium">Mix mittel (14 Übungen)</string>
-    <string name="random_mix_short">Mix kurz (6 Übungen)</string>
+    <string name="random_mix_long">Mix lang (26 Übungen)</string>
+    <string name="random_mix_medium">Mix mittel (18 Übungen)</string>
+    <string name="random_mix_short">Mix kurz (10 Übungen)</string>
     <string name="random_legs">Beine (6 Übungen)</string>
     <string name="random_belly">Bauch (6 Übungen)</string>
     <string name="random_back">Rücken (6 Übungen)</string>
+    <string name="random_combi">Combi (6 Übungen)</string>
 
     <string name="statistic">Statistik</string>
     <string name="statistic_points_4">Punkte (4 Wochen)</string>

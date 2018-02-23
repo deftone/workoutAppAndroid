@@ -16,7 +16,6 @@ import org.junit.runner.RunWith;
 import java.util.Locale;
 
 import de.deftone.bitsandpizzas.R;
-import de.deftone.bitsandpizzas.data.Icons;
 import de.deftone.bitsandpizzas.testUtils.MatchUtils;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
@@ -33,12 +32,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_ID;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_EXERCISE_TYPE;
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_DATES;
-import static de.deftone.bitsandpizzas.activityUtils.ExerciseDetailAddPoints.PREFS_POINTS;
+import static de.deftone.bitsandpizzas.activities.MainActivity.ALL_LEG_EXERCISES;
+import static de.deftone.bitsandpizzas.activities.MainActivity.stretchingExercises;
+import static de.deftone.bitsandpizzas.helper.ExerciseDetailAddPoints.PREFS_DATES;
+import static de.deftone.bitsandpizzas.helper.ExerciseDetailAddPoints.PREFS_POINTS;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_LEG_EXERCISES;
 import static de.deftone.bitsandpizzas.activities.MainActivity.TYPE_STRETCHING_EXERCISES;
-import static de.deftone.bitsandpizzas.data.LegExercise.LEG_EXERCISES;
-import static de.deftone.bitsandpizzas.data.StretchingExercise.STRETCHING_EXERCISES;
+import static de.deftone.bitsandpizzas.data.Exercise.MUSCLE;
+import static de.deftone.bitsandpizzas.data.Exercise.SPARKLES;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.not;
@@ -81,7 +82,7 @@ public class ExerciseDetailActivityTest {
         onView(withId(R.id.detail_scrollview)).perform(ViewActions.swipeUp());
         onView(withId(R.id.weight_button)).perform(click());
         //check toast is visible
-        int[] points = LEG_EXERCISES[position].getWeight();
+        int[] points = ALL_LEG_EXERCISES.get(position).getWeight();
         String toastText = mActivityRule.getActivity().getString(R.string.points_today_1) + points[0]
                 + mActivityRule.getActivity().getString(R.string.points_today_2);
         onView(withText(toastText))
@@ -97,7 +98,7 @@ public class ExerciseDetailActivityTest {
         //check title
         onView(allOf(withParent(isAssignableFrom(Toolbar.class)),
                 isAssignableFrom(AppCompatTextView.class)))
-                .check(matches(withText(LEG_EXERCISES[position].getName())));
+                .check(matches(withText(ALL_LEG_EXERCISES.get(position).getName())));
 
         //detailImageIsVisible
         onView(withId(R.id.image_detail)).check(MatchUtils.isVisible());
@@ -117,12 +118,12 @@ public class ExerciseDetailActivityTest {
 
         //man sieht die buttons nicht, der test sollte fehlschlagen?? nach unten scrollen?
         //check 3 buttons with correct points are visible
-        int[] points = LEG_EXERCISES[position].getWeight();
-        String point_text = "1x" + points[0] + Icons.getIcon(Icons.MUSCLE);
+        int[] points = ALL_LEG_EXERCISES.get(position).getWeight();
+        String point_text = "1x" + points[0] + MUSCLE;
         onView(withId(R.id.weight_button)).check(matches(withText(point_text)));
-        point_text = "2x" + points[0] + Icons.getIcon(Icons.MUSCLE);
+        point_text = "2x" + points[0] + MUSCLE;
         onView(withId(R.id.weight_button_2)).check(matches(withText(point_text)));
-        point_text = "3x" + points[0] + Icons.getIcon(Icons.MUSCLE);
+        point_text = "3x" + points[0] + MUSCLE;
         onView(withId(R.id.weight_button_3)).check(matches(withText(point_text)));
 
         //the alternative buttons are invisible  -because the table row is GONE
@@ -136,12 +137,12 @@ public class ExerciseDetailActivityTest {
 
         //man sieht die buttons nicht, der test sollte fehlschlagen?? nach unten scrollen?
         //check 3 buttons with correct points are visible
-        int[] points = LEG_EXERCISES[position].getWeight();
-        String point_text = "1x" + points[1] + Icons.getIcon(Icons.SPARKLES);
+        int[] points =ALL_LEG_EXERCISES.get(position).getWeight();
+        String point_text = "1x" + points[1] + SPARKLES;
         onView(withId(R.id.weight_button_alternative)).check(matches(withText(point_text)));
-        point_text = "2x" + points[1] + Icons.getIcon(Icons.SPARKLES);
+        point_text = "2x" + points[1] + SPARKLES;
         onView(withId(R.id.weight_button_alternative_2)).check(matches(withText(point_text)));
-        point_text = "3x" + points[1] + Icons.getIcon(Icons.SPARKLES);
+        point_text = "3x" + points[1] + SPARKLES;
         onView(withId(R.id.weight_button_alternative_3)).check(matches(withText(point_text)));
 
         //the alternative buttons are invisible  -because the table row is GONE
@@ -160,7 +161,7 @@ public class ExerciseDetailActivityTest {
         onView(withId(R.id.fab)).perform(click());
 
         //check time
-        int seconds = STRETCHING_EXERCISES[position].getSeconds();
+        int seconds = stretchingExercises.get(position).getSeconds();
         String time = String.format(Locale.getDefault(), "%02d:%02d", 0, seconds);
         onView(withId(R.id.time_view)).check(matches(withText(time)));
     }
