@@ -4,6 +4,7 @@ package de.deftone.bitsandpizzas.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,9 +39,8 @@ import static de.deftone.bitsandpizzas.data.CreatedExercise.CREATED_EXERCISES_LI
 
 public class ExerciseFragment extends Fragment {
 
-    private static final String SAVED_LAYOUT_MANAGER = "classname.recycler.layout";//????
+    private static final String BUNDLE_RECYCLER_LAYOUT = "potato";
     private RecyclerView recyclerView;
-    private Parcelable layoutManagerSavedState;
 
     public ExerciseFragment() {
     }
@@ -112,30 +112,20 @@ public class ExerciseFragment extends Fragment {
         return recyclerView;
     }
 
-//    //todo: it would be great if the correct position would be shown too, i.e. scrolled where it was before
-//    //http://panavtec.me/retain-restore-recycler-view-scroll-position
-//    //oder das hier:
-//    //https://stackoverflow.com/questions/27816217/how-to-save-recyclerviews-scroll-position-using-recyclerview-state
-//    //ich glaube das muss alles in das fragment rein.... oder doch in die activity? keine ahnung, funktioniert in beiden nicht
-//    @Override
-//    protected Parcelable onSaveInstanceState() {
-//        Bundle bundle = new Bundle();
-//
-//        bundle.putParcelable(SAVED_LAYOUT_MANAGER, recyclerView.getLayoutManager().onSaveInstanceState());
-//        return bundle;
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Parcelable state) {
-//        if (state instanceof Bundle) {
-//            layoutManagerSavedState = ((Bundle) state).getParcelable(SAVED_LAYOUT_MANAGER);
-//        }
-//        super.onRestoreInstanceState(state);
-//    }
-//
-//    private void restoreLayoutManagerPosition() {
-//        if (layoutManagerSavedState != null) {
-//            recyclerView.getLayoutManager().onRestoreInstanceState(layoutManagerSavedState);
-//        }
-//    }
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+        if(savedInstanceState != null)
+        {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+    }
 }
