@@ -38,6 +38,7 @@ import de.deftone.bitsandpizzas.data.StretchingExerciseData;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
 
+import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_VIEWPAGER;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.ALL;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.EXTRA;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.FOUR_WEEKS;
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final List<Exercise> combiExercises = CombiExerciseData.getAllCombiExercises();
     public static final List<Exercise> stretchingExercises = StretchingExerciseData.getAllStretchinExercises();
 
-    private static final String SAVED_LAYOUT_MANAGER = "classname.recycler.layout";//????
     public final static String TYPE = "type";
     public final static String TYPE_LEG_EXERCISES = "leg exercieses";
     public final static String TYPE_BELLY_EXERCISES = "belly exercieses";
@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public final static String TYPE_CREATED_EXERCISES = "created exercieses";
 
     private ShareActionProvider shareActionProvider;
-    private Parcelable layoutManagerSavedState;
-    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +72,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         setUpViewPager();
-
-        recyclerView = findViewById(R.id.exercise_recycler);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -116,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shareActionProvider.setShareIntent(intent);
     }
 
-    private void setUpViewPager(){
+    private void setUpViewPager() {
         //Attach the SectionsPagerAdapter to the Viewpager
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -134,34 +131,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.getTabAt(4).setIcon(R.drawable.combi);
         tabLayout.getTabAt(5).setIcon(R.drawable.stretching);
 
-        //todo das hier macht einen nullpointer wenn die app ohne AS gestartet wird... :(
-//        //set correct tab - wozu brauche ich das ueberhaupt?!
-//        if (getIntent().getExtras() != null) {
-//            String viewPagerTitle = getIntent().getExtras().getString(EXTRA_VIEWPAGER);
-//            int viewPagerItem;
-//            switch (viewPagerTitle) {
-//                case TYPE_LEG_EXERCISES:
-//                    viewPagerItem = 1;
-//                    break;
-//                case TYPE_BELLY_EXERCISES:
-//                    viewPagerItem = 2;
-//                    break;
-//                case TYPE_BACK_EXERCISES:
-//                    viewPagerItem = 3;
-//                    break;
-//                case TYPE_COMBI_EXERCISES:
-//                    viewPagerItem = 4;
-//                    break;
-//                case TYPE_STRETCHING_EXERCISES:
-//                    viewPagerItem = 5;
-//                    break;
-//                default:
-//                    viewPagerItem = 0;
-//
-//            }
-//            viewPager.setCurrentItem(viewPagerItem);
-//        }
-
+        //das hier sollte gar nicht sein... denn das letzte fragment aufrufen, keinen neuen intent starten!!
+        //set correct tab - when mainActivity is called from ExerciseDetailActivity (upArrow)
+        if (getIntent().getExtras() != null && getIntent().getExtras().getString(EXTRA_VIEWPAGER) != null) {
+            String viewPagerTitle = getIntent().getExtras().getString(EXTRA_VIEWPAGER);
+            int viewPagerItem;
+            switch (viewPagerTitle) {
+                case TYPE_LEG_EXERCISES:
+                    viewPagerItem = 1;
+                    break;
+                case TYPE_BELLY_EXERCISES:
+                    viewPagerItem = 2;
+                    break;
+                case TYPE_BACK_EXERCISES:
+                    viewPagerItem = 3;
+                    break;
+                case TYPE_COMBI_EXERCISES:
+                    viewPagerItem = 4;
+                    break;
+                case TYPE_STRETCHING_EXERCISES:
+                    viewPagerItem = 5;
+                    break;
+                default:
+                    viewPagerItem = 0;
+            }
+            viewPager.setCurrentItem(viewPagerItem);
+        }
     }
 
     //viewpager
@@ -210,29 +205,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public int getCount() {
             return 6;
         }
-
-
-
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            Drawable myDrawable;
-//            switch (position) {
-//                case 0:
-//                    return getResources().getText(R.string.home_tab);
-//                case 1:
-////                    myDrawable = getResources().getDrawable(R.mipmap.ic_launcher);
-//                    return getResources().getText(R.string.beine_tab);
-//                case 2:
-//                    return getResources().getText(R.string.bauch_tab);
-//                case 3:
-//                    return getResources().getText(R.string.ruecken_tab);
-//                case 4:
-//                    return getString(R.string.combi_tab);
-//                case 5:
-//                    return getResources().getText(R.string.stretching_tab);
-//            }
-//            return null;
-//        }
     }
 
     //navigation drawer
@@ -352,28 +324,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences.Editor sharedPreferencesPointsEditor = sharedPreferencesPoints.edit();
         sharedPreferencesPointsEditor.clear().apply();
     }
-
-    //todo: merken wo die liste war und nicht immer wieder von oben!
-//    @Override
-//    protected Parcelable onSaveInstanceState() {
-//        Bundle bundle = new Bundle();
-//
-//        bundle.putParcelable(SAVED_LAYOUT_MANAGER, recyclerView.getLayoutManager().onSaveInstanceState());
-//        return bundle;
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Parcelable state) {
-//        if (state instanceof Bundle) {
-//            layoutManagerSavedState = ((Bundle) state).getParcelable(SAVED_LAYOUT_MANAGER);
-//        }
-//        super.onRestoreInstanceState(state);
-//    }
-//
-//    private void restoreLayoutManagerPosition() {
-//        if (layoutManagerSavedState != null) {
-//            recyclerView.getLayoutManager().onRestoreInstanceState(layoutManagerSavedState);
-//        }
-//    }
-
 }
