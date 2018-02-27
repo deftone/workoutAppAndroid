@@ -150,9 +150,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra(EXTRA_VIEWPAGER, exerciseType);
-                startActivity(intent);
+                finish();
             }
         });
         actionBar.setDisplayHomeAsUpEnabled(true);
