@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,8 @@ public class ExerciseFragment extends Fragment {
         List<String> exerciseNames = new ArrayList<>();
         List<Integer> exerciseImages = new ArrayList<>();
 
+        recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view_exercises, container, false);
+
         if (bundle != null) {
             switch (bundle.getString(TYPE)) {
                 case TYPE_LEG_EXERCISES:
@@ -88,12 +91,15 @@ public class ExerciseFragment extends Fragment {
                     for (CreatedExercise exercise : CREATED_EXERCISES_LIST) {
                         exerciseNames.add(exercise.getName());
                         exerciseImages.add(exercise.getImageResourceId());
+                        Toolbar toolbar = getActivity().findViewById(R.id.toolbar_create);
+                        int height = toolbar.getMinimumHeight();
+                        recyclerView.setPadding(0, height, 0, 0);
                     }
                     break;
             }
         }
 
-        recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view_exercises, container, false);
+
 
         CaptionedImagesAdapter adapter = new CaptionedImagesAdapter(exerciseNames, exerciseImages);
         recyclerView.setAdapter(adapter);

@@ -137,7 +137,7 @@ public class ExerciseDetailActivity extends AppCompatActivity {
         //show up arrow
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_main_activity_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawer, toolbar,
                 R.string.nav_open_drawer,

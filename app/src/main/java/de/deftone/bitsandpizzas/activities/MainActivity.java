@@ -36,6 +36,7 @@ import de.deftone.bitsandpizzas.data.StretchingExerciseData;
 import de.deftone.bitsandpizzas.fragments.ExerciseFragment;
 import de.deftone.bitsandpizzas.fragments.TopFragment;
 
+import static de.deftone.bitsandpizzas.activities.CreateWorkoutActivity.EXTRA_TITLE;
 import static de.deftone.bitsandpizzas.activities.ExerciseDetailActivity.EXTRA_VIEWPAGER;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.ALL;
 import static de.deftone.bitsandpizzas.activities.StatisticActivity.EXTRA;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         //add burger icon for drawer to toolbar
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_main_activity_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this,
                 drawer,
@@ -215,42 +216,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         Intent intent = null;
+        String title;
         switch (id) {
             //hier jedesmal die CREATED_EXERCISES_LIST neu befuellen
             case R.id.nav_random_mix_long:
                 CreatedExercise.generateRandomExercises(4, 5,
                         5, 7, 5);
                 intent = new Intent(this, CreateWorkoutActivity.class);
+                title = getString(R.string.random_mix_long);
+                intent.putExtra(EXTRA_TITLE, title);
                 break;
             case R.id.nav_random_mix_medium:
-                intent = new Intent(this, CreateWorkoutActivity.class);
                 CreatedExercise.generateRandomExercises(3, 4,
                         3, 5, 3);
+                title = getString(R.string.random_mix_medium);
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                intent.putExtra(EXTRA_TITLE, title);
                 break;
             case R.id.nav_random_mix_short:
-                intent = new Intent(this, CreateWorkoutActivity.class);
                 CreatedExercise.generateRandomExercises(2, 2,
                         2, 2, 2);
+                title = getString(R.string.random_mix_short);
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                intent.putExtra(EXTRA_TITLE, title);
                 break;
             case R.id.nav_radom_legs:
-                intent = new Intent(this, CreateWorkoutActivity.class);
                 CreatedExercise.generateRandomExercises(6, 0,
                         0, 0, 0);
+                title = getString(R.string.random_legs);
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                intent.putExtra(EXTRA_TITLE, title);
                 break;
             case R.id.nav_radom_belly:
-                intent = new Intent(this, CreateWorkoutActivity.class);
                 CreatedExercise.generateRandomExercises(0, 6,
                         0, 0, 0);
+                title = getString(R.string.random_belly);
+                intent = new Intent(this, CreateWorkoutActivity.class);
+                intent.putExtra(EXTRA_TITLE, title);
                 break;
             case R.id.nav_radom_back:
                 CreatedExercise.generateRandomExercises(0, 0,
                         6, 0, 0);
+                title = getString(R.string.random_back);
                 intent = new Intent(this, CreateWorkoutActivity.class);
+                intent.putExtra(EXTRA_TITLE, title);
                 break;
             case R.id.nav_radom_combi:
                 CreatedExercise.generateRandomExercises(0, 0,
                         0, 6, 0);
+                title = getString(R.string.random_combi);
                 intent = new Intent(this, CreateWorkoutActivity.class);
+                intent.putExtra(EXTRA_TITLE, title);
                 break;
             case R.id.statistic_last10:
                 intent = new Intent(this, StatisticActivity.class);
@@ -275,14 +291,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (intent != null)
             startActivity(intent);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_main_activity_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_main_activity_layout);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else

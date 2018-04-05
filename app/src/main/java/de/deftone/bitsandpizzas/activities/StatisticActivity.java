@@ -34,7 +34,7 @@ import static de.deftone.bitsandpizzas.helper.ExerciseDetailAddPoints.PREFS_POIN
 /**
  * Created by deftone on 12.01.18.
  */
-
+//todo: toolbar und up arrow hinzufuegen
 public class StatisticActivity extends AppCompatActivity {
     public static final String EXTRA = "extra";
     public static final int LAST_TEN = 10;
